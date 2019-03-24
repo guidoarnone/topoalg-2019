@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+
+\usepackage{mathpazo}
+\usepackage{euler}
+\usepackage{xcolor}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\paint}[2]{\color{#1}{#2}}
+\definecolor{blue}{RGB}{0, 107, 179}
+
+\renewcommand*{\proofname}{\paint{blue}{Demostraci\'on}}
+\newenvironment{theorem}[2][Teorema]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lema]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep \paint{blue}{{\bfseries #1}}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Resoluci\']{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposici\'on]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corolario]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+%-----------------------
+
+\title{\paint{blue}{Topolog\'ia Algebraica}}
+\author{\paint{blue}{Guido Arnone}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\begin{exercise}{3} Sea $X$ un espacio topol\'ogico y $U = \{U_i\}_{i \in I}$ un cubrimiento por abiertos de $X$. El nervio de $U$
+es el complejo simplicial $N(U)$ cuyos v\'ertices son los abiertos del cubrimiento y los s\'implices
+son los subconjuntos finitos no vac\'ios de $U$, $s = \{U_{i_0}, \dots , U_{i_n} \}$ tales que $\bigcap U_{i_k} \neq \emptyset$. Notar que efectivamente $N(U)$ es un complejo simplicial. Se dice que un espacio topol\'ogico $X$ tiene dimensi\'on $\leq n$ si todo cubrimiento abierto de $X$ admite un refinamiento abierto cuyo nervio es un complejo simplicial de dimensi\'on $\leq n$. Decimos que $\dim X = n$ si $\dim X \leq n$ y $\dim X \not \leq n - 1$. Probar que:
+\begin{itemize}
+\item[a)] Si $A \subseteq X$ es cerrado entonces $\dim A \leq \dim X$.
+\item[b)] Los espacios discretos tienen dimensi\'on $0$.
+\item[c)] El intervalo $I$ tiene dimensi\'on $1$.
+\item[d)] Si $K$ complejo simplicial finito y $\dim K = n$ entonces $\dim |K| \leq n$. (En realidad vale la igualdad, se ver\'a m\'as adelante).
+\end{itemize}
+\end{exercise}
+\begin{proof} Probamos cada inciso por separado.
+\begin{itemize}
+\item[a)] Sea $A \subseteq X$ cerrado, $n := \dim X$ y $\mathcal{U} = \{U_i\}_{i \in I}$ un cubrimiento por abiertos de $A$. Existe entonces para cada $i \in I$ un abierto $V_i$ de $X$ tal que $U_i = V_i \cap A$, y es entonces que la colecci\'on $\mathcal{O} = \{V_i\}_{i \in I} \cup \{A^c\}$ cubre $X$ por abiertos, ya que $A$ es cerrado. Por hip\'otesis, tenemos entonces un refinamiento $\tilde{\mathcal{O}} = \{O_j\}_{j \in J}$ de $\mathcal{O}$ tal que $N(\tilde{\mathcal{O}})$ es un complejo simplicial de dimensi\'on menor o igual que $n$. Afirmamos ahora que $\tilde{\mathcal{U}} = \{O_j \cap A\}_{j \in J}$ es refinamiento de $\mathcal{U}$: tenemos que
+\begin{align*}
+\bigcup_{j \in J} O_j \cap A = A \cap \bigcup_{j \in J}O_j = A \cap X = A,
+\end{align*}
+y dado $j \in J$ luego $O_j \cap A$ es abierto en $A$ pues $O_j$ es abierto en $X$. Por \'ulimo, si $O_j \cap A \neq \emptyset$ luego $O_j \not \subset A^c$ y existe $i_j \in I$ con $O_j \subset V_{i_j}$ y entonces $O_j \cap A \subset V_{i_j} \cap A = U_{i_j} \in \mathcal{U}$. En cualquier caso, $O_j \cap A$ es subconjunto de alg\'un elemento de $\mathcal{U}$. Para terminar, veamos que $\dim N(\tilde{\mathcal{U}}) \leq n$. Sea $\sigma = \{O_{j_0} \cap A, \dots, O_{j_k} \cap A \}$ un s\'implex del nervio de $\tilde{\mathcal{U}}$. Luego, 
+\begin{align*}
+\emptyset \neq \bigcap_{i=0}^k A \cap O_{j_i} \subset \bigcap_{i=0}^k O_{j_i}
+\end{align*}
+y entonces $\{O_{j_0}, \dots, O_{j_k}\}$ es un s\'implex de $N(\tilde{\mathcal{O}})$. Como este \'ultimo tiene dimensi\'on a lo sumo $n$, es 
+\begin{align*}
+\dim \sigma  = k \leq \dim N(\tilde{\mathcal{O}}) \leq n
+\end{align*}
+y en consecuencia, $\dim N(\tilde{\mathcal{U}}) \leq n$.
+\item[b)] Sea $X = \{x_\alpha\}_{\alpha \in \Lambda}$ discreto y $\mathcal{U}$ un cubrimiento de $X$ por abiertos. Afirmamos que el conjunto $\mathcal{O} := \{ \ \{x\} : x \in X \ \}$ es un refinamiento de $\mathcal{U}$. Los elementos de $\mathcal{O}$ son abiertos pues $X$ es discreto. Por otro lado si $\{x\} \in \mathcal{O}$, entonces como $\mathcal{U}$ es cubrimiento de $X$ existe $U \in \mathcal{U}$ tal que $x \in U$. Equivalentemente es $\{x\} \subset U$, y as\'i probamos que el primero es subconjunto de alg\'un abierto de $\mathcal{U}$. Basta entonces con probar que el nervio de $\mathcal{O}$ es de dimensi\'on $0$. Como los simplices de $N(\mathcal{O})$ consisten de abiertos de $\mathcal{O}$ cuya intersecci\'on sea no vac\'ia, alcanza con ver que cualesquiera dos abiertos de $\mathcal{O}$ son disjuntos. Esto es claro: si $\{x\} \neq \{y\} \in \mathcal{O}$, entonces $x \neq y$ y $\{x\} \cap \{y\} = \emptyset$. 
+\item[c)] Veamos en primer lugar que $\dim I \not \leq 0$. Sea $\mathcal{U} = \{[0,\frac{2}{3}), (\frac{1}{3},0]\}$ cubrimiento de $I$. Cualquier refinamiento de $\mathcal{U}$ tiene entonces al menos $2$ elementos. Si $I$ tuviese dimensi\'on cero, existir\'ia un refinamiento $\mathcal{O}$ de $\mathcal{U}$ cuyo nervio es de dimensi\'on cero. Esto dir\'ia que los abiertos de $\mathcal{O}$ son disjuntos y por conexi\'on conluir\'iamos entonces que $1 = \#\mathcal{O} \geq 2$, lo que es absurdo. 
+
+Probemos ahora que $\dim I \leq 1$. Sea $\mathcal{U} = \{U_i\}_{i \in I}$ un cubrimiento por abiertos de $I$. Como los abiertos de $\R$ son uni\'on numerable de intervalos abiertos y disjuntos, luego para cada $i \in I$ existen conjuntos $J_i \subset \N$ e intervalos $\{I^i_j\}_{j \in J_i}$ abiertos (en $I$) y disjuntos tales que $U_i = \bigsqcup_{j \in J_i}I_j^i$. Por compacidad tenemos luego intervalos $I_1, \dots, I_n \in \{I_j^i\}_{i \in I, j \in J_i}$ tales que $\bigcup_{i=1}^N I_i = I$ y, por construcci\'on, cada intervalo es subconjunto de alg\'un abierto $U_i$. Obtuvimos as\'i un refinamiento $\mathcal{O}_0 = \{I_1, \dots, I_n\}$ de $\mathcal{U}$. Construimos a continuaci\'on un refinamiento $\mathcal{O}$ de $\mathcal{U}$ de la siguiente forma: tomamos primero los intevalos de $\mathcal{O}_0$. A los que no sean abiertos (como intervalos) les quitamos los extremos: estos seguir\'an siendo abiertos en $I$, pues s\'olo pueden provenir de alguno de la forma $[0,1], (a,1]$ o $[0,b)$. Luego, dados $J_0,J_1 \in \mathcal{O}_0$ con $s \in J_s$ para $s \in \{0,1\}$, agregamos entornos $E_0 := [0,\eps), E_1 := (1-\eps,1]$ a $\mathcal{O}$ con $0 < \eps \ll 1$ tal que estos sean disjuntos y est\'en contenidos en $J_0$ y $J_1$ respectivamente. Esto garantiza que $\mathcal{O}$ cubre a $I$ ya que volvemos a cubrir sus extremos. Finalmente, de existir alg\'un intervalo que est\'e contenido en la uni\'on de otros, seleccionamos alguno de ellos y lo quitamos. Repetimos el proceso hasta que no haya m\'as intervalos de este tipo, lo cual es posible pues hay finitos intervalos en total. Como removemos intervalos de uno, $\mathcal{O}$ sigue siendo refinamiento pues sigue cubriendo a $I$. 
+
+Afirmamos ahora que $N(\mathcal{O})$ es de dimensi\'on a lo sumo $1$, o equivalentemente, que no hay tres intervalos de $\mathcal{O}$ cuya intersecci\'on sea no vac\'ia. Supongamos que s\'i y sean $\{J_i\}_{1 \leq i \leq 3} \subset \mathcal{O}$ de intersecci\'on no vac\'ia y tales que el interior\footnote{Esto evita tratar por separado la posible elecci\'on de $E_0$ o $E_1$, ya que al ser los \'unicos dos intervalos semiabiertos, el argumento que sigue funciona a\'un si $a_1 \in J_1$ o $b_3 \in J_3$. Siempre tenemos que tanto $J_2$ o $J_1 \cap J_3$ son intervalos abiertos, y no hace falta que las desigualdades entre $a_1$ y $a_2$ o $b_2$ y $b_3$ sean estrictas.} de $J_i$ en $\R$ es $(a_i,b_i)$. Como los intervalos no se contienen entre s\'i, existen dos de ellos distintos con el menor extremo izquierdo y mayor extremo derecho, que suponemos son $J_1$ y $J_3$ respectivamente. As\'i, $J_1 \cap J_3 = (a_3,b_1)$. Como $J_2 \not \subseteq J_1$ debe ser $b_2 > b_1$, y similarmente como $J_2 \not \subseteq J_3$ tenemos que $a_2 < a_3$. Si ahora $s \in J_2$, entonces $a_1 \leq a_2 < s < b_2 \leq b_3$. Si $s \neq J_1$, luego $s > b_1 > a_3$ y consecuentemente $s \in J_3$. En cualquier caso, $s \in J_1 \cup J_2$. Esto implica que $J_2 \subset J_1 \cap J_2$, lo que es absurdo: no hay entonces tres intervalos cuya intersecci\'on sea no vac\'ia. Dado un cubrimiento arbitrario encontramos un refinamiento cuyo nervio es de dimensi\'on a lo sumo $1$, lo que completa la demostraci\'on. 
+\item[d)] 
+\end{itemize}
+\end{proof}
+\end{document}
