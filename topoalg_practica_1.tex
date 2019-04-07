@@ -192,4 +192,44 @@ Afirmamos ahora que $N(\mathcal{O})$ es de dimensi\'on a lo sumo $1$, o equivale
 \end{itemize}
 \end{proof}
 
+\begin{lemma}{4} Sea $X$ un espacio topol\'ogico, $R$ una relaci\'on en $X$ y $X/R$ el espacio cociente. Notamos $q : X \to X/R$ a la proyecci\'on. Si $U,V$ son abiertos saturados disjuntos en $X$, entonces $q(U)$ y $q(V)$ son abiertos disjuntos en $X/R$. En particular, si $[x] \neq [y] \in X/R$ y existen $U \ni x, V \ni y$ abiertos saturados disjuntos, los abiertos $q(U)$ y $q(V)$ separan a $[x]$ de $[y]$.
+\end{lemma}
+\begin{proof} Ya sabemos que los abiertos de $X/R$ son precisamente las im\'agenes por $q$ de abiertos saturados, resta ver entonces que $q(U) \cap q(V) = \emptyset$. Si no fuera as\'i existir\'ian $z \in U$ y $w \in V$ con $q(z) = q(w)$. En particular, tendr\'iamos que $z \sim w$ y como $U$ es saturado, luego $w \in U$. Sin embargo esto contradice que $U$ y $V$ son disjuntos.
+\end{proof}
+
+\begin{exercise}{5} Sea $A \subset X$ subespacio cerrado y $f : A \to B$ continua. Denotemos con $B \cup_f X$ al espacio de
+adjunci\'on. Probar que si
+\begin{itemize}
+\item $B$ y $X$ son Hausdorff,
+\item Para todo $x \in X \setminus A$, existe un entorno cerrado de $x$ en $X$ que no interseca a $A$ y
+\item $A \subset X$ es retracto de entorno,
+\end{itemize}
+entonces $B \cup_f X$ es Hausdorff.
+\end{exercise}
+\begin{proof} Recordemos que $B \cup_f X = B \sqcup X / \sim$, con $\sim$ la relaci\'on generada por la identificaci\'on $a \sim f(a)$ para cada $a \in A$. Sea ahora $q : X \sqcup B \to X \cup_f B$ la proyecci\'on al cociente. Notemos adem\'as que por construcci\'on, si $x \in X \setminus A$ e $y \in B \setminus f(A)$ entonces $[x] = \{x\}$, $[y] = \{y\}$. Es decir, en el cociente s\'olo se identifican puntos de $A$ y $f(A)$. M\'as a\'un, los elementos de $f(A)$ no se relacionan entre s\'i, y cada $a \in A$ est\'a relacionado a su imagen por $f$. Esto dice que $q(X \setminus A \sqcup B)$ es un sistema de representantes para esta relaci\'on y
+\begin{align*}
+q^{-1}([x]) = \begin{cases}
+\{x\} \text{ si $x \in X \setminus A$ \'o $x \in B \setminus f(A)$} \\
+\{x\} \sqcup f^{-1}(x) \text{ si $x \in f(A)$}
+\end{cases}
+\end{align*}
+Ahora, sean $[x]$ e $[y]$ puntos del espacio de adjunci\'on con $x,y \in X \setminus A \sqcup B$. Queremos ver que siempre existen abiertos disjuntos $\mathcal{U} \ni [x]$ y $\mathcal{V} \ni [y]$. Para esto, podemos separar en casos seg\'un a que espacio pertenecen los representantes, y por el $\paint{grey-light-blue}{\text{Lema }4}$, alcanza con ver que en cada caso tenemos abiertos saturados disjuntos $U \ni x, V\ni y$.
+\begin{itemize}
+\item \underline{\textbf{\paint{grey-light-blue}{\text{Caso $1$:}}} $x,y \in X \setminus A$.} Como tanto $x$ como $y$ est\'an en el complemento de $A$ en $X$, tenemos entornos cerrados de cada punto que no intersecan a $A$. Es decir, existen abiertos $O_x,O_y$ y cerrados $F_x,F_y$ tales que $x \in O_x \subset F_x \subset X \setminus A$ e $y \in O_y \subset F_y \subset X \setminus A$. Por otro lado, como $X$ es $T_2$, existen abiertos $U_x \ni x$ y $V_y \ni y$ tales que $U_x \cap V_y = \emptyset$. Definimos luego los abiertos $U := U_x \cap O_x$ e $V := V_y \cap O_y$ que contienen a $x$ e $y$ respectivamente. \'Estos son saturados pues est\'an contenidos en $X \setminus A$ donde no hay identificaciones no triviales y finalmente son disjuntos pues $U \cap V \subset U_x \cap V_y = \emptyset$.
+\item \underline{\textbf{\paint{grey-light-blue}{\text{Caso $2$:}}} $x \in X \setminus A, y \in B$.} Como en el caso anterior, tenemos $x \in O_x \subset F_x \subset X \setminus A$ con $O_x$ abierto y $F_x$ cerrado en $X$. Luego, $x \in O_x$ y $F_x^c \sqcup B \ni y$ son abiertos disjuntos en $X \sqcup B$. Veamos que \'estos son saturados. Rara $O_x \subset X \setminus A$ podemos utilizar el argumento del $\paint{grey-light-blue}{\text{Caso } 1}$. Por \'ultimo, si $z \in F^c \sqcup B$ y $z \sim w$ con $w \neq z$ entonces o bien $w \in A$ y $f(z) = f(w)$ o $z = f(w)$, o bien $w = f(z) \in f(A)$ pues en $B$ no hay identificaciones entre puntos distintos. En cualquier caso, $w \in A \sqcup f(A) \subset F^c \sqcup B$ y por lo tanto \'este \'ultimo es saturado. Por simetr\'ia, obviamos el caso en que $x \in B$ e $y \in X \setminus A$.
+\item \underline{\textbf{\paint{grey-light-blue}{\text{Caso $3$:}}} $x,y \in B$.} Como $B$ es Hausdorff, tenemos abiertos $U \ni x$ y $V \ni y$ de $B$ que resultan disjuntos, pero no necesariamente saturados. Buscamos entonces conseguir abiertos de $x$ e $y$ en base a los anteriores que sean saturados pero sigan siendo disjuntos. Como $A$ es retracto de entorno, existe un abierto $U \subset X$ que contiene a $A$ y una funci\'on continua $r : U \to A$ tal que $r(a) = a$ para todo $a \in A$. Ahora, como $U$ y $V$ son disjuntos, sus preimagenes por $fr : U \to B$ son disjuntas y abiertas en $U$, ya que $fr$ es continua. Como $U$ es abierto de $X$, esto dice que $(fr)^{-1}(U)$ y $(fr)^{-1}(V)$ son en realidad abiertos de $X$. Por lo tanto, los conjuntos $(fr)^{-1}(U) \sqcup U$ y $(fr)^{-1}(V) \sqcup V$ son abiertos de $X \sqcup B$ que contienen a $x$ e $y$ respectivamente. Para terminar, veamos que son saturados. Como ambos casos son sim\'etricos, sin p\'erdida de generalidad lo hacemos s\'olo para $(fr)^{-1}(U) \sqcup U$. Sea $z \in (fr)^{-1}(U) \sqcup U$ y $w \sim z$ con $w \neq z$. Como en el $\paint{grey-light-blue}{\text{Caso } 2}$, al no haber identifiaciones entre puntos distintos en $B$ los casos posibles son:
+\begin{itemize}
+\item[$\blacktriangleright$] $f(w) =f(z)$ con $w \in A, z \in A \cap (fr)^{-1}(U)$. Aqu\'i es
+\begin{align*}
+fr(w) = f(w) = f(z) = fr(z) \in fr((fr)^{-1}(U)) \subset U,
+\end{align*}
+y entonces $w \in (fr)^{-1}(U)$.
+\item[$\blacktriangleright$] $f(w) = z$ con $w \in A, z \in U$. Como $fr(w) = f(w) = z \in U$, tenemos que $w \in (fr)^{-1}(U)$. 
+\item[$\blacktriangleright$] $w = f(z)$ con $w \in f(A), z \in A \cap (fr)^{-1}(U)$. Luego $w = f(z) = fr(z) \in fr((fr)^{-1}(U)) \subset U$.
+\end{itemize}
+En todo momento $w$ es un elemento de $(fr)^{-1}(U) \sqcup U$ y por lo tanto \'este es saturado.
+\end{itemize}
+Habiendo encontrado en cada caso abiertos saturados y disjuntos de $X \sqcup B$ que contienen a $x$ e $y$ respectivamente, concluimos entonces que $X \cup_f B$ es Hausdorff. 
+\end{proof}
+
 \end{document}
