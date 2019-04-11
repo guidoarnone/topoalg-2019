@@ -5,6 +5,10 @@
 \usepackage{mathpazo}
 \usepackage{euler}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
@@ -13,6 +17,8 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Ss}{\mathbb{S}}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\tint}[1]{#1^o}%\stackrel{o}{#1}}
 \newcommand{\nat}[1]{[\![#1]\!]}
@@ -64,7 +70,7 @@
 \paint{grey-light-blue}{\large{Sobre los Ejercicios}}
 \end{center}
 
-Eleg\'i resolver los ejercicios $\paint{grey-light-blue}{(3)}$, $\paint{grey-light-blue}{(5)}$, y $\paint{grey-light-blue}{()}$. Por completitud, incluyo el ejercicio $\paint{grey-light-blue}{(4)}$ al comienzo ya que lo ulilizar\'e en la resoluci\'on de $\paint{grey-light-blue}{(3)}$. Con la intenci\'on de hacer m\'as legibles a las resoluciones, algunos argumentos est\'an escritos en forma de lemas que preceden a cada ejercicio.
+Eleg\'i resolver los ejercicios $\paint{grey-light-blue}{(3)}$, $\paint{grey-light-blue}{(5)}$, y $\paint{grey-light-blue}{(10)}$. Por completitud, incluyo el ejercicio $\paint{grey-light-blue}{(4)}$ al comienzo ya que lo ulilizar\'e en la resoluci\'on de $\paint{grey-light-blue}{(3)}$. Con la intenci\'on de hacer m\'as legibles a las resoluciones, algunos argumentos est\'an escritos en forma de lemas que preceden a cada ejercicio.
 
 \begin{center}
 $\paint{grey-light-blue}{
@@ -230,6 +236,79 @@ y entonces $w \in (fr)^{-1}(U)$.
 En todo momento $w$ es un elemento de $(fr)^{-1}(U) \sqcup U$ y por lo tanto \'este es saturado.
 \end{itemize}
 Habiendo encontrado en cada caso abiertos saturados y disjuntos de $X \sqcup B$ que contienen a $x$ e $y$ respectivamente, concluimos entonces que $X \cup_f B$ es Hausdorff. 
+\end{proof}
+
+\begin{exercise}{10} Probar que los CW-complejos admiten revestimientos y que el revestimiento de un CW-complejo de dimensi\'on $n$ es un CW-complejo de la misma dimensi\'on. En particular los revestimientos de grafos son grafos.
+\end{exercise}
+\begin{proof} Sea $X$ un CW-complejo de dimensi\'on $n$ con estructura celular $\{e^{k}_\alpha\}_{\alpha \in J_k}^{k \in \natzero{n}}$. Procedemos por etapas: primero, veremos que si $p : E \to X$ es un revestimiento, entonces $E$ tiene una estructura de CW-complejo de dimensi\'on $n$. Para esto, construimos una estructura celular en $E$ y vemos que verifica tanto $(C)$ como $(W)$. Luego, probamos que siempre existe un revestimiento universal de $X$ si \'este es arcoconexo. Sea entonces $p : E \to X$ un revestimiento. Antes que nada, verfiquemos que $E$ es Hausdorff: sean $x \neq y \in E$. Si $p(x) \neq p(y)$, luego existen $U \ni p(x), V \ni p(y)$ abiertos disjuntos en $X$ pues \'este es Hausdorff, y entonces $p^{-1}(U)$ y $p^{-1}(V)$ son abiertos que separan a $E$. Si en cambio $p(x) = p(y) =: b$, como $p$ es revestimiento tenemos un abierto $U \ni b$ tal que $p^{-1}(U) = \sqcup_{i \in I} U_i$ es uni\'on de abiertos disjuntos y $p|_{U_i} : U_i \to U$ es homeomorfismo para cada $i \in I \neq \emptyset$. Como $x,y \in E_b$, luego $x,y \in \sqcup_{i \in I}U_i$. Basta ver que estos no pertenecen al mismo abierto, lo cual ocurre pues si fuera $x,y \in U_i$, la funci\'on $p|_{U_i}$ no ser\'ia inyectiva, en particular no ser\'ia un homeomorfismo. 
+
+
+Ahora s\'i, comenzamos con la construcci\'on de estructura celular de $E$. Para cada $k \in \natzero{n}$, el disco $\D^k$ es simplemente conexo y localmente arcononexo as\'i que cada funci\'on caracter\'istica $f_\alpha^k : \D^k \to X$ compuesta con la inclusi\'on\footnote{A partir de ahora, para aligerar notaci\'on pensamos a los puntos de la imagen de cada funci\'on caracter\'istica como puntos de $X$, i.e. dejamos de escribir la postcomposici\'on con la inclusi\'on $e_\alpha^k \hookrightarrow X$.} $e_\alpha^k \hookrightarrow X$ tiene un levantado a $E$. M\'as a\'un, el levantado est\'a unicamente determinado por la imagen de un punto. Para tener una buena definici\'on, si fijamos $0 \in \D^k$ y $p_\alpha^k := f_\alpha^k(0)$, para cada $x \in E_\alpha^k := E_{p_\alpha^k}$ hay un \'unico levantado,
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em]
+  {
+     &  & E \\
+     \D^n & e_\alpha^n & X \\};
+  \path[-stealth]
+    (m-1-3) edge node [right] {$p$} (m-2-3)
+    (m-2-1) edge node [below] {$f_\alpha^k$} (m-2-2)
+    (m-2-2) edge [right hook->] node [below] {} (m-2-3)
+    (m-2-1) edge [dashed] node [above] {$\exists!g_\alpha^{k,x}$}  (m-1-3);
+\end{tikzpicture}
+\end{center}
+tal que $g_\alpha^{k,x}(0) = x$. Adem\'as, todo levantado de una funci\'on caracter\'istica es de \'esta forma, pues queda determinada un\'ivocamente por su imagen en cualquiera de sus puntos, en particular, en $0$. Ahora, afirmamos que $\mathcal{C} = \{c_\alpha^{k,x} := g_\alpha^{k,x}(\D^n) : k \in \natzero{n},\alpha \in J_k, x \in E_\alpha^k\}$ es una estructura celular:
+\begin{itemize}
+\item[\paint{grey-light-blue}{(i)}] $\bigcup_{c_\alpha^{k,y} \in \mathcal{C}}c_\alpha^{k,y} = E$ pues si $q \in E$, luego $p(q)  \in X$ pertenece a alguna celda $e_\alpha^k$. As\'i, es $p(q) = f_\alpha^k(z)$ para cierto $z \in \D^k$. Luego existe una \'unica funci\'on $g_\alpha^{k,y}$ tal que $g_\alpha^{k,y}(z) = q$. En consecuencia, es $q \in c_\alpha^{k,y}$.
+\item[\paint{grey-light-blue}{(ii)}] Supongamos $\tint{{c_\alpha^{k,x}}} \cap \tint{{c_\beta^{l,y}}} \neq \emptyset$ y veamos que $\alpha = \beta, x = y, k = l$. Siempre es
+\begin{align}
+p(\tint{{c_\alpha^{k,x}}} \cap \tint{{c_\beta^{l,y}}}) \subset p(c_\alpha^{k,x} \cap c_\beta^{l,y}) \subset p(c_\alpha^{k,x}) \cap p(c_\beta^{l,y}) = e_\alpha^k \cap e_\beta^l. 
+\end{align}
+Veamos ahora que $p(\tint{{c_\alpha^{k,x}}} \cap \tint{{c_\beta^{l,y}}}) \subset \tint{{ e_\alpha^k}} \cap \tint{{e_\beta^l}}$. Como ya sabemos que vale $\paint{grey-light-blue}{(1)}$ y  $e_\alpha^k \cap e_\beta^l \subset \tint{{c_\beta^{l,y}}} \cap \tint{{ e_\alpha^k}} \cup \dot{e_\alpha^k} \cup \dot{e_\beta^l}$, es suficiente probar que
+\begin{align}
+p(\tint{{c_\alpha^{k,x}}} \cap \tint{{c_\beta^{l,y}}}) \subset \dot{e_\alpha^k}^c, \ \dot{e_\beta^l}^c.
+\end{align}
+Ambos casos son similares, lo hacemos para $e_\alpha^k$. Por el absurdo, si $p(q) \in \dot{e_\alpha^k}$, luego existe $e_\gamma^m$ tal que $p(q) \in e_\gamma^m$ y $m < k$. Existe entonces $g_\gamma^{m,w}$ tal que $g_\gamma^{m,w}(z) = q$ para cierto $z \in \D^m$ y as\'i $q \in c_\gamma^{m,w}$ con $m < k$, lo que es absurdo pues $q \in \tint{{c_\alpha^{k,x}}}$. En conclusi\'on, hemos probado $\paint{grey-light-blue}{(2)}$ y entonces siempre es $p(\tint{{c_\alpha^{k,x}}} \cap \tint{{c_\beta^{l,y}}}) \subset \tint{{ e_\alpha^k}} \cap \tint{{e_\beta^l}}$. Esto en particular implica que como $\tint{{c_\alpha^{k,x}}} \cap \tint{{c_\beta^{l,y}}} \neq \emptyset$, la intersecci\'on $\tint{{ e_\alpha^k}} \cap \tint{{e_\beta^l}}$ es no vac\'ia y entonces $\alpha = \beta, k = l$. Para terminar, veamos que $x = y$. Sea $q \in \tint{{c_\alpha^{k,x}}} \cap \tint{{c_\beta^{l,y}}} = \tint{{c_\alpha^{k,x}}} \cap \tint{{c_\alpha^{k,y}}}$. Luego existen $z,z' \in \D^k$ tales que 
+\begin{align}
+g_\alpha^{k,x}(z) = q = g_\alpha^{k,y}(z').
+\end{align}
+Aplicando $p$, tenemos
+\begin{align*}
+f_\alpha^k(z) = p(q) = f_\alpha^k(z'), 
+\end{align*}
+y como acabamos de probar que $p(q) \in \tint{{ e_\alpha^k}} = f_\alpha^k(\tint{(\D^k)})$, luego $z,z' \in \tint{(\D^k)}$. Restringida all\'i sabemos que $f_\alpha^k$ es biyectiva (de hecho, es un homeomorfismo con su imagen) as\'i que $z = z'$. Volviendo a $\paint{grey-light-blue}{(3)}$, tenemos dos levantados $g_\alpha^{k,x}, g_\alpha^{k,y}$ de $f_\alpha^k$ que coinciden en un punto y por lo tanto deben ser iguales. Finalmente, $x = g_\alpha^{k,x}(0) = g_\alpha^{k,y}(0) = y$.
+
+\begin{center}
+$\paint{grey-light-blue}{
+\rule{400pt}{0.5pt}
+}$
+\end{center}
+
+\item[]Antes de seguir observemos que tomando celdas iguales, en $\paint{grey-light-blue}{(ii)}$ probamos en particuar que $p(c_\alpha^{k,x}) \subset e_\alpha^{k,x}$ y $p(\tint{{c_\alpha^{k,x}}}) \subset \tint{{e_\alpha^{k,x}}}$ para cuaqluier celda.
+
+\begin{center}
+$\paint{grey-light-blue}{
+\rule{400pt}{0.5pt}
+}$
+\end{center}
+
+\item[\paint{grey-light-blue}{(iii)}] Afirmamos por \'ultimo que las correstricciones $g_\alpha^{k,y} : \D^k \to c_\alpha^{k,y}$ son funciones caracter\'isticas: debemos ver que $g_\alpha^{k,y}(\Ss^{k-1}) = \dot{c_\alpha^{k,x}}$, $g_\alpha^{k,y}(\tint{{\D^k}}) = \tint{{c_\alpha^{k,x}}}$ y que la restricci\'on $g_\alpha^{y,k} : \tint{{\D^k}} \to \tint{{c_\alpha^{y,k}}}$ es homeomorfismo.
+\begin{itemize}
+\item[$\blacktriangleright$] Si $x \in \Ss^{k-1}$ entonces $f_\alpha^k(x) \in \dot{e_\alpha^k}$ y por lo tanto $f_\alpha^k(x) \in e_\beta^m$ para cierta celda con $m < k$. Luego como $g_\alpha^{k,y}(x) \in E_{f_\alpha^k(x)}$, existe un levantado $g_\beta^{m,z}$ de $f_\beta^m$ tal que $g_\beta^{m,z}(x') = g_\alpha^{k,y}(x)$ para cierto $x' \in \D^{m}$. Por lo tanto $g_\alpha^{k,y}(x) \in c_\alpha^{k,x} \cap c_\beta^{m,z}$ y as\'i $g_\alpha^{k,y}(\Ss^{k-1}) \subset \dot{c_\alpha^{k,y}}$. Rec\'iprocamente, si $q = g_\alpha^{k,y}(x) \in c_\alpha^{k,y} \cap c_\beta^{m,w}$ para cierta celda con $m < k$ entonces $f_\alpha^k(x) = p(q) \in p(c_\alpha^{k,y}) \cap p(c_\beta^{m,w}) \subset \dot{e_\alpha^k}$. Por lo tanto, necesariamente es $x \in \Ss^{k-1}$ y entonces $\dot{c_\alpha^{y,k}} \subset g_\alpha^{k,y}(\Ss^{k-1})$.
+\item[$\blacktriangleright$] Sea $x \in \tint{{\D^k}}$. Si su imagen por $g_\alpha^{k,y}$ no fuera parte del interior de $c_\alpha^{k,y}$, debe estar en el borde. Por lo tanto, por lo anterior existe $x' \in \Ss^{k-1}$ tal que $g_\alpha^{y,k}(x') = g_\alpha^{y,k}(x)$. Componiendo con $p$, luego es $f_\alpha^{k}(x') = f_\alpha^{k}(x)$ lo que es absurdo, pues este elemento ser\'ia imagen del borde e interior de $e_\alpha^k$ al mismo tiempo. Rec\'iprocamente, si $g_\alpha^{y,k}(x) \in \tint{{c_\alpha^{y,k}}}$ entonces $f_\alpha^k(x) = pg_\alpha^{k,y}(x) \in \tint{{e_\alpha^k}}$ y por lo tanto $x \in \tint{{\D^k}}$.
+\item[$\blacktriangleright$] Sabemos que $g_\alpha^{y,k} : \tint{{\D^k}} \to \tint{{c_\alpha^{y,k}}}$ es continua y sobreyectiva. Como $f_\alpha^k$ es inyectiva en el interior del disco, tambi\'en tenemos la inyectividad: si $g_\alpha^{y,k}(x) = g_\alpha^{y,k}(x')$ para ciertos $x,x' \in \tint{{\D^k}}$ componiendo con $p$ es $f_\alpha^k(x) = f_\alpha^k(x')$ y entonces $x = x'$. Resta ver que $g_\alpha^{y,k}$ es abierta. Sea $U \subset \tint{{\D^k}}$ abierto, y veamos que $g_\alpha^k(U)$ es abierto. Por hip\'otesis, $f_\alpha^k(U)$ es abierto en $\tint{{e_\alpha^k}}$, es decir tenemos que $f_\alpha^k(U) = V \cap \tint{{e_\alpha^k}}$ con $V$ abierto en $X$. Luego $p^{-1}(V)$ es abierto y afirmamos entonces que $g_\alpha^{k,y}(U) = p^{-1}(V) \cap \tint{{c_\alpha^{k,y}}}$. Ya sabemos que $g_\alpha^{k,y}(U) \subset \tint{{c_\alpha^{k,y}}}$, y adem\'as $pg_\alpha^{k,y}(U) = f_\alpha^k(U) \subset V$ as\'i que $g_\alpha^{k,y}(U) \subset p^{-1}(V)$. Veamos la otra contenci\'on: sea $y \in p^{-1}(V) \cap \tint{{c_\alpha^{k,y}}}$. Como $g_\alpha^{k,y}$ es una biyecci\'on entre el interior del disco y de la celda, luego $y \in p^{-1}(V) \cap \tint{{c_\alpha^{k,y}}}$ si y s\'olo si $y = g_\alpha^{k,y}(x)$ con $p(y) = f_\alpha^k(x) \in V$ y $x \in \tint{{\D^k}}$. Una vez m\'as, como $f_\alpha^k$ es una biyecci\'on entre el interior del disco y el interior de $e_\alpha^k$, esto equivale a decir que $f_\alpha^k(x) \in V \cap \tint{{e_\alpha^k}} = f_\alpha^k(U)$. En particular $x$ debe ser un elemento del interior del disco, y como $f_\alpha^k$ es biyectiva en $U$, luego es $x \in U$ e $y = g_\alpha^{k,y}(x) \in g_\alpha^{k,y}(U)$. 
+\end{itemize}
+\end{itemize}
+Esto termina la demostraci\'on de que $E$ admite una estructura celular. Veamos ahora que es CW-complejo, es decir, que cumple las propiedades (C) y (W).
+\begin{itemize}
+\item[$\blacktriangleright$] \underline{$E$ verifica $(C)$:} si $c_\beta^{l,y} < c_\alpha^{k,x}$ entonces $e_\alpha^l < e_\beta^k$ pues
+\begin{align*}
+p({c_\alpha^{k,x}} \cap \tint{{c_\beta^{l,y}}}) \subset p(c_\alpha^{k,x}) \cap p(\tint{{c_\beta^{l,y}}}) \subset e_\alpha^k \cap \tint{{e_\beta^l}},
+\end{align*}
+y m\'as a\'un de aqu\'i se ve que si $c_\beta^{l,y}$ es cara de $c_\alpha^{k,x}$ entonces $e_\alpha^l$ es cara de  $e_\beta^k$. Entonces, si $c_\beta^{l,y}$ tuviese infinitas caras, tendr\'iamos al menos numerables celdas $\{c_{\alpha_n}^{k_n,y_n}\}_{n \geq 1}$ que son caras de $c_\beta^{l,y}$. Luego las celdas $\{e_{\alpha_n}^{k_n}\}_{n \geq 1}$ ser\'ian caras de $e_\beta^l$ y como $X$ es CW-complejo, deben ser finitas: as\'i, las suceciones $(\alpha_n)_n,(k_n)_n$ toman finitos valores $\gamma_1, \dots, \gamma_s$ y $m_1, \dots, m_r$. Luego, debe existir un par $(\gamma_i,k_j)$ tal que hay infinitas celdas de la forma $c_{\gamma_i}^{k_j,x}$ que son caras de $c_\beta^{l,y}$. Para terminar veamos que esto es absurdo: si 
+\item[$\blacktriangleright$] \underline{$E$ verifica $(W)$}:
+\end{itemize}
+Esto termina de probar que $E$ es un CW-complejo, y es de dimensi\'on $n$ por construimos su estructura celular. Finalmente, veamos que un CW-complejo arcoconexo siempre admite un revestimiento universal. Para esto, basta probar que los CW-complejos son localmente arcoconexos y semi-localmente simplemente conexos. M\'as a\'un, afirmamos que un CW-complejo es localmente contr\'actil. 
 \end{proof}
 
 \end{document}
