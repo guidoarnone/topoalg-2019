@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+
+\usepackage{mathpazo}
+\usepackage{euler}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Ss}{\mathbb{S}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\tint}[1]{#1^o}
+\newcommand{\nat}[1]{[\![#1]\!]}
+\newcommand{\natzero}[1]{\nat{#1}_0}
+\newcommand{\diam}[1]{\operatorname{diam}(#1)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\im}{\operatorname{im}}
+
+\newcommand{\paint}[2]{\color{#1}{#2}}
+\definecolor{orange}{RGB}{226, 131, 0}
+
+\renewcommand*{\proofname}{\paint{orange}{Demostraci\'on}}
+\newenvironment{theorem}[2][Teorema]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lema]{\begin{trivlist}
+\item[\hskip \labelsep \paint{orange}{{\bfseries #1}}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep \paint{orange}{{\bfseries #1}}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Resoluci\'on]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposici\'on]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corolario]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{obs}[2][Observaci\'on]{\begin{trivlist}
+\item[\hskip \labelsep \paint{orange}{{\bfseries #1}}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+%-----------------------
+
+\title{
+\LARGE{\paint{orange}{Topolog\'ia Algebraica}}
+\\
+\vspace{5pt}
+\small{\paint{orange}{Ejercicios para Entregar - Pr\'acticas 2 y 3}}
+\\
+\vspace{5pt}
+\large{\paint{orange}{Guido Arnone}}
+\\
+\paint{orange}{
+\rule{250pt}{0.5pt}
+}
+}
+\author{}
+\date{}
+\lhead{Guido Arnone}
+\rhead{Pr\'acticas 2 y 3}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\paint{orange}{\large{Sobre los Ejercicios}}
+\end{center}
+
+lorem ipsum
+
+\begin{center}
+$\paint{orange}{
+\rule{400pt}{0.5pt}
+}$
+\vspace{35pt}
+\end{center}
+
+\begin{lemma}{1} Sea $\varphi$ una funci\'on de los CW-complejos finitos a los enteros que cumple las hip\'otesis del ejercicio $\paint{orange}{8}$. Entonces,
+\begin{itemize}
+\item[(i)] Si $D$ es un CW-complejo finito de dimensi\'on $0$, entonces $\varphi(D) = \varphi(S^0) \cdot (\#D -1)$.
+\item[(ii)] Si $X$ es un CW-complejo finito y $A,B \subset X$ son subcomplejos de $X$ tales que $X = A \vee B$, entonces $\varphi(X) = \varphi(A) + \varphi(B)$.
+\item[(iii)] Para cada $d \in \N_0$ tenemos que $\varphi(\Ss^d) = (-1)^d \cdot \varphi(\Ss^0)$.
+\item[(iv)] Para cada $d \in \N_0$ y $k \in \N$, es $\varphi(\vee_{j =1}^k\Ss^d) = k \cdot (-1)^d \cdot \varphi(\Ss^0)$.
+\end{itemize}
+\end{lemma}
+\begin{proof} Hacemos cada inciso por separado.
+\begin{itemize}
+\item[(i)] Hacemos inducci\'on en el tama\~{n}o de $D$. Sea $e^1_0 \sqcup e^2_0$ una estructura celular para $\Ss^0$. Si $\# D=1$, luego $D \equiv e^1_0$. Por otro lado, el cociente de un espacio por el subespacio de un punto es siempre homeomorfo al espacio mismo. Tenemos entonces $\varphi(\Ss^0) = \varphi(\Ss^0/e^1_0) + \varphi(e^1_0) = \varphi(\Ss^0) + \varphi(D)$. Restando, tenemos que $\varphi(D) = 0$. Si $\# D = 2$, es $D \simeq \Ss^0$ y $\varphi(D) = \varphi(\Ss^0)$. Por \'ultimo, cuando $\#D > 2$, si tomamos $x,y \in D$ dos $0$-celdas, el cociente $D' := D/\{x,y\}$ por el subcomplejo $\{x,y\} \equiv \Ss^0$ corresponde a indentificar $x$ con $y$, de forma que resulta un espacio discreto de un punto menos. Es decir, es un CW-complejo finito de dimensi\'on cero con una $0$-celda menos. Inductivamente, tenemos
+\begin{align*}
+\varphi(D) &= \varphi(D/\{x,y\}) + \varphi(\{x,y\}) = \varphi(D') + \varphi(\Ss^0) \\
+&= \varphi(\Ss^0)(\# D'-1) + \varphi(\Ss^0) = \varphi(\Ss^0)\# D'\\
+&= \varphi(\Ss^0)(\# D-1).
+\end{align*}
+\item[(ii)] Basta probar que $X/A \equiv B$. En tal caso, tendremos en efecto $\varphi(X) = \varphi(A) + \varphi(X/A) = \varphi(A) + \varphi(B)$. Consideramos la funci\'on $f : B \to X/A$ definida como la composici\'on entre la inclusi\'on $B \hookrightarrow X$ y la proyecci\'on $q : X \to X/A$. Como $B$ es compacto pues es un CW-complejo finito y $X/A$ es Hausdorff ya que es CW-complejo, resta ver que $f$ es biyectiva. Sea $p \in X$ el punto de pegado entre $A$ y $B$. Es decir, $A \cap B = \{p\}$. Ahora,
+\begin{itemize}
+\item[$\bullet$] La funci\'on $f$ es inyectiva: sean $x, y \in B$ con $[x] = f(x) = f(y) = [y]$. Por definici\'on de $X/A$, o bien $x = y$ o bien $x,y \in A$. Esto \'ultimo implica $x,y \in A \cap B = \{p\}$. En cualquier caso, es $x = y$.
+\item[$\bullet$] La funci\'on $f$ es sobreyectiva: sea $[x] \in A$ con $x \in X = A \vee B$. Si $x \in B$ es $[x] = f(x)$. De lo contrario, necesariamente es $x \in A \setminus \{p\}$. Pero entonces basta notar que como $p \in B$, es $f(p) = [p] = [x]$ pues $p,x \in A$.
+\end{itemize}
+\item[(iii)] Hacemos inducci\'on en $d$. El caso base $d = 0$ es trivial. Si $d = 1$, construimos a $\Ss^1$ como la adjunci\'on de dos $1$-celdas $e_1^1$ y $e_1^2$ a $\Ss^0 = e_0^1 \sqcup e_0^2$. Luego $\Ss^1/\Ss^0 \equiv \Ss^1 \vee \Ss^1$ y $\varphi(\Ss^1) = \varphi(\Ss^1/\Ss^0) + \varphi(\Ss^0) \stackrel{(ii)}{=} 2\varphi(\Ss^1) + \varphi(\Ss^0)$. Restando, obtenemos $\varphi(\Ss^1) = -\varphi(\Ss^0)$. Cuando $d >2$, usamos una idea similar: consideramos la estructura celular para $\Ss^d$ que consiste en adjuntar dos $d$-discos a $\Ss^{d-1}$. Es decir, tenemos una cero celda $e_0$, una $(d-1)$-celda $e_{d-1}$ que corresponde a pegar el borde de un $(d-1)$-disco en $e_0$, y dos $d$-celdas $e_d^1$ y $e_d^2$ que coresponden a pegar el borde cada $d$-disco en la $(d-1)$-esfera sin identificar puntos del borde entre s\'i. As\'i, $\Ss^{d-1}$ resulta el "ecuador" de $\Ss^{d}$ y entonces, el cociente $\Ss^d/e_{d-1}$ es homeomorfo al wedge de dos $d$-esferas. Por lo tanto, 
+\begin{align*}
+\varphi(\Ss^d) = \varphi(\Ss^d/e_{d-1}) + \varphi(e_{d-1}) = \varphi(\Ss^d \vee \Ss^d) + \varphi(\Ss^{d-1}) \stackrel{(ii)}{=} 2\varphi(\Ss^d) + \varphi(\Ss^{d-1}),
+\end{align*}
+lo que implica $\varphi(\Ss^d) = - \varphi(\Ss^{d-1}) = -(-1)^{d-1}\varphi(\Ss^0) = (-1)^d\varphi(\Ss^0)$.
+\item[(iv)] Hacemos inducci\'on en $k$. El caso base cuando $k=1$ se verifica por $\paint{orange}{(iii)}$. Si ahora $k  > 1$, fijamos $d \in \N_0$ Ahora, consideramos la siguente estructura celular del wedge: tenemos una cero celda $e_0$ y $k$ celdas de dimensi\'on $d$, con funci\'ones de adjunci\'on $f_i : \D^k \xrightarrow{!} e_0$ para cada $i \in \nat{k}$. Luego cada esfera es un subcomplejo y entonces usando $\paint{orange}{(ii)}$, $\paint{orange}{(iii)}$ y la hip\'otesis inductiva, tenemos que
+\begin{align*}
+\varphi(\vee_{j =1}^k\Ss^d) &= \varphi(\Ss \vee \vee_{j =1}^{k-1}\Ss^d) = \varphi(\Ss^d) + \varphi(\vee_{j =1}^{k-1}\Ss^d) \\
+&= (-1)^d\varphi(\Ss^0) + (k-1)(-1)^d\varphi(\Ss^0) = k \cdot (-1)^d \cdot \varphi(\Ss^0).
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\begin{lemma}{2} Sea $X$ un CW-complejo finito de dimensi\'on $d$ y sea $i < d$. Si $X$ tiene $c_i$ celdas de dimensi\'on $i$, entonces $X^i/X^{i-1} \equiv \vee_{j \in \nat{c_i}}\Ss^i$.
+\end{lemma}
+\begin{proof} Sea $W := \vee_{j \in \nat{c_i}}\Ss^i$. Notemos que $X^i/X^{i-1}$ es Hausdorff al ser un CW-complejo y $W$ es compacto, as\'i que basta con dar una funci\'on $W \to X^i/X^{i-1}$ continua y biyectiva. Consideramos primero la funci\'on $g : \bigsqcup_{j \in \nat{c_i}}\D^i_j \to X^i/X^{i-1}$ dada por la composici\'on entre la funci\'on de adjunci\'on de las $i$-celdas $f := \sqcup_{j \in \nat{c_i}}f_j$ y la proyecci\'on al cociente $q : X^i \to X^i/X^{i-1}$. Notemos que si $x$ e $y$ son puntos que pertenecen al borde de dos discos $\D^i_k, \D^i_l$, luego sus imagenes via $f$ caen en el borde de dos $i$-celdas. En particular caen en el $(i-1)$-esqueleto de $X^i$, as\'i que al proyectar obtenemos que $g(x) = g(y)$. Esto dice que $g$ pasa al cociente por la relaci\'on que identifica todos los bordes de los discos. Como $\D^i/\partial \D^i \equiv \Ss^i$, luego $\bigsqcup_{j \in \nat{c_i}}\D^i_j/\bigsqcup_{j \in \nat{c_i}} \partial\D_j^i \equiv W$ y por lo tanto $g$ induce una funci\'on continua $\hat{g} : W \to X^i/X^{i-1}$. Para terminar, veamos que es biyectiva: 
+\begin{itemize}
+\item[$\bullet$] La funci\'on $\hat{g}$ es inyectiva: sean $x' \neq y' \in W$ y $x,y \in \bigsqcup_{j \in \nat{c_i}}\D^i_j$ preimganes de $x'$ e $y'$ respectivamente por la proyecci\'on a $W$. En particular no solo es $x \neq y$ si no que alguno de los puntos debe estar en el interior de alg\'un disco, ya que todos los bordes se proyectan a un mismo punto de $W$. Suponemos sin p\'erdida de generalidad que $x \in \tint{{\D^i_j}}, y \in \D^i_{j'}$ con $j,j' \in \nat{c_i}$. Ahora, para ver que $[f(x)] = g(x) = \hat{g}(x') \neq \hat{g}(y') = g(y) = [f(y)]$ alcanza probar que $f(x)$ y $f(y)$ no est\'an relacionados. Si $f(y) \in X^{i-1}$ luego $f(y) \not \sim f(x)$ pues $f(x) \not \in X^{i-1}$. Caso contrario, es $y \in \tint{{\D^i_{j'}}}$ y entonces $f(x)$ y $f(y)$ pertenecen a interiores de celdas disjuntos. En consecuencia, tenemos $f(x) \neq f(y)$ y $f(x),f(y) \not \in X^{i-1}$ as\'i que en cualquier caso obtuvimos $f(x) \not \sim f(y)$.
+\item[$\bullet$] La funci\'on $\hat{g}$ es sobreyectiva: sea $[z] \in X^i/X^{i-1}$. Si $z \in X^{i-1}$, tomamos $p \in W$ el punto de pegado de las esferas. Luego $\hat{g}(p) = g(x)$ para cierto $x \in \D^i_j$ con $j \in \nat{c_i}$. Por lo tanto, $f(x)$ est\'a en el borde de una $i$-celda y entonces $f(x) \in X^{i-1}$. De esta forma, tenemos que $f(x) \sim z$ y entonces $\hat{g}(p) = g(x) = qf(x) = q(z) = [z]$. Si en cambio $z \in X^i \setminus X^{i-1}$, luego $z$ est\'a en el interior de una $i$-celda y es imagen de cierto punto $x \in \tint{{\D^i_j}}$ con $j \in \nat{c_i}$. Si proyectamos $x$ a $W$, su imagen por $\hat{g}$ es $g(x) = qf(x) = q(z) = [z]$. En cualquier caso $[z]$ es imagen por $\hat{g}$ de alg\'un punto de $W$.
+\end{itemize}
+\end{proof}
+
+\begin{obs}{3} Como lo necesitaremos a continuaci\'on, recordamos el siguiente resultado visto en clase : sea $0 \cdots \xrightarrow{d_{q}} C_{q+1} \xrightarrow{d_{q+1}} C_q \xrightarrow{d_{q}} C_{q-1} \xrightarrow{d_{q-1}} \cdots \xrightarrow{d_{1}} C_0 \to 0$ un complejo de cadenas de $\Z$-m\'odulos finitamente generado. Entonces,
+\begin{align*}
+\sum_{q \geq 0}(-1)^i\rg C_i = \sum_{q \geq 0}(-1)^iH_qC
+\end{align*}
+En efecto, para cada $q \in \N$ tenemos luego las sucesiones exactas cortas
+\begin{align*}
+0 \to \im d_{q+1} \hookrightarrow \ker d_q \to &\ker d_q/\im d_{q+1} = H_qC \to 0, \\
+0 \to \ker d_q \hookrightarrow &C_q \xrightarrow{d_q} \im d_q \to 0.
+\end{align*}
+Por lo tanto, $\rg C_q =  \rg \ker d_q + \rg \im d_q = (\rg \im d_{q+1} + \rg H_qC) + \rg \im d_q$. Luego,
+\begin{align*}
+\sum_{q \geq 0}(-1)^i\rg C_i &= \sum_{q \geq 0}(-1)^i(\rg \im d_{q+1} + \rg H_qC + \rg \im d_q)\\
+&= \sum_{q \geq 0}(-1)^iH_qC + \sum_{q \geq 0}(-1)^i(\rg \im d_{q+1} + \rg \im d_q)\\
+&= \sum_{q \geq 0}(-1)^iH_qC + \sum_{q \geq 0}(-1)^i\rg \im d_{q+1} + \sum_{q \geq 0}(-1)^i\rg \im d_{q+1}\\
+&= \sum_{q \geq 0}(-1)^iH_qC + \sum_{q \geq 1}(-1)^{i+1}\rg \im d_{q} + \sum_{q \geq 0}(-1)^i\rg \im d_{q+1}\\
+&= \sum_{q \geq 0}(-1)^iH_qC + \rg \im d_0 = \sum_{q \geq 0}(-1)^iH_qC.
+\end{align*} 
+\end{obs}
+como afirmamos.
+
+\begin{exercise}{8} Sea $n \in \Z$. Probar que existe una \'unica funci\'on $\varphi$ que le asigna a cada CW-complejo finito un entero tal que 
+\begin{itemize}
+\item[(a)] $\varphi(X) = \varphi(Y)$ si $X$ e $Y$ son homeomorfos.
+\item[(b)] $\varphi(X) = \varphi(A) + \varphi(X/A)$ si $A$ es subcomplejo de $X$.
+\item[(c)] $\varphi(\Ss^0) = n$.
+\end{itemize}
+Probar adem\'as que una tal funci\'on debe cumplir que $\varphi(X) = \varphi(Y)$ si $X \simeq Y$
+
+\end{exercise}
+\begin{proof} Probamos en primera instancia la unicidad, y luego la existencia. Fijemos $n \in \Z$ y supongamos que existe una tal funci\'on $\varphi$ como en el enunciado. Ahora, sea $X$ un CW-complejo finito de dimensi\'on $d \in \N_0$. Por $\paint{orange}{(b)}$, obtenemos
+\begin{align*}
+\varphi(X) = \varphi(X^d) = \varphi(X^d/X^{d-1}) + \varphi(X^{d-1}) = \dots = \sum_{i=1}^d\varphi(X^i/X^{i-1}) + \varphi(X^0).
+\end{align*}
+Como por el $\paint{orange}{\text{Lema $2$}}$ es $X^i/X^{i-1} \equiv \vee_{j \in \nat{c_i}}\Ss^i$ con $c_i$ la cantidad de $i$-celdas, luego usando $\paint{orange}{(a)}$ y los \'items $\paint{orange}{(i)}$ y $\paint{orange}{(iv)}$ del $\paint{orange}{\text{Lema $1$}}$ tenemos que
+\begin{align*}
+\varphi(X) &= \sum_{i=1}^d \varphi(\vee_{j \in \nat{c_i}}\Ss^i) + \varphi(\Ss^0) \cdot (\#X^0-1) = \sum_{i=1}^d c_i\varphi(\Ss^i) + (c_0-1)\varphi(\Ss^0)\\
+&= \sum_{i=0}^dc_i \varphi(\Ss^i) - \varphi(\Ss^0) = \sum_{i=0}^dc_i(-1)^i\varphi(\Ss^0) -\varphi(\Ss^0)\\
+& = \varphi(\Ss^0)\sum_{i=0}^d(-1)^ic_i - \varphi(\Ss^0).
+\end{align*}
+Observando que $c_i = \operatorname{rg}(C_iX)$, es entonces
+\begin{align*}
+\varphi(X) = \varphi(\Ss^0)\sum_{i=0}^d(-1)^i\operatorname{rg}(C_iX) - \varphi(\Ss^0) = \varphi(\Ss^0) \chi(X) - \varphi(\Ss^0) = \varphi(\Ss^0)(\chi(X)-1).
+\end{align*}
+Esto prueba la unicidad, pues una tal funci\'on queda un\'ivocamente determinada por su valor en la $0$-esfera. Adem\'as, como la caracter\'istica de Euler es un invariante homot\'opico, vemos que si $X \simeq Y$ luego $\varphi(X) = \varphi(\Ss^0)(\chi(X)-1) = \varphi(\Ss^0)(\chi(Y)-1) = Y$. Para terminar, veamos la existencia: dado $n \in \Z$, por lo anterior necesariamente debemos definir $\varphi(X) := n(\chi(X)-1)$ para cada CW-complejo finito $X$. Observemos tambi\'en que si una funci\'on $\psi$ cumple las condiciones $\paint{orange}{(a)}$ y $\paint{orange}{(b)}$ y $m \in \Z$ es un entero, la funci\'on $m \cdot \psi$ sigue verific\'andolas. Por lo tanto, resta probar la afirmaci\'on para $n = 1$. Una vez m\'as como $\chi$ es un invariante homot\'opico, en particular $\chi -1$ verifica $\paint{orange}{(a)}$, y entonces para terminar basta ver que si $X$ es un CW-complejo finito y $A$ un subcomplejo de $X$, entonces $\chi(X) -1 = \chi(A) + \chi(X/A) -2$. Es decir, debemos ver que $\chi(X) = \chi(A) + \chi(X/A) -1$. Siempre tenemos una sucesi\'on exacta corta $0 \to S_\bullet A \to S_\bullet X \to S_\bullet(X,A) \to 0$ de complejos singulares, i.e. tenemos 
+\begin{align*}
+0 \to S_q A \to S_q X \to S_q(X,A) \to 0.
+\end{align*}
+sucesi\'on exacta para cada $q \geq 0$ con los morfismos de inclusi\'on y proyecci\'on can\'onicos, ya que por definicion es $S_q(X,A) = S_qX/S_qA$. En particular, sabemos entonces que $\rg S_qX = \rg S_qA + \rg S_q(X,A)$. Ahora, usando la $\paint{orange}{\text{Observaci\'on $3$}}$,
+\begin{align*}
+\chi(X) &= \sum_{i \geq 0}(-1)^i \rg S_iX = \sum_{i \geq 0}(-1)^i(\rg S_iA + \rg S_i(X,A))\\
+&= \chi(A) + \sum_{i \geq 0}(-1)^i\rg S_i(X,A) = \chi(A) + \sum_{i \geq 0}(-1)^i\rg H_i(X,A).
+\end{align*}
+Como $(X,A)$ es un par bueno, como consecuencia de escisi\'on tenemos que $H_i(X,A) = \tilde{H}_i(X/A)$ para todo $i \geq 0$. Observando que para cualquier espacio $Y$ es $\tilde{H}_0(Y) \oplus \Z \simeq H_0(Y)$, en particular $\rg H_0(X,A) = \rg \tilde{H}_0(X/A) = \rg H_0(X/A) -1$ y entonces
+\begin{align*}
+\chi(X) &= \chi(A) + \sum_{i \geq 0}(-1)^i\rg H_i(X,A)\\
+&= \chi(A) + \sum_{i \geq 0}(-1)^i\rg H_i(X/A) - 1\\
+&= \chi(X) + \chi(X/A) -1,
+\end{align*}
+lo que concluye la demostraci\'on.
+\end{proof}
+
+\end{document}
