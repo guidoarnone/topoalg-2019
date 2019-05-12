@@ -187,4 +187,64 @@ Como $(X,A)$ es un par bueno, como consecuencia de escisi\'on tenemos que $H_i(X
 lo que concluye la demostraci\'on.
 \end{proof}
 
+\begin{lemma}{4} Sean $n \in \N$ y $f,g : \Ss^n \to \Ss^n$ dos funciones continuas. Si $f(x) \neq -g(x)$ para todo $x \in \Ss^n$, entonces $f$ y $g$ son homot\'opicas.
+\end{lemma}
+\begin{proof} Consideremos primero dos puntos $x,y \in \Ss^n$ y $t \in [0,1]$  tal que $tx + (1-t)y = 0$. Como 
+\begin{align*}
+t = \|x\| = \|(t-1)y\| = |t-1| = 1-t,
+\end{align*}
+necesariamente es $t = 1/2$. Reemplazando en la ecuaci\'on original obtenemos $\frac{1}{2}x + \frac{1}{2}y = 0$, y por un c\'alculo directo es $x = -y$. 
+
+Como para cada $x \in \Ss^n$ tenemos que $f(x) \neq -g(x)$, el contrarrec\'iproco del argumento anterior asegura que $tf(x) + (1-t)g(x) \neq 0$ para cualquier $t \in [0,1]$. En consecuencia, la funci\'on
+\begin{align*}
+H : \ &\Ss^n \times [0,1] \longrightarrow \Ss^n \\
+&(x,t) \mapsto \frac{tf(x) + (1-t)g(x)}{\|tf(x) + (1-t)g(x)\|}
+\end{align*}
+est\'a bien definida y es continua. Como $H(x,0) = f(x)$ y $H(x,1) = g(x)$ para cada $x \in \Ss^n$, concluimos que $f$ y $g$ son homot\'opicas.
+\end{proof}
+
+\begin{exercise}{10} Probar que toda funci\'on continua $f : \Ss^n \to \Ss^n$ es homot\'opica a una que tiene alg\'un punto fijo.
+\end{exercise}
+\begin{proof} Si $f$ tiene alg\'un punto fijo, no hay nada que decir. En caso contrario, es
+\begin{align*}
+f(x) \neq x = -(-x) = -A(x) \quad  (\forall x \in \Ss^n)
+\end{align*}
+con $A : \Ss^n \to \Ss^n$ la ant\'ipoda de $\Ss^n$. Por el $\paint{orange}{\text{Lema $3$}}$, debe ser $f \simeq A$. Por lo tanto, basta probar el resultado para $f = A$. 
+
+Para cada $t \in [0,1]$, definimos
+\begin{align*}
+R_t := \begin{pmatrix}
+\cos(\pi t) & \sin(\pi t) & 0_{1,n}\\
+-\sin(\pi t) & \cos(\pi t) & 0_{1,n}\\
+0_{n,1} & 0_{n,1} & -I_{n-2}\\
+\end{pmatrix}
+\end{align*}
+con $I_{n-2} \in \mathsf{M}_{n-2}(\R)$ la matriz identidad y $0_{k,l} \in \R^{k \times l}$ la matriz cero. Ahora, la funci\'on definida por
+\begin{align*}
+h : \R^{n+1}& \times [0,1] \to \mathbb{R}^{n+1}\\
+&(x,t) \longmapsto R_t \cdot x
+\end{align*}
+resulta continua, pues en cada coordenada es suma de productos de funciones continuas. Concretamente\footnote{En esta expresi\'on y las siguientes asumimos que $n \geq 2$. Para el caso donde $n = 1$, las expresiones son an\'alogas ignorando las coordenas siguientes. Por ejemplo, $h(x_0,x_1,t) = (\cos(\pi t)x_0 + \sin(\pi t)x_1,\cos(\pi t)x_0+-\sin(\pi t)x_1)$}, 
+\begin{align}
+h(x_0,\dots,x_n,t) = (\cos(\pi t)x_0 + \sin(\pi t)x_1,\cos(\pi t)x_0-\sin(\pi t)x_1,-x_2, \dots,-x_n).
+\end{align}
+Dado $t \in [0,1]$, la matriz $R_t$ es diagonal por bloques con cada bloque ortogonal: esto dice que $R_t$ es ortogonal. En particular, si $x \in \R^{n+1}$ es unitario entonces $R_t \cdot x$ resulta unitario. Podemos considerar entonces la (co)restricci\'on 
+\begin{align*}
+H : \ &\Ss^n \times I \to \Ss^n\\
+&(x,t) \longmapsto h(t,x)
+\end{align*}
+que sigue siendo continua. Por $\paint{orange}{(1)}$ sabemos que
+\begin{align*}
+H(x,0) = (x_0,x_1,-x_2,\dots,-x_n)
+\end{align*}
+y
+\begin{align*}
+H(x,1) = (-x_0,-x_1,-x_2,\dots,-x_n) = A(x),
+\end{align*}
+as\'i que $g := H(-,0)$ y $A$ son homot\'opicas. Para terminar, observemos que como
+\begin{align*}
+g(1,0,0,\dots,0) = (1,0,-0,\dots,-0) = (1,0,0,\dots,0),
+\end{align*}
+la funci\'on $g$ tiene puntos fijos.
+\end{proof}
 \end{document}
