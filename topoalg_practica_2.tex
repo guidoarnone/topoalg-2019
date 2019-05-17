@@ -100,23 +100,27 @@ Entonces,
 \end{lemma}
 \begin{proof} Hacemos cada inciso por separado.
 \begin{itemize}
-\item[(i)] Hacemos inducci\'on en el tama\~{n}o de $D$. Sea $e^1_0 \sqcup e^2_0$ una estructura celular para $\Ss^0$. Si $\# D=1$, luego $D \equiv e^1_0$. Por otro lado, el cociente de un espacio por el subespacio de un punto es siempre homeomorfo al espacio mismo. Tenemos entonces $\varphi(\Ss^0) = \varphi(\Ss^0/e^1_0) + \varphi(e^1_0) = \varphi(\Ss^0) + \varphi(D)$. Restando, tenemos que $\varphi(D) = 0$. Si $\# D = 2$, es $D \simeq \Ss^0$ y $\varphi(D) = \varphi(\Ss^0)$. Por \'ultimo, cuando $\#D > 2$, si tomamos $x,y \in D$ dos $0$-celdas, el cociente $D' := D/\{x,y\}$ por el subcomplejo $\{x,y\} \equiv \Ss^0$ corresponde a indentificar $x$ con $y$, de forma que resulta un espacio discreto de un punto menos. Es decir, es un CW-complejo finito de dimensi\'on cero con una $0$-celda menos. Inductivamente, tenemos
+\item[(i)] Hacemos inducci\'on en el tama\~{n}o de $D$. Sea $e^1_0 \sqcup e^2_0$ una estructura celular para $\Ss^0$. Si $\# D=1$, entonces $D \equiv e^1_0$. Por otro lado, el cociente de un espacio por un subespacio de un punto es siempre homeomorfo al espacio mismo. Tenemos entonces $\varphi(\Ss^0) = \varphi(\Ss^0/e^1_0) + \varphi(e^1_0) = \varphi(\Ss^0) + \varphi(D)$. Restando, es $\varphi(D) = 0$. Si $\# D = 2$, es $D \simeq \Ss^0$ y $\varphi(D) = \varphi(\Ss^0)$. Por \'ultimo, cuando $\#D > 2$, si tomamos $x,y \in D$ dos $0$-celdas, el cociente $D' := D/\{x,y\}$ por el subcomplejo $\{x,y\} \equiv \Ss^0$ corresponde a indentificar $x$ con $y$, de forma que resulta un espacio discreto de un punto menos. Es decir, es un CW-complejo finito de dimensi\'on cero con una $0$-celda menos. Inductivamente, 
 \begin{align*}
 \varphi(D) &= \varphi(D/\{x,y\}) + \varphi(\{x,y\}) = \varphi(D') + \varphi(\Ss^0) \\
 &= \varphi(\Ss^0)(\# D'-1) + \varphi(\Ss^0) = \varphi(\Ss^0)\# D'\\
 &= \varphi(\Ss^0)(\# D-1).
 \end{align*}
-\item[(ii)] Basta probar que $X/A \equiv B$. En tal caso, tendremos en efecto $\varphi(X) = \varphi(A) + \varphi(X/A) = \varphi(A) + \varphi(B)$. Consideramos la funci\'on $f : B \to X/A$ definida como la composici\'on entre la inclusi\'on $B \hookrightarrow X$ y la proyecci\'on $q : X \to X/A$. Como $B$ es compacto pues es un CW-complejo finito y $X/A$ es Hausdorff ya que es CW-complejo, resta ver que $f$ es biyectiva. Sea $p \in X$ el punto de pegado entre $A$ y $B$. Es decir, $A \cap B = \{p\}$. Ahora,
+\item[(ii)] Basta probar que $X/A \equiv B$. En tal caso, ser\'a $\varphi(X) = \varphi(A) + \varphi(X/A) = \varphi(A) + \varphi(B)$. Consideramos la funci\'on $f : B \to X/A$ definida como la composici\'on entre la inclusi\'on $B \hookrightarrow X$ y la proyecci\'on can\'onica $q : X \to X/A$. Como $A$ y $B$ son CW-complejos, sabemos que $B$ es compacto (pues es finito) y $X/A$ es Hausdorff. Resta ver entonces que $f$ es biyectiva. Sea $p \in X$ el punto de pegado entre $A$ y $B$. Es decir, $A \cap B = \{p\}$. Ahora,
 \begin{itemize}
 \item[$\bullet$] La funci\'on $f$ es inyectiva: sean $x, y \in B$ con $[x] = f(x) = f(y) = [y]$. Por definici\'on de $X/A$, o bien $x = y$ o bien $x,y \in A$. Esto \'ultimo implica $x,y \in A \cap B = \{p\}$. En cualquier caso, es $x = y$.
-\item[$\bullet$] La funci\'on $f$ es sobreyectiva: sea $[x] \in A$ con $x \in X = A \vee B$. Si $x \in B$ es $[x] = f(x)$. De lo contrario, necesariamente es $x \in A \setminus \{p\}$. Pero entonces basta notar que como $p \in B$, es $f(p) = [p] = [x]$ pues $p,x \in A$.
+\item[$\bullet$] La funci\'on $f$ es sobreyectiva: sea $[x] \in A$ con $x \in X = A \vee B$. Si $x \in B$, es $[x] = f(x)$. Si no, necesariamente es $x \in A \setminus \{p\}$. Pero entonces basta notar que como $p \in B$, es $f(p) = [p] = [x]$ ya que $p,x \in A$.
 \end{itemize}
-\item[(iii)] Hacemos inducci\'on en $d$. El caso base $d = 0$ es trivial. Si $d = 1$, construimos a $\Ss^1$ como la adjunci\'on de dos $1$-celdas $e_1^1$ y $e_1^2$ a $\Ss^0 = e_0^1 \sqcup e_0^2$. Luego $\Ss^1/\Ss^0 \equiv \Ss^1 \vee \Ss^1$ y $\varphi(\Ss^1) = \varphi(\Ss^1/\Ss^0) + \varphi(\Ss^0) \stackrel{(ii)}{=} 2\varphi(\Ss^1) + \varphi(\Ss^0)$. Restando, obtenemos $\varphi(\Ss^1) = -\varphi(\Ss^0)$. Cuando $d >2$, usamos una idea similar: consideramos la estructura celular para $\Ss^d$ que consiste en adjuntar dos $d$-discos a $\Ss^{d-1}$. Es decir, tenemos una cero celda $e_0$, una $(d-1)$-celda $e_{d-1}$ que corresponde a pegar el borde de un $(d-1)$-disco en $e_0$, y dos $d$-celdas $e_d^1$ y $e_d^2$ que coresponden a pegar el borde cada $d$-disco en la $(d-1)$-esfera sin identificar puntos del borde entre s\'i. As\'i, $\Ss^{d-1}$ resulta el "ecuador" de $\Ss^{d}$ y entonces, el cociente $\Ss^d/e_{d-1}$ es homeomorfo al wedge de dos $d$-esferas. Por lo tanto, 
+\item[(iii)] Hacemos inducci\'on en $d$. El caso base $d = 0$ es inmediato. Si $d = 1$, construimos a $\Ss^1$ como la adjunci\'on a $\Ss^0 = e_0^1 \sqcup e_0^2$ de dos $1$-celdas $e_1^1$ y $e_1^2$. Es decir "pegamos dos intervalos en las puntas". As\'i, se tiene que $\Ss^1/\Ss^0 \equiv \Ss^1 \vee \Ss^1$ y
+\begin{align*}
+\varphi(\Ss^1) = \varphi(\Ss^1/\Ss^0) + \varphi(\Ss^0) \stackrel{(ii)}{=} 2\varphi(\Ss^1) + \varphi(\Ss^0).
+\end{align*}
+Restando, obtenemos $\varphi(\Ss^1) = -\varphi(\Ss^0)$. Cuando $d >2$, usamos una idea similar: consideramos la estructura celular para $\Ss^d$ que consiste en adjuntar dos $d$-discos a $\Ss^{d-1}$. Es decir, tenemos una cero celda $e_0$, una $(d-1)$-celda $e_{d-1}$ que corresponde a pegar el borde de un $(d-1)$-disco en $e_0$, y dos $d$-celdas $e_d^1$ y $e_d^2$ que coresponden a pegar el borde cada $d$-disco en la $(d-1)$-esfera sin identificar puntos del borde entre s\'i. As\'i, $\Ss^{d-1}$ resulta el "ecuador" de $\Ss^{d}$ y entonces, el cociente $\Ss^d/e_{d-1}$ es homeomorfo al wedge de dos $d$-esferas. Por lo tanto, 
 \begin{align*}
 \varphi(\Ss^d) = \varphi(\Ss^d/e_{d-1}) + \varphi(e_{d-1}) = \varphi(\Ss^d \vee \Ss^d) + \varphi(\Ss^{d-1}) \stackrel{(ii)}{=} 2\varphi(\Ss^d) + \varphi(\Ss^{d-1}),
 \end{align*}
 lo que implica $\varphi(\Ss^d) = - \varphi(\Ss^{d-1}) = -(-1)^{d-1}\varphi(\Ss^0) = (-1)^d\varphi(\Ss^0)$.
-\item[(iv)] Hacemos inducci\'on en $k$. El caso base cuando $k=1$ se verifica por $\paint{(iii)}$. Si ahora $k  > 1$, fijamos $d \in \N_0$ Ahora, consideramos la siguente estructura celular del wedge: tenemos una cero celda $e_0$ y $k$ celdas de dimensi\'on $d$, con funci\'ones de adjunci\'on $f_i : \D^k \xrightarrow{!} e_0$ para cada $i \in \nat{k}$. Luego cada esfera es un subcomplejo y entonces usando $\paint{(ii)}$, $\paint{(iii)}$ y la hip\'otesis inductiva, tenemos que
+\item[(iv)] Hacemos inducci\'on en $k$. El caso base cuando $k=1$ se verifica por $\paint{(iii)}$. Sea ahora $k  > 1$, y fijemos $d \in \N_0$. Consideramos la siguente estructura celular del wedge: tenemos una cero celda $e_0$ y $k$ celdas de dimensi\'on $d$, con funci\'ones de adjunci\'on $f_i : \D^k \xrightarrow{!} e_0$ para cada $i \in \nat{k}$. Luego cada esfera es un subcomplejo y entonces usando $\paint{(ii)}$, $\paint{(iii)}$ y la hip\'otesis inductiva, tenemos que
 \begin{align*}
 \varphi(\vee_{j =1}^k\Ss^d) &= \varphi(\Ss \vee \vee_{j =1}^{k-1}\Ss^d) = \varphi(\Ss^d) + \varphi(\vee_{j =1}^{k-1}\Ss^d) \\
 &= (-1)^d\varphi(\Ss^0) + (k-1)(-1)^d\varphi(\Ss^0) = k \cdot (-1)^d \cdot \varphi(\Ss^0).
@@ -125,23 +129,29 @@ lo que implica $\varphi(\Ss^d) = - \varphi(\Ss^{d-1}) = -(-1)^{d-1}\varphi(\Ss^0
 \end{proof}
 \newpage
 
-\begin{lemma}{2} Sea $X$ un CW-complejo finito de dimensi\'on $d$ y sea $i < d$. Si $X$ tiene $c_i$ celdas de dimensi\'on $i$, entonces $X^i/X^{i-1} \equiv \vee_{j \in \nat{c_i}}\Ss^i$.
+\begin{lemma}{2} Sea $X$ un CW-complejo finito de dimensi\'on $d$ y sea $i \leq d$. Si $X$ tiene $c_i$ celdas de dimensi\'on $i$, entonces $X^i/X^{i-1} \equiv \vee_{j \in \nat{c_i}}\Ss^i$.
 \end{lemma}
 \begin{proof} Sea $W := \vee_{j \in \nat{c_i}}\Ss^i$. Notemos que $X^i/X^{i-1}$ es Hausdorff al ser un CW-complejo y $W$ es compacto, as\'i que basta con dar una funci\'on $W \to X^i/X^{i-1}$ continua y biyectiva. Consideramos primero la funci\'on $g : \bigsqcup_{j \in \nat{c_i}}\D^i_j \to X^i/X^{i-1}$ dada por la composici\'on entre la funci\'on de adjunci\'on de las $i$-celdas $f := \sqcup_{j \in \nat{c_i}}f_j$ y la proyecci\'on al cociente $q : X^i \to X^i/X^{i-1}$. Notemos que si $x$ e $y$ son puntos que pertenecen al borde de dos discos $\D^i_k, \D^i_l$, luego sus imagenes via $f$ caen en el borde de dos $i$-celdas. En particular caen en el $(i-1)$-esqueleto de $X^i$, as\'i que al proyectar obtenemos que $g(x) = g(y)$. Esto dice que $g$ pasa al cociente por la relaci\'on que identifica todos los bordes de los discos. Como $\D^i/\partial \D^i \equiv \Ss^i$, luego $\bigsqcup_{j \in \nat{c_i}}\D^i_j/\bigsqcup_{j \in \nat{c_i}} \partial\D_j^i \equiv W$ y por lo tanto $g$ induce una funci\'on continua $\hat{g} : W \to X^i/X^{i-1}$. Para terminar, veamos que es biyectiva: 
 \begin{itemize}
-\item[$\bullet$] La funci\'on $\hat{g}$ es inyectiva: sean $x' \neq y' \in W$ y $x,y \in \bigsqcup_{j \in \nat{c_i}}\D^i_j$ preimganes de $x'$ e $y'$ respectivamente por la proyecci\'on a $W$. En particular no solo es $x \neq y$ si no que alguno de los puntos debe estar en el interior de alg\'un disco, ya que todos los bordes se proyectan a un mismo punto de $W$. Suponemos sin p\'erdida de generalidad que $x \in \tint{{\D^i_j}}, y \in \D^i_{j'}$ con $j,j' \in \nat{c_i}$. Ahora, para ver que $[f(x)] = g(x) = \hat{g}(x') \neq \hat{g}(y') = g(y) = [f(y)]$ alcanza probar que $f(x)$ y $f(y)$ no est\'an relacionados. Si $f(y) \in X^{i-1}$ luego $f(y) \not \sim f(x)$ pues $f(x) \not \in X^{i-1}$. Caso contrario, es $y \in \tint{{\D^i_{j'}}}$ y entonces $f(x)$ y $f(y)$ pertenecen a interiores de celdas disjuntos. En consecuencia, tenemos $f(x) \neq f(y)$ y $f(x),f(y) \not \in X^{i-1}$ as\'i que en cualquier caso obtuvimos $f(x) \not \sim f(y)$.
-\item[$\bullet$] La funci\'on $\hat{g}$ es sobreyectiva: sea $[z] \in X^i/X^{i-1}$. Si $z \in X^{i-1}$, tomamos $p \in W$ el punto de pegado de las esferas. Luego $\hat{g}(p) = g(x)$ para cierto $x \in \D^i_j$ con $j \in \nat{c_i}$. Por lo tanto, $f(x)$ est\'a en el borde de una $i$-celda y entonces $f(x) \in X^{i-1}$. De esta forma, tenemos que $f(x) \sim z$ y entonces $\hat{g}(p) = g(x) = qf(x) = q(z) = [z]$. Si en cambio $z \in X^i \setminus X^{i-1}$, luego $z$ est\'a en el interior de una $i$-celda y es imagen de cierto punto $x \in \tint{{\D^i_j}}$ con $j \in \nat{c_i}$. Si proyectamos $x$ a $W$, su imagen por $\hat{g}$ es $g(x) = qf(x) = q(z) = [z]$. En cualquier caso $[z]$ es imagen por $\hat{g}$ de alg\'un punto de $W$.
+\item[$\bullet$] La funci\'on $\hat{g}$ es inyectiva: sean $x' \neq y' \in W$ y $x,y \in \bigsqcup_{j \in \nat{c_i}}\D^i_j$ preimganes de $x'$ e $y'$ respectivamente por la proyecci\'on a $W$. En particular no solo es $x \neq y$ si no que alguno de los puntos debe estar en el interior de alg\'un disco, ya que todos los bordes se proyectan a un mismo punto de $W$. Suponemos sin p\'erdida de generalidad que $x \in \tint{{\D^i_j}}, y \in \D^i_{j'}$ con $j,j' \in \nat{c_i}$. 
+
+Para ver que $[f(x)] = g(x) = \hat{g}(x') \neq \hat{g}(y') = g(y) = [f(y)]$, alcanza probar que $f(x)$ y $f(y)$ no est\'an relacionados. Si $f(y) \in X^{i-1}$ luego $f(y) \not \sim f(x)$ pues $f(x) \not \in X^{i-1}$. De lo contrario, es $y \in \tint{{\D^i_{j'}}}$ y como $f$ restringida al interior de los discos es inyectiva, tenemos que $f(x) \neq f(y)$ y $f(x),f(y) \not \in X^{i-1}$. En cualquier caso obtenemos que $f(x) \not \sim f(y)$.
+\item[$\bullet$] La funci\'on $\hat{g}$ es sobreyectiva: sea $[z] \in X^i/X^{i-1}$. Si $z \in X^{i-1}$, tomamos $p \in W$ el punto de pegado de las esferas. Luego $\hat{g}(p) = g(x)$ para cierto $x \in \D^i_j$ con $j \in \nat{c_i}$. Por lo tanto, $f(x)$ est\'a en el borde de una $i$-celda y entonces $f(x) \in X^{i-1}$. De esta forma se tiene que $f(x) \sim z$, y 
+\begin{align*}
+\hat{g}(p) = g(x) = qf(x) = q(z) = [z].
+\end{align*}
+Si en cambio $z \in X^i \setminus X^{i-1}$, luego $z$ est\'a en el interior de una $i$-celda y es imagen de cierto punto $x \in \tint{{\D^i_j}}$ con $j \in \nat{c_i}$. Si proyectamos $x$ a $W$, su imagen por $\hat{g}$ es $g(x) = qf(x) = q(z) = [z]$. En cualquier caso $[z]$ es imagen por $\hat{g}$ de alg\'un punto de $W$.
 \end{itemize}
 \end{proof}
 
-\begin{obs}{3} Como lo necesitaremos a continuaci\'on, recordamos el siguiente resultado visto en clase: sea $0 \to \cdots \xrightarrow{d_{q}} C_{q+1} \xrightarrow{d_{q+1}} C_q \xrightarrow{d_{q}} C_{q-1} \xrightarrow{d_{q-1}} \cdots \xrightarrow{d_{1}} C_0 \xrightarrow{d_0} 0$ un complejo de cadenas de $\Z$-m\'odulos finitamente generado. Entonces,
+\begin{obs}{3} Como lo necesitaremos a continuaci\'on, recuerdo el siguiente resultado visto en clase: sea $0 \to \cdots \xrightarrow{d_{q+2}} C_{q+1} \xrightarrow{d_{q+1}} C_q \xrightarrow{d_{q}} C_{q-1} \xrightarrow{d_{q-1}} \cdots \xrightarrow{d_{1}} C_0 \xrightarrow{d_0} 0$ un complejo de cadenas de $\Z$-m\'odulos finitamente generado. Entonces,
 \begin{align*}
 \sum_{q \geq 0}(-1)^q\rg C_q = \sum_{q \geq 0}(-1)^qH_qC
 \end{align*}
 En efecto, para cada $q \in \N$ tenemos las sucesiones exactas cortas
 \begin{align*}
 0 \to \im d_{q+1} \hookrightarrow \ker d_q \to &\ker d_q/\im d_{q+1} = H_qC \to 0, \\
-0 \to \ker d_q \hookrightarrow &C_q \xrightarrow{d_q} \im d_q \to 0.
+0 \to \ker d_q \hookrightarrow & \ C_q \xrightarrow{d_q} \im d_q \to 0.
 \end{align*}
 Por lo tanto, $\rg C_q =  \rg \ker d_q + \rg \im d_q = (\rg \im d_{q+1} + \rg H_qC) + \rg \im d_q$. Entonces,
 \begin{align*}
@@ -177,16 +187,20 @@ Observando que $c_i = \operatorname{rg}(C_iX)$, es entonces
 \begin{align*}
 \varphi(X) = \varphi(\Ss^0)\sum_{i=0}^d(-1)^i\operatorname{rg}(C_iX) - \varphi(\Ss^0) = \varphi(\Ss^0) \chi(X) - \varphi(\Ss^0) = \varphi(\Ss^0)(\chi(X)-1).
 \end{align*}
-Esto prueba la unicidad, pues una tal funci\'on queda un\'ivocamente determinada por su valor en la $0$-esfera. Adem\'as, como la caracter\'istica de Euler es un invariante homot\'opico, vemos que si $X \simeq Y$ luego $\varphi(X) = \varphi(\Ss^0)(\chi(X)-1) = \varphi(\Ss^0)(\chi(Y)-1) = Y$. Para terminar, veamos la existencia: dado $n \in \Z$, por lo anterior necesariamente debemos definir $\varphi(X) := n(\chi(X)-1)$ para cada CW-complejo finito $X$. Observemos tambi\'en que si una funci\'on $\psi$ cumple las condiciones $\paint{(a)}$ y $\paint{(b)}$ y $m \in \Z$ es un entero, la funci\'on $m \cdot \psi$ sigue verific\'andolas. Por lo tanto, resta probar la afirmaci\'on para $n = 1$. Una vez m\'as como $\chi$ es un invariante homot\'opico, en particular $\chi -1$ verifica $\paint{(a)}$, y $\paint{(c)}$ es cierto pues $\chi(S^0)-1 = 2-1 = 1$. Para terminar basta ver que si $X$ es un CW-complejo finito y $A$ un subcomplejo de $X$, entonces $\chi(X) -1 = \chi(A) + \chi(X/A) -2$. Es decir, debemos ver que $\chi(X) = \chi(A) + \chi(X/A) -1$. Siempre tenemos una sucesi\'on exacta corta $0 \to S_\bullet A \to S_\bullet X \to S_\bullet(X,A) \to 0$ de complejos singulares, es decir tenemos una sucesi\'on exacta
+Esto prueba la unicidad, pues una tal funci\'on queda un\'ivocamente determinada por su valor en la $0$-esfera. Adem\'as, como la caracter\'istica de Euler es un invariante homot\'opico, vemos que si $X \simeq Y$ luego $\varphi(X) = \varphi(\Ss^0)(\chi(X)-1) = \varphi(\Ss^0)(\chi(Y)-1) = Y$.
+
+Para terminar, veamos la existencia: dado $n \in \Z$, por lo anterior necesariamente debemos definir $\varphi(X) := n(\chi(X)-1)$ para cada CW-complejo finito $X$. Observemos tambi\'en que si una funci\'on $\psi$ cumple las condiciones $\paint{(a)}$ y $\paint{(b)}$ y $m \in \Z$ es un entero, la funci\'on $m \cdot \psi$ sigue verific\'andolas. Por lo tanto, resta probar la afirmaci\'on para $n = 1$. Una vez m\'as como $\chi$ es un invariante homot\'opico, en particular $\chi -1$ verifica $\paint{(a)}$, y $\paint{(c)}$ es cierto pues $\chi(S^0)-1 = 2-1 = 1$. Basta ver que si $X$ es un CW-complejo finito y $A$ un subcomplejo de $X$, entonces $\chi(X) -1 = \chi(A) + \chi(X/A) -2$. Es decir, debemos ver que $\chi(X) = \chi(A) + \chi(X/A) -1$. 
+
+Siempre tenemos una sucesi\'on exacta corta $0 \to S_\bullet A \to S_\bullet X \to S_\bullet(X,A) \to 0$ de complejos singulares y, en particular, una sucesi\'on exacta corta
 \begin{align*}
-0 \to S_q A \to S_q X \to S_q(X,A) \to 0.
+0 \to S_q A \to S_q X \to S_q(X,A) \to 0
 \end{align*}
-para cada $q \geq 0$ con los morfismos de inclusi\'on y proyecci\'on can\'onicos, ya que por definicion es $S_q(X,A) = S_qX/S_qA$. En particular sabemos que $\rg S_qX = \rg S_qA + \rg S_q(X,A)$. Ahora usando la $\paint{\text{Observaci\'on $3$}}$ se tiene que
+para cada $q \geq 0$ con los morfismos de inclusi\'on y proyecci\'on can\'onicos (ya que por definicion es $S_q(X,A) = S_qX/S_qA$). Es entonces $\rg S_qX = \rg S_qA + \rg S_q(X,A)$ para todo $q \geq 0$ y usando la $\paint{\text{Observaci\'on $3$}}$, se tiene que
 \begin{align*}
-\chi(X) &= \sum_{i \geq 0}(-1)^i \rg S_iX = \sum_{i \geq 0}(-1)^i(\rg S_iA + \rg S_i(X,A))\\
-&= \chi(A) + \sum_{i \geq 0}(-1)^i\rg S_i(X,A) = \chi(A) + \sum_{i \geq 0}(-1)^i\rg H_i(X,A).
+\chi(X) &= \sum_{q \geq 0}(-1)^q \rg S_qX = \sum_{q \geq 0}(-1)^q(\rg S_qA + \rg S_q(X,A))\\
+&= \chi(A) + \sum_{q \geq 0}(-1)^q\rg S_q(X,A) = \chi(A) + \sum_{q \geq 0}(-1)^q\rg H_q(X,A).
 \end{align*}
-Como $(X,A)$ es un par bueno, como consecuencia de escisi\'on tenemos que $H_i(X,A) = \tilde{H}_i(X/A)$ para todo $i \geq 0$. Observando que para cualquier espacio $Y$ es $\tilde{H}_0(Y) \oplus \Z \simeq H_0(Y)$, en particular $\rg H_0(X,A) = \rg \tilde{H}_0(X/A) = \rg H_0(X/A) -1$ y entonces
+Como $(X,A)$ es un par bueno, como consecuencia del teorema de escisi\'on tenemos que $H_q(X,A) = \tilde{H}_q(X/A)$ para todo $q \geq 0$. Finalmente, observando que para cualquier espacio $Y$ es $\tilde{H}_0(Y) \oplus \Z \simeq H_0(Y)$ y en particular $\rg H_0(X,A) = \rg \tilde{H}_0(X/A) = \rg H_0(X/A) -1$, obtenemos
 \begin{align*}
 \chi(X) &= \chi(A) + \sum_{i \geq 0}(-1)^i\rg H_i(X,A)\\
 &= \chi(A) + \sum_{i \geq 0}(-1)^i\rg H_i(X/A) - 1\\
@@ -197,11 +211,11 @@ lo que concluye la demostraci\'on.
 
 \begin{lemma}{4} Sean $n \in \N$ y $f,g : \Ss^n \to \Ss^n$ dos funciones continuas. Si $f(x) \neq -g(x)$ para todo $x \in \Ss^n$, entonces $f$ y $g$ son homot\'opicas.
 \end{lemma}
-\begin{proof} Consideremos primero dos puntos $x,y \in \Ss^n$ y $t \in [0,1]$  tal que $tx + (1-t)y = 0$. Como 
+\begin{proof} Consideremos primero dos puntos $x,y \in \Ss^n$ y $t \in [0,1]$  tales que $tx + (1-t)y = 0$. Como 
 \begin{align*}
-t = \|x\| = \|(t-1)y\| = |t-1| = 1-t,
+t = \|tx\| = \|(t-1)y\| = |t-1| = 1-t,
 \end{align*}
-necesariamente es $t = 1/2$. Reemplazando en la ecuaci\'on original obtenemos $\frac{1}{2}x + \frac{1}{2}y = 0$, y por un c\'alculo directo es $x = -y$. 
+necesariamente $t = 1/2$. Reemplazando en la ecuaci\'on original obtenemos $\frac{1}{2}x + \frac{1}{2}y = 0$, y por un c\'alculo directo es entonces $x = -y$. 
 
 Como para cada $x \in \Ss^n$ tenemos que $f(x) \neq -g(x)$, el contrarrec\'iproco del argumento anterior asegura que $tf(x) + (1-t)g(x) \neq 0$ para cualquier $t \in [0,1]$. En consecuencia, la funci\'on
 \begin{align*}
@@ -217,7 +231,7 @@ est\'a bien definida y es continua. Como $H(x,0) = f(x)$ y $H(x,1) = g(x)$ para 
 \begin{align*}
 f(x) \neq x = -(-x) = -A(x) \quad  (\forall x \in \Ss^n)
 \end{align*}
-con $A : \Ss^n \to \Ss^n$ la ant\'ipoda de $\Ss^n$. Por el $\paint{\text{Lema $3$}}$, debe ser $f \simeq A$. Por lo tanto, basta probar el resultado para $f = A$. 
+con $A : \Ss^n \to \Ss^n$ la ant\'ipoda de $\Ss^n$. Por el $\paint{\text{Lema $3$}}$, debe ser $f \simeq A$. Por lo tanto, basta probar el resultado en el caso de la ant\'ipoda. 
 
 Para cada $t \in [0,1]$, definimos
 \begin{align*}
@@ -227,7 +241,7 @@ R_t := \begin{pmatrix}
 0_{n,1} & 0_{n,1} & -I_{n-2}\\
 \end{pmatrix}
 \end{align*}
-con $I_{n-2} \in \mathsf{M}_{n-2}(\R)$ la matriz identidad y $0_{k,l} \in \R^{k \times l}$ la matriz cero. Ahora, la funci\'on definida por
+con $I_{n-2} \in \mathsf{M}_{n-2}(\R)$ la matriz identidad y $0_{k,l} \in \R^{k \times l}$ la matriz cero en cada caso. Ahora, la funci\'on
 \begin{align*}
 h : \R^{n+1}& \times [0,1] \to \mathbb{R}^{n+1}\\
 &(x,t) \longmapsto R_t \cdot x
@@ -236,7 +250,7 @@ resulta continua, pues en cada coordenada es suma de productos de funciones cont
 \begin{align}
 h(x_0,\dots,x_n,t) = (\cos(\pi t)x_0 + \sin(\pi t)x_1,\cos(\pi t)x_0-\sin(\pi t)x_1,-x_2, \dots,-x_n).
 \end{align}
-Dado $t \in [0,1]$, la matriz $R_t$ es diagonal por bloques con cada bloque ortogonal: esto dice que $R_t$ es ortogonal. En particular, si $x \in \R^{n+1}$ es unitario entonces $R_t \cdot x$ resulta unitario. Podemos considerar entonces la (co)restricci\'on 
+Dado $t \in [0,1]$, la matriz $R_t$ es diagonal por bloques con cada bloque ortogonal. Esto dice que $R_t$ es ortogonal y en particular, si $x \in \R^{n+1}$ es unitario luego $R_t \cdot x$ resulta unitario. Podemos considerar entonces la (co)restricci\'on 
 \begin{align*}
 H : \ &\Ss^n \times I \to \Ss^n\\
 &(x,t) \longmapsto h(t,x)
@@ -267,7 +281,7 @@ Para el ejercicio siguiente, recuerdo algunas definiciones. Dada $R \subset X \t
 
 El complejo $K_R$ tiene como $n$-s\'implices a los subconjuntos $\{x_0, \dots, x_n\} \subset X$ tales que existe $y \in Y$ con $x_jRy$ para todo $j \in \natzero{n}$. De forma similar, en $L_R$ los $n$-s\'implices son los subconjuntos $\{y_0, \dots, y_n\} \subset Y$ tales que existe $x \in X$ con $xRy_j$ para todo $j \in \natzero{n}$.
 
-Defino tambi\'en $R_y := \{x \in X : xRy\}$ para cada $y \in Y$ y $R_Y = \{R_y\}_{y \in Y}$.
+Defino tambi\'en $R_y := \{x \in X : xRy\}$ para cada $y \in Y$ y $R_Y := \{R_y\}_{y \in Y}$.
 \begin{center}
 $\paint{
 \rule{400pt}{0.5pt}
@@ -275,21 +289,23 @@ $\paint{
 \vspace{15pt}
 \end{center}
 
-\begin{lemma}{5} Sean $X$ e $Y$ conjuntos finitos y $R \subset X \times Y$ una relaci\'on. Entonces, para cada $y \in Y$ el conjunto $R_y$ es o bien vac\'io o bien un s\'implex.
+\begin{obs}{5} Sean $X$ e $Y$ conjuntos finitos y $R \subset X \times Y$ una relaci\'on. Si $y \in Y$ es tal que $\emptyset \neq R_y$, entonces \'este \'ultimo es de la forma $R_y = \{x_0, \dots, x_n\}$. Como por construcci\'on $x_jRy$ para cada $j \in \natzero{n}$, el conjunto $R_y$ es un s\'implex. 
+\end{obs}
+
+\begin{lemma}{6} Sean $X$ e $Y$ conjuntos finitos y $R \subset X \times Y$ una relaci\'on. Ahora, sean $\tilde{X}$ los elementos de $X$ que est\'an relacionados con alguno de $Y$, e $\tilde{Y}$ los elementos de $Y$ que est\'an relacionados con alguno de $X$. Esto es,
+\begin{align*}
+\tilde{X} := \bigcup_{y \in Y}R_y, \quad \tilde{Y} := \{y \in Y : R_y \neq \emptyset\}.
+\end{align*}
+Si notamos $R'$ a la restricci\'on de $R$ a los conjuntos $\tilde{X}$ e $\tilde{Y}$, entonces $K_R = K_{R'}$ y $L_R = L_{R'}$.
 \end{lemma}
-\begin{proof} Sea $y \in Y$. Si $R_y$ es vac\'io, no hay nada que decir. En caso contrario, es de la forma $R_y = \{x_0, \dots, x_n\}$. Como por construcci\'on  es $x_jRy$ para cada $j \in \natzero{n}$, \'este es un s\'implex. 
+\begin{proof} Por construcci\'on es $K_{R'} \subset K_R$ y $L_{R'} \subset L_R$. Veamos la otra contenci\'on. Ambos casos son similares, lo hacemos para $K_R$. Si $\sigma = \{x_0, \dots, x_n\} \in K_R$, entonces existe $y \in Y$ con $x_jRy$ para cada $j \in \natzero{n}$. En particular $y$ pertenece a $\tilde{Y}$, y cada $x_j$ pertence a $\tilde{X}$, as\'i que $\sigma \in K_{R'}$.
 \end{proof}
 
-\begin{lemma}{6} Sean $X$ e $Y$ conjuntos finitos y $R \subset X \times Y$ una relaci\'on. Ahora, sean $\tilde{X}$ los elementos de $X$ que est\'an relacionados con alguno de $Y$, e $\tilde{Y}$ los elementos de $Y$ que est\'an relacionados con alguno de $X$. Si notamos $R'$ a la restricci\'on de $R$ a los conjuntos $\tilde{X}$ e $\tilde{Y}$, entonces $K_R = K_{R'}$ y $L_R = L_{R'}$.
+\begin{lemma}{7} Sean $X$ e $Y$ conjuntos finitos, $R \subset X \times Y$ una relaci\'on con $R_z \neq  \emptyset$ para todo $z \in Y$, e $y,y' \in Y$ tales que $R_y = R_{y'}$.  Si notamos $R'= R \setminus X \times \{y'\}$ a la restricci\'on a $X \times Y \setminus \{y'\}$, entonces $|L_{R'}|$ es un retracto por deformaci\'on fuerte de $|L_R|$, y $K_{R'} = K_{R}$.
 \end{lemma}
-\begin{proof} Por construcc\'on, es $K_{\tilde{R}} \subset K_R$ y $L_{\tilde{R}} \subset L_R$. Veamos la otra contenci\'on. Ambos casos son similares, lo hacemos para $K_R$. Si $\sigma = \{x_0, \dots, x_n\} \in K_R$, entonces existe $y \in Y$ con $x_jRy$ para cada $j \in \natzero{n}$. En particular $y$ pertenece a $\tilde{Y}$, y cada $x_j$ pertence a $\tilde{X}$, as\'i que $\sigma \in K_{\tilde{R}}$.
-\end{proof}
+\begin{proof} Como $R' \subset R$, ya sabemos que $K_{R'} \subset K_R$. Si ahora $\sigma = \{x_0, \dots, x_n \} \in K_{R}$ entonces existe $z \in Y \setminus \{y'\}$ tal que $x_jRz$ para todo $j \in \natzero{n}$. De ser $z \neq y'$, entonces $\sigma \in K_{R'}$. En caso contrario debe ser $z = y'$ y como $R_y = R_{y'}$ tenemos que $x_jRy$ para todo $j$. Como $y \in Y \setminus \{y'\}$, esto dice que en cualquier caso $\sigma \in K_{R'}$, lo que prueba la igualdad.
 
-\begin{lemma}{7} Sean $X$ e $Y$ conjuntos finitos, $R \subset X \times Y$ una relaci\'on con $R_z \neq  \emptyset$ para todo $z \in Y$, e $y,y' \in Y$ tales que $R_y = R_{y'}$.  Si notamos $R'= R \setminus X \times \{y'\}$ a la restricci\'on a $X \times Y \setminus \{y'\}$, entonces $L_{R'}$ es un retracto por deformaci\'on fuerte de $L_R$, y $K_{R'} = K_{R}$.
-\end{lemma}
-\begin{proof} Como $R' \subset R$, es $K_{R'} \subset K_R$. Si ahora $\sigma = \{x_0, \dots, x_n \} \in K_{R}$ entonces existe $z \in Y \setminus \{y'\}$ tal que $x_jRz$ para todo $j \in \natzero{n}$. De ser $z \neq y'$, entonces ya sabemos que $\sigma \in K_{R'}$. En caso contrario debe ser $z = y'$ y como $R_y = R_{y'}$, entonces $x_jRy$ para todo $j$. Esto dice que en cualquier caso $\sigma \in K_{R'}$, lo que prueba la igualdad.
-
-Ahora veamos que $L_{R'}$ es un retracto por deformaci\'on fuerte de $L_R$. Consideremos el morfismo simlpicial dado por la siguiente funci\'on entre v\'ertices,
+Ahora veamos que $|L_{R'}|$ es un retracto por deformaci\'on fuerte de $|L_R|$. Consideremos el morfismo simlpicial dado por la siguiente funci\'on entre v\'ertices\footnote{Aqu\'i usamos que $R_z \neq \emptyset$ para todo $z \in Y$, pues esto dice que $Y = V_{L_R}$ e $Y \setminus \{y'\} = V_{L_{R'}}$.},
 \begin{align*}
 r : \ &Y \to Y \setminus \{y'\}\\ 
 & z \mapsto \begin{cases}
@@ -299,24 +315,28 @@ y \text{ si $z = y'$}
 \end{align*}
 Observemos que si $i : Y \setminus \{y'\} \hookrightarrow Y$ es la inclusi\'on, entonces $ri = 1_{Y \setminus \{y'\}}$ y por lo tanto
 \begin{align*}
-|ri| = |r| \circ |i| = |1_{Y \setminus \{y'\}}| = 1_{L_{R'}}.
+|r| \circ |i| = |ri| = |1_{Y \setminus \{y'\}}| = 1_{|L_{R'}|}.
 \end{align*}
-Para terminar, veamos que $|ir| \simeq 1_{L_R}$. Dado $v = \sum_{z \in Y}a_z \cdot z$ en $L_{R}$, notamos $v_z = a_z$. Afirmamos ahora que
+Para terminar, veamos que $|ir| \simeq 1_{|L_R|}$. Dado $v = \sum_{z \in Y}a_z \cdot z$ en $|L_{R}|$, notamos $v_z := a_z$. Afirmamos ahora que
 \begin{align*}
 H : \ &|L_R| \times I \longrightarrow |L_R|\\
 & (v,t) \mapsto (v - v_{y'} \cdot y') + v_{y'}(t \cdot y + (1-t) \cdot y')
 \end{align*}
-es una homotop\'ia. En primer lugar, veamos que $H$ est\'a bien definida. Sea $t \in \R$ y $v \in L_R$ con $\operatorname{sop} v \subset \sigma$ para cierto $ \sigma = \{y_0, \dots, y_n\} \in L_R$.
-Si $y' \not \in \sigma$, entonces $v_y = 0$ y $H(v,t) = v$. Si $y' \in \sigma$, por hip\'otesis tambi\'en es $y \in \sigma$. Sin p\'erdida de generalidad suponemos que $y' = y_0$ e $y = y_1$. Ahora, 
+es una homotop\'ia entre $1_{|L_R|}$ e $|ir|$. 
+
+En primer lugar, veamos que $H$ est\'a bien definida. Sea $t \in \R$ y $v$ un punto de $|L_R|$ con $\operatorname{sop} v \subset \sigma$ para cierto $ \sigma = \{y_0, \dots, y_n\} \in L_R$.
+Si $y' \not \in \sigma$, entonces $v_y = 0$ y $H(v,t) = v$. Si en cambio $y' \in \sigma$, por hip\'otesis tambi\'en es $y \in \sigma$ y sin p\'erdida de generalidad podemos suponer que $y' = y_0$ e $y = y_1$. Ahora, 
 \begin{align*}
-H(v,t) &= \sum_{i=0}^na_iy_i - a_0y + a_0(ty + (1-t)y') = \\
+H(v,t) &= \sum_{i=0}^na_iy_i - a_0y + a_0(ty + (1-t)y') \\
 & = a_0ty + [a_1 + a_0(1-t)]y' + \sum_{i=2}^na_iy_i
 \end{align*}
 sigue estando soportado en $\sigma$, y 
 \begin{align*}
 a_0t + a_1 + a_0(1-t) + \sum_{i=2}^na_i = a_0 + a_1 + \sum_{i=2}^na_i = \sum_{i=0}^na_i = 1,
 \end{align*}
-lo que dice que efectivamente $H(v,t)$ es un punto de $|L_R|$, lo que prueba la buena definici\'on. Como $L_R$ es finito, la funci\'on $H$ resulta adem\'as continua (pues lo es para la distancia m\'etrica). Para terminar de ver que $H$ es homotop\'ia, notemos que
+lo que dice que efectivamente $H(v,t)$ es un punto de $|L_R|$. Esto prueba la buena definici\'on. Adem\'as, como $|L_R|$ es finito, la funci\'on $H$ resulta continua (pues lo es para la distancia m\'etrica). 
+
+Por \'ultimo, para cada $v \in |L_R|$ es
 \begin{align*}
 H(v,0) = (v - v_{y'} \cdot y') + v_{y'}(0 \cdot y + 1 \cdot y') = v - v_{y'} \cdot y' + v_{y'} \cdot y' = v
 \end{align*}
@@ -324,30 +344,32 @@ y
 \begin{align*}
 H(v,1) = (v - v_{y'} \cdot y') + v_{y'}(1 \cdot y + 0\cdot y') = v - v_{y'} \cdot y' + v_{y'} \cdot y 
 \end{align*}
-lo que dice que $H(-,0) = 1_{L_R}$ y $H(-,1) = |ir|$, pues justamente $H(-,1)$ reemplaza a $y'$ por $y$ en la suma formal de $v$, lo que coincide con $|ir|(v)$. Esto termina de probar que $L_R$ y $L_{R'}$ son homot\'opicos. Por \'ultimo, al ver la buena definici\'on de $H$ notamos en particular que $H(v,t) = v$ si $\operatorname{sop} v \not \ni y'$, lo que prueba que la homotop\'ia es relativa a $L_{R'}$. 
+lo que dice que $H(-,0) = 1_{|L_R|}$ y $H(-,1) = |ir|$, pues justamente $H(v,1)$ reemplaza a $y'$ por $y$ en la suma formal de $v$, coincidiendo con $|ir|(v)$.
+
+Esto termina de probar que $L_R$ y $L_{R'}$ son homot\'opicos, pero como al ver la buena definici\'on de $H$ notamos que $H(v,t) = v$ si $\operatorname{sop} v \not \ni y'$, la homotop\'ia es relativa a $L_{R'}$. 
 \end{proof}
-
-\begin{lemma}{del Nervio} Sea $K$ un complejo simplicial y $\mathcal{U} = \{U_j\}_{j \in J}$ un cubrimiento localmente finito de $K$ por subcomplejos. Si $\bigcap_{j \in J'}U_j$ es vac\'io o contr\'actil para cada $J' \subset J$, entonces $|K| \simeq |N(\mathcal{U})|$. 
+\vspace{25pt}
+\begin{lemma}{del Nervio} Sea $K$ un complejo simplicial y $\mathcal{U} = \{U_j\}_{j \in J}$ un cubrimiento localmente finito de $K$ por subcomplejos. Si $\bigcap_{j \in J'}U_j$ es vac\'io o contr\'actil para cada $J' \subset J$, entonces $|K| \simeq |N(\mathcal{U})|$. $\square $
 \end{lemma}
-
-\begin{exercise}{(sobre poliedros y relaciones, en el caso finito)} Sean $X$ e $Y$ dos conjuntos finitos y $R \subset X \times Y$ una relaci\'on. Entonces, los poliedros $K_R$ y $L_R$ son homot\'opicamente equivalentes.
+\newpage
+\begin{exercise}{(sobre poliedros y relaciones, en el caso finito)} Sean $R \subset X \times Y$ una relaci\'on con $X$ e $Y$ dos conjuntos finitos. Entonces, los poliedros $|K_R|$ y $|L_R|$ son homot\'opicamente equivalentes.
 \end{exercise}
-\begin{proof} Por el $\paint{\text{Lema $6$}}$, podemos suponer que todo punto de $X$ est\'a relacionado con alguno de $Y$ y viceversa. Esto dice que los v\'ertices de $L_R$ son todos los elementos de $Y$ y cada conjunto $R_y$ resulta no vac\'io.
+\begin{proof} Por el $\paint{\text{Lema $6$}}$, podemos suponer que todo punto de $X$ est\'a relacionado con alguno de $Y$ y viceversa. Esto nos dice que los v\'ertices de $L_R$ son todos los elementos de $Y$, y que cada conjunto $R_y$ resulta no vac\'io.
 
-Por otro lado, si existen $y,y' \in Y$ distintos tales que $R_y = R_{y'}$, el $\paint{\text{Lema $7$}}$ nos asegura que los complejos inducidos por la relaci\'on $R \setminus X \times \{y'\}$ son homot\'opicos a los originales. Repitiendo el proceso las veces que sea necesario\footnote{Aqu\'i usamos que $Y$ es finito, y por lo tanto, el proceso termina.}, podemos conseguir un subconjunto $Y' \subset Y$ y una relaci\'on $R' \subset R$ tales que $K_{R'} \simeq K_R$, $L_{R'} \simeq L_R$  y $R'_y \neq R'_z$ si $y \neq z$. En consecuencia, $K_R$ y $L_R$ ser\'an homot\'opicos si y s\'olo si $K_{R'}$ y $L_{R'}$ lo son, lo que nos dice que sin p\'erdida de generalidad podemos asumir que $R_{y} \neq R_{y'}$ cuando $y \neq y'$.
+Por otro lado, si existen $y,y' \in Y$ distintos tales que $R_y = R_{y'}$, el $\paint{\text{Lema $7$}}$ nos asegura que los complejos inducidos por la relaci\'on $R \setminus X \times \{y'\}$ son homot\'opicos a los originales. Repitiendo el proceso las veces que sea necesario\footnote{Aqu\'i usamos que $Y$ es finito para poder afirmar que el proceso termina.}, podemos conseguir un subconjunto $Y' \subset Y$ y una relaci\'on $R' \subset R$ tales que $K_{R'} \simeq K_R$, $L_{R'} \simeq L_R$  y $R'_w \neq R'_z$ si $w \neq z$. Como $K_R$ y $L_R$ ser\'an homot\'opicos si y s\'olo si $K_{R'}$ y $L_{R'}$ lo son, sin p\'erdida de generalidad podemos asumir que $R_{y} \neq R_{y'}$ cuando $y \neq y'$.
 
 Veamos ahora que la funci\'on entre v\'ertices
 \begin{align*}
-f : \ &Y \to \{R_y\}_{y \in Y}\\
+f : \ &Y \to R_Y = \{R_y\}_{y \in Y}\\
 & y \mapsto R_y
 \end{align*}
-induce un isomorfismo simplicial entre $L_R$ y $N(\{R_y\}_{y\in Y})$. Por definici\'on, sabemos que $f$ es suryectiva, pero la simplificaci\'on anterior nos garantiza adem\'as la inyectividad. Resta ver que $\sigma \in L_R$ si y s\'olo si $f(\sigma) \in N(\{R_y\}_{y \in Y})$. Notemos que $\{y_0, \dots, y_n\}$ es un s\'implex de  $L_R$ si y s\'olo si existe $x \in X$ tal que $xRy_j$ para cada $j \in \natzero{n}$, y esto ocurre exactamente cuando $x \in R_{y_j}$ para todo $j$. En consecuencia, tenemos que
+induce un isomorfismo simplicial entre $L_R$ y $N(R_Y)$. Por definici\'on, sabemos que $f$ es suryectiva, pero la simplificaci\'on anterior nos garantiza adem\'as la inyectividad. Resta ver que $\sigma \in L_R$ si y s\'olo si $f(\sigma) \in N(R_Y)$. Dado que $\{y_0, \dots, y_n\}$ es un s\'implex de  $L_R$ si y s\'olo si existe $x \in X$ tal que $xRy_j$ para cada $j \in \natzero{n}$, y esto ocurre exactamente cuando existe $x \in X$  que pertenece a $R_{y_j}$ para todo $j \in \natzero{n}$, tenemos que
 \begin{align*}
-\{y_0,\dots,y_n\} \in L_Y \iff \cap_{i=1}^nR_{y_i} \neq \emptyset \iff \{R_{y_0}, \dots, R_{y_n}\} = f(\{y_0,\dots,y_n\}) \in N(\{R_y\})_{y \in Y}
+\{y_0,\dots,y_n\} \in L_Y \iff \cap_{i=0}^nR_{y_i} \neq \emptyset \iff \{R_{y_0}, \dots, R_{y_n}\} = f(\{y_0,\dots,y_n\}) \in N(R_Y).
 \end{align*} 
-y as\'i $f$ es un isomorfismo simplicial. En particular, la realizaci\'on geom\'etrica de $N(\{R_y\}_{y \in Y})$ es homeomorfa a la de $L_R$.
+Esto muestra que efectivamente $f$ es un isomorfismo simplicial. En particular, la realizaci\'on geom\'etrica de $N(R_Y)$ es homeomorfa a la de $L_R$.
 
-Para terminar el ejercicio, basta ver entonces que $K_R \simeq N(\{R_y\}_{y \in Y})$. Por construcci\'on, cada v\'ertice de $K_R$ se encuentra el alg\'un conjunto $R_y$. Es decir, se tiene que la familia $\{R_y\}_{y \in Y}$ es un cubrimiento por subcomplejos (finito, en particular localmente finito) de $K_R$. M\'as a\'un, por el $\paint{\text{Lema $5$}}$ cada uno de \'estos es un s\'implex, asi que las interesecciones de elementos de $\{R_y\}_{y \in Y}$ son o bien un simplex, que es contr\'actil, o bien vac\'ias. El lema del nervio nos asegura entonces que $N(\{R_y\}_{y \in Y})$ y $K_R$ son homot\'opicos, lo que concluye la demostraci\'on.
+Para terminar el ejercicio, basta probar entonces que $|K_R| \simeq |N(R_Y)|$. Por construcci\'on, cada v\'ertice de $K_R$ se encuentra el alg\'un conjunto $R_y$. Es decir, la familia $R_Y = \{R_y\}_{y \in Y}$ es un cubrimiento por subcomplejos (finito, en particular localmente finito) de $K_R$. M\'as a\'un, por la $\paint{\text{Observaci\'on $5$}}$ cada uno de \'estos es un s\'implex, asi que las interesecciones de elementos de $R_Y$ son o bien un simplex, que es contr\'actil, o bien vac\'ias. El lema del nervio nos asegura entonces que $|N(R_Y)|$ y $|K_R|$ son homot\'opicos, lo que concluye la demostraci\'on.
 \end{proof}
 
 \end{document}
