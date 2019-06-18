@@ -108,15 +108,16 @@ Concretamente, éste envía cada espacio $Y$ a $[X,Y]$ y cada función continua 
 En particular, si $f$ es una equivalencia homotópica entonces $If$ es un isomorfismo y por lo tanto así lo es $[f]_*$.
 \end{obs}
 
-\begin{lemma}{1} Sea $(X,A)$ un CW-par, $n \in \N$ y $(Z,Y)$ un par topológico. Si $f : (X,A) \to (Z,Y)$ es una función continua de pares que satisface $f(X^{(n-1)} \cup A) \subset Y$ y $\pi_n(Z,Y) = 0$, entonces existe otra función continua $g : X \to Z$ tal que $g(X^{(n)} \cup A) \subset Y$ y $f \simeq g$ relativa a $A$.
-\end{lemma}
-\begin{proof} Tomemos una $n$-celda $e$ de $X^{(n)}$ que no sea una celda de $A$, y sea $\xi : \D^n \to e$ su correspondiente función de adjunción. Como 
-\begin{align*}
-f\xi(\partial \D^n) \subset f(X^{(n-1)}) \subset Y,
-\end{align*}
-la función $f\xi : \D^n \to Z$ representa a una clase de equivalencia de $\pi_n(Z,Y)$. 
+Por comodidad, en el resultado siguiente notamos $X^{(-1)} = \emptyset$ para cada CW-complejo $X$.
 
-Al ser $\pi_n(Z,Y) = 0$, existe una homotopía $H : \D^n \times I \to Z$ entre $f\xi$ y $g$ relativa  a $\partial \D^n$ con $\im H_1 \subset Y$. Puesto que la homotopía $H$ es relativa al borde del disco, pasa al cociente por las identificaciones que hace $\xi$, y tenemos entonces $\tilde{H} : e \times I \to Z$ tal que
+\begin{lemma}{1} Sea $(X,A)$ un CW-par, $n \in \N$ y $(Z,Y)$ un par topológico tal que $\pi_n(Z,Y,y) = 0$ para todo $y \in Y$. Si $f : (X,A) \to (Z,Y)$ es una función continua de pares que satisface $f(X^{(n-1)} \cup A) \subset Y$, entonces existe otra función $g : X \to Z$ continua y homotópica a $f$ relativa a $X^{(n-1)} \cup A$ que satisface $g(X^{(n)} \cup A) \subset Y$.
+\end{lemma}
+\begin{proof} Tomemos una $n$-celda $e$ de $X^{(n)}$ que no sea una celda de $A$, y sea $\xi : \D^n \to e$ su correspondiente función de adjunción. Notemos que la función $f\xi : \D^n \to Z$ siempre representa a una clase de equivalencia de $\pi_n(Z,Y,f\xi(s))$, donde $s \in \partial \D^n$, pues si $n \geq 1$ entonces
+\begin{align*}
+f\xi(\partial \D^n) \subset f(X^{(n-1)}) \subset Y.
+\end{align*}
+
+Al ser $\pi_n(Z,Y,f\xi(s)) = 0$, existe una homotopía $H : \D^n \times I \to Z$ entre $f\xi$ y $g$ relativa  a $\partial \D^n$ con $\im H_1 \subset Y$. Puesto que la homotopía $H$ es relativa al borde del disco, pasa al cociente por las identificaciones que hace $\xi$. Existe entonces $\tilde{H} : e \times I \to Z$ tal que
 \begin{center}
 \begin{tikzpicture}
   \matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em]
@@ -129,13 +130,11 @@ Al ser $\pi_n(Z,Y) = 0$, existe una homotopía $H : \D^n \times I \to Z$ entre $
     (m-2-1) edge [dashed] node [below] {$\ \tilde{H}$} (m-1-2);
 \end{tikzpicture}
 \end{center}
-conmuta.
-
-Esto en particular dice que 
-\begin{align}
+conmuta. En particular esto dice que 
+\begin{align*}
 \im \tilde{H}_1 = \tilde{H}_1(e) = \tilde{H}_1\xi(\D^n) = H_1(\D^n) \subset Y
-\end{align} 
-y $f\xi = H_0 = \tilde{H}_0\xi$. De aquí vemos que $\tilde{H}_0 = f$, pues $\xi$ es sobreyectiva, y como $\tilde{H}$ es relativa a $\dot{e}$ (ya que $H$ es relativa a $\partial \D^n$) sabemos que $\tilde{H}_t|_{\dot{e}} = f|_{\dot{e}}$ para todo $t \in I$. 
+\end{align*} 
+y $f\xi = H_0 = \tilde{H}_0\xi$. Como $\xi$ es sobreyectiva de aquí vemos que $\tilde{H}_0 = f$, y como $\tilde{H}$ es relativa a $\dot{e}$ (ya que $H$ es relativa a $\partial \D^n$) sabemos que $\tilde{H}_t|_{\dot{e}} = f|_{\dot{e}}$ para todo $t \in I$. 
 
 Esto nos dice que para cada $n$-celda $e^n_\beta$ de $X^{(n)}$ que no es una celda de $A$, existe una homotopía $H_\beta^n : e^n_\beta \times I \to Z$ relativa a $\dot{e^n_\beta}$ que satisface
 \begin{itemize}
@@ -148,21 +147,90 @@ En virtud de que dos $n$-celdas distintas se intersecan a lo sumo en sus bordes 
 \begin{align*}
 H : X^{(n)} \cup A \times I \to Z
 \end{align*}
-que cumple $H|_A \equiv f|_A$ y $H|_{e_\beta^n} \equiv H_\beta^n$ en cada $n$-celda $e_\beta^n$ que no es una celda de $A$. Además, por construcción es $H_0 = f|_{X^{(n)} \cup A}$ y $\im H_1 \subset Y$.
+que cumple $H|_{X^{(n-1)} \cup A \times I} \equiv f|_{X^{(n-1)} \cup A}$ y $H|_{e_\beta^n} \equiv H_\beta^n$ en cada $n$-celda $e_\beta^n$ que no es una celda de $A$. Además, por construcción es $H_0 = f|_{X^{(n)} \cup A}$ e $\im H_1 \subset Y$.
 
-Finalmente, como la inclusión del subcomplejo $X^{(n)} \cup A \hookrightarrow X$ es una cofibración, existe una homotopía $\tilde{H} : X \times I \to Z$ que coincide con $H$ en $X^{(n)} \cup A$ y satisface $\tilde{H}_0 = f$. En particular, es $\tilde{H}_1(X^{(n)}\cup A) = \im H_1 \subset Y$, así que basta tomar $g := \tilde{H}_1$.
+Finalmente como la inclusión del subcomplejo $X^{(n)} \cup A \hookrightarrow X$ es una cofibración, existe una homotopía $\tilde{H} : X \times I \to Z$ que coincide con $H$ en $X^{(n)} \cup A$ y satisface $\tilde{H}_0 = f$.
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em]
+  {
+     X^{(n)} \cup A & X^{(n)} \cup A \times I \\
+     X & X \times I\\
+     & & Z\\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$\iota_0$} (m-1-2)
+    (m-1-1) edge [right hook->] node [left] {$i$} (m-2-1)
+    (m-2-1) edge node [above] {$\iota_0$} (m-2-2)
+    (m-1-2) edge [right hook->] node [left] {$i \times 1$} (m-2-2)
+    (m-2-1) edge [bend right] node [below] {$f$} (m-3-3)
+    (m-1-2) edge [bend left] node [above] {$\quad H$} (m-3-3)
+    (m-2-2) edge [dashed] node [below] {$\exists \tilde{H} \quad $} (m-3-3);
+\end{tikzpicture}
+\end{center}
+En particular es $\tilde{H}_1(X^{(n)}\cup A) = \im H_1 \subset Y$ y
+\begin{align*}
+\tilde{H}|_{X^{(n-1)} \cup A \times I} \equiv H|_{X^{(n-1)} \cup A \times I}\equiv f|_{X^{(n-1)} \cup A},
+\end{align*}
+así que basta tomar $g := \tilde{H}_1$.
+
 \end{proof}
+\newpage
 
-Probamos ahora un caso particular del \textit{lema crucial},
+A partir del resultado anterior probamos a continuación el \textit{lema crucial}, pues será necesario para resolver el ejercicio $\paint{(4)}$.
 
-\begin{lemma}{2} Sea $(X,A)$ un CW-par y $(Z,Y)$ un par topológico tal que $\pi_n(Z,Y) = 0$ para todo $n \geq 1$. Si $f : (X,A) \to (Z,Y)$ es una función continua de pares, entonces existe otra función continua $g : X \to Z$ tal que $g(X) \subset Y$ y $f \simeq g$ relativa a $A$.
+\begin{lemma}{2} Sea $(X,A)$ un CW-par y $(Z,Y)$ un par topológico con $\pi_n(Z,Y) = 0$ para todo $n \geq 1$ para el cual existen celdas de $X^{(n)}$ que no pertenecen a $A$. Si $f : (X,A) \to (Z,Y)$ es una función continua de pares, entonces existe otra función $g : X \to Z$ continua y homotópica a $f$ relativa a $A$ que satisface $g(X) \subset Y$.
 \end{lemma}
-\begin{proof} asd
+\begin{proof} Utilizando el $\paint{\text{Lema $1$}}$ inductivamente, tenemos una sucesión de homotopías
+\begin{align*}
+\{H^k : X \times I \to Z\}_{k \geq 0}
+\end{align*}
+tales que 
+\begin{itemize}
+\item $H^0_0 = f$,
+\item $H^k_1 = H^{k+1}_0$,
+\item $H^k$ es relativa a $X^{(k-1)} \cup A$, y
+\item $H^k_1(X^{(k)} \cup A) \subset Y$.
+\end{itemize}
+En el $k$-ésimo paso, de haber $k$-celdas que no pertenezcan a $A$ tomamos la homotopía que nos garantiza el $\paint{\text{Lema $1$}}$ para la función $H^{k-1}_1$, y en caso contrario tomamos la homotopía constante.
+
+Como cada homotopía $H^i$ es relativa a $A$, inductivamente vemos que
+\begin{align*}
+H^i_t(a) = H^i_0(a) = H^{i-1}_1(a) = H^{i-1}_t(a) = \dots = H^0_t(a) = H^0_0(a) = f(a)
+\end{align*}
+para todo $a \in A$, $i \geq 0$ y $t \in I$.
+
+Del mismo modo, para cada $x \in X$  existe $n \geq 1$ tal que $x \in X^{(n)}$ y como $H^k$ es relativa a $X^{(n)}$ si $k > n$, es
+\begin{align*}
+H^n_t(x) = H^k_t(x) \in Y
+\end{align*}
+para todo $k > n$ y $t\in I$. 
+
+Esto último nos permite definir $g : X \to Z$ poniendo $g|_{X^{(n)}} \equiv H^n_1|_{X^{(n)}}$ para cada $n \geq 0$. Por construcción $g$ resulta continua (pues lo es en cada esqueleto de $X$) y satisface tanto $g(X) \subset Y$ como $g|_A = f|_A$. Veamos ahora que $g$ es homotópica a $f$ relativa a $A$.
+
+Fijemos una sucesión $(t_n)_{n \geq 0} \subset \R$ tal que $t_0 = 0$ y $t_n \to 1$ de forma estrictamente creciente, y notemos $c_i : [t_i,t_{i+1}] \to I$ a la función lineal que vale $0$ en $t_i$ y $1$ en $t_{i+1}$. 
+
+Como $H^i_1 = H_0^{i+1}$ para todo $i \geq 0$, por el lema de pegado podemos definir una función continua
+\begin{align*}
+H : X \times [0,1) \to Z
+\end{align*}
+que satisface $H|_{X \times [t_i,t_{i+1}]} \equiv H^i \circ c_i$ para cada $i \geq 0$. Así, es $H_0 = f$ y $H_t|_A = f|_A$ para todo $t \in [0,1)$.
+
+Afirmamos que 
+\begin{align*}
+\tilde{H}:\ & X \times I \longrightarrow Z\\
+&(x,t) \mapsto \begin{cases}
+H(x,t) &\text{si $t\in [0,1)$}\\
+g(x) &\text{si $t = 1$}
+\end{cases}
+\end{align*}
+es una homotopía entre $f$ y $g$ relativa a $A$. Por las observaciones anteriores sólo resta ver que ésta es continua, y es suficiente probarlo en cada cerrado $X^{(n)} \times I$. 
+
+Efectivamente, en $X^{(n)} \times [0,t_{n+1}]$ la función $\tilde{H}$ es continua pues coincide con $H$, y en $[t_{n+1}, 1]$ es constante, pues cuando $m > n$ sabemos que $H^m|_{X^{(n)}} \equiv H^n|_{X^{(n)}}$. Por lo tanto $\tilde{H}$ es continua en $X^{(n)} \times I$ para cada $n \in \N_0$, lo que concluye la demostración. 
 \end{proof}
 
 \begin{exercise}{4} Probar que una equivalencia débil $f : Y \to Z$ induce biyecciones $[X,Y] \to [X,Z]$ para todo CW-complejo $X$.
 \end{exercise}
-\begin{proof} En primer lugar, notemos que $f$ \textit{se factoriza a través} de $M_f$, 
+\begin{proof} En primer lugar, notemos que $f$ \textit{se factoriza a través de} $M_f$, 
 \begin{center}
 \begin{tikzpicture}
   \matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em]
@@ -175,7 +243,7 @@ Probamos ahora un caso particular del \textit{lema crucial},
     (m-1-2) edge node [above] {$j$} (m-2-3);
 \end{tikzpicture}
 \end{center}
-donde la inclusión $i$ es una cofibración y $j$ es equivalencia homotópica. Esto a su vez da un diagrama en $\cat{Set}$,
+donde la inclusión $i$ es una cofibración y $j$ es una equivalencia homotópica. Esto a su vez da un diagrama en $\cat{Set}$,
 \begin{center}
 \begin{tikzpicture}
   \matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em]
@@ -189,11 +257,9 @@ donde la inclusión $i$ es una cofibración y $j$ es equivalencia homotópica. E
 \end{tikzpicture}
 \end{center}
 
-y como $j$ es equivalencia homotópica, la función $[j]_*$ es biyectiva. Por lo tanto, $[f]_*$ es biyectiva sí y solo si $[i]_*$ lo es. Del mismo modo, $f$ es una equivalencia débil si y sólo si lo es $i$. 
+con $[j]_*$ biyectiva. Por lo tanto $[f]_*$ es biyectiva sí y solo si $[i]_*$ lo es. Usando una vez más que $j$ es equivalencia homotópica vemos también que $f$ es una equivalencia débil si y sólo si lo es $i$. Esto nos dice que sin pérdida de generalidad podemos probar el ejercicio para un subespacio $Y$ de un espacio topológico $Z$ e $i : Y \to Z$ la inclusión.
 
-Esto nos dice que sin pérdida de generalidad podemos probar el enunciado en el caso de $i : Y \to Z$ la inclusión de un subespacio $Y$ en un espacio topológico $Z$.
-
-Ahora, como por hipótesis $i$ induce isomorfismos en los grupos de homotopía, de la suceción exacta larga de pares
+Como por hipótesis $i$ induce isomorfismos en los grupos de homotopía, de la suceción exacta larga de pares
 \begin{align*}
 \dots \to \pi_n(Y,y) \xrightarrow{i_*} \pi_n(Z,y) \to \pi_n(Z,Y,y) \to \dots
 \end{align*}
@@ -205,7 +271,7 @@ Por lo tanto, si $g : X \to Z$ es una función continua, es una función de pare
 \end{align*}
 lo que prueba la sobreyectividad de $i_*$.
 
-Ahora veamos la inyectividad. Sean $h_0,h_1 : X \to Y$ funciones continuas tales que $ih_0 \simeq ih_1$ y veamos que $h_0$ y $h_1$ son homotópicas. Por hipótesis, sabemos que existe una homotopía $H : ih_0 \simeq ih_1$, que puede ser vista como una función de pares de $(X \times I, X \times \partial I)$ a $(Z,Y)$, ya que tanto $ih_0$ como $ih_1$ tienen imagen en $Y$. 
+Ahora veamos la inyectividad. Sean $h_0,h_1 : X \to Y$ funciones continuas tales que $ih_0 \simeq ih_1$, y veamos que $h_0$ y $h_1$ son homotópicas. Por hipótesis sabemos que existe una homotopía $H$ entre $ih_0$ e $ih_1$. Más aún, ésta puede ser vista como una función de pares de $(X \times I, X \times \partial I)$ a $(Z,Y)$, pues tanto $ih_0$ como $ih_1$ tienen imagen en $Y$. 
 
 Una vez más, por el $\paint{\text{Lema $2$}}$ existe una función continua $K : (X \times I, X \times \partial I) \to (Z,Y)$ y una homotopía $\Gamma : K \simeq H$ relativa a $X \times \partial I$ tal que $K(X \times I) \subset Y$. En particular $H$ y $K$ coinciden en $X \times \partial I$, así que si $s \in \{0,1\}$ entonces
 \begin{align*}
@@ -233,21 +299,28 @@ Como $f$ no tiene puntos fijos debe ser $\lambda(f) = 0$, lo que nos dice que $\
 
 \begin{exercise}{1} Probar que $\Z_2$ es el \'unico grupo no trivial que puede actuar libremente en una esfera de dimensi\'on par.
 \end{exercise}
-\begin{proof} Sea $n \in \N$ y $G$ un grupo que act\'ua libremente en $\Ss^{2n}$. Esto es equivalente a que para cada $g \in G$ distinto de la unidad la funci\'on 
+\begin{proof} Sea $n \in \N$ y $G$ un grupo no trivial que act\'ua libremente en $\Ss^{2n}$. Esto es equivalente a que, para cada $s \in G$ distinto de la unidad, la funci\'on 
 \begin{align*}
-m_g : \ & \Ss^{2n} \rightarrow \Ss^{2n}\\
-&x \longmapsto g \cdot x
+m_s : \ & \Ss^{2n} \rightarrow \Ss^{2n}\\
+&x \longmapsto s \cdot x
 \end{align*}
-no tenga puntos fijos. Por el $\paint{\text{Lema $3$}}$ sabemos entonces que $\deg m_g = -1$ para todo $g \neq 1$. 
+no tenga puntos fijos. Por el $\paint{\text{Lema $3$}}$ sabemos entonces que $\deg m_s = -1$ para todo $s \neq 1$. 
 
 Si ahora tomamos $g,h \in G \setminus \{1\}$ tenemos que
 \begin{align*}
-\deg m_{gh} = \deg m_g \circ m_h = \deg m_g \cdot \deg m_h = (-1)^2 = 1,
+\deg m_{gh^{-1}} = \deg m_g \circ m_{h^{-1}} = \deg m_g \cdot \deg m_{h^{-1}} = (-1)^2 = 1,
 \end{align*}
-asi que el contrarrec\'iproco del $\paint{\text{Lema $3$}}$ dice que $m_{gh}$ tiene puntos fijos: como la acci\'on es libre, debe ser $gh = 1$. 
+asi que el contrarrec\'iproco del $\paint{\text{Lema $3$}}$ dice que $m_{gh^{-1}}$ tiene puntos fijos: como la acci\'on es libre, debe ser $gh^{-1} = 1$. Es decir, debe ser $g = h$.
 
-Dado que $G$ no es trivial, existe alg\'un elemento $g \in G \setminus \{1\}$. Si ahora $h \in G \setminus \{1\}$ es arbitrario, de $gh^{-1} = 1$ obtenemos $h = g$ para cualquier $h \neq 1$. Por lo tanto es $G = \{1,g\}$. y en consecuencia, $G \simeq \Z_2$.
+Dado que $G$ no es trivial, existe alg\'un elemento $g \in G \setminus \{1\}$. El argumento anterior nos dice que
+\begin{align*}
+G = \{1,g\}
+\end{align*}
+así que necesariamente $G \simeq \Z_2$.
 \end{proof}
+
+\begin{obs}{} Sabemos además que efectivamente $\Z_2 =  {\langle \sigma \ | \ \sigma^2 \rangle}$ actúa en $\Ss^{2n}$ de forma libre, por ejemplo vía $\sigma \cdot p := -p$.
+\end{obs}
 
 \begin{center}
 $\paint{
@@ -258,16 +331,16 @@ $\paint{
 
 \begin{lemma}{4} Sea $G$ un grupo. Si $x \in \Z[G]$ es no nulo y $G$-invariante, entonces $G$ es finito y existe $k \in \Z$ tal que $x = k \cdot \sum_{g \in G} g$.
 \end{lemma}
-\begin{proof} Como $x \in \Z[G] \setminus \{0\}$, existen finitos elementos $g_1, \dots, g_n \in G$ y enteros $a_1, \dots, a_n$ con $a_1 \neq 0$ tales que
+\begin{proof} Al $x \in \Z[G]$ ser no nulo, existen finitos elementos $g_1, \dots, g_n \in G$ y enteros $a_1, \dots, a_n$ con $a_1 \neq 0$ tales que
 \begin{align*}
 x = a_1g_1 + \dots + a_ng_n.
 \end{align*}
-Para cada $g \in G$, es
+Como para cada $g \in G$ es
 \begin{align}
-a_1g_1 + \dots + a_ng_n = x = gg_1^{-1}x = a_1g + a_2gg_1^{-1}g_2 + \dots + a_ngg_1^{-1}g_n
+a_1g_1 + \dots + a_ng_n = x = gg_1^{-1}x = a_1g + a_2gg_1^{-1}g_2 + \dots + a_ngg_1^{-1}g_n,
 \end{align}
-así que por la unicidad de la escritura en combinaciones formales, necesariamente $g \in \{g_1, \dots, g_n\}$. 
-Esto prueba que $G = \{g_1, \dots, g_n\}$, y en particular $G$ resulta finito. 
+por la unicidad de la escritura en combinaciones formales necesariamente $g \in \{g_1, \dots, g_n\}$. 
+Esto prueba que $G = \{g_1, \dots, g_n\}$ y en particular $G$ resulta finito. 
 
 Ahora, si para cada $i \in \nat{n}$ ponemos $g = g_i$ en la igualdad $\paint{(1)}$, se tiene que
 \begin{align*}
@@ -281,11 +354,11 @@ x = a_1g_1 + \dots a_ng_n = kg_1 + \dots kg_n = k \cdot \sum_{g \in G}g.
 
 \begin{exercise}{5} Probar que $\operatorname{cd}(G) = 0$ si y sólo si $G$ es el grupo trivial.
 \end{exercise}
-\begin{proof} Una implicación es clara: si $G = 1$, un $\Z[1]$-módulo es simplemente un $\Z$ módulo, y entonces la sucesión
+\begin{proof} Si $G$ es trivial un $\Z[G]$-módulo es simplemente un $\Z$ módulo, y entonces
 \begin{align*}
 0 \to \Z \xrightarrow{id} \Z \to 0
 \end{align*} 
-es una resolución libre (en particular, proyectiva) de $\Z$ como $\Z[1]$-módulo trivial que tiene longitud cero. 
+es una resolución libre (en particular, proyectiva) de $\Z$ como $\Z[G]$-módulo trivial que tiene longitud cero. 
 
 Recíprocamente, supongamos que existe una resolución proyectiva
 \begin{align*}
@@ -305,7 +378,7 @@ Aplicando $r$ se obtiene
 \begin{align*}
 1 = rs(1) = r\left(k \cdot \sum_{g \in G}g\right) = k \cdot \sum_{g \in G}1 = k |G|,
 \end{align*}
-lo que implica $|G| = k = 1$. Por lo tanto, necesariamente $G$ es el grupo trivial.
+lo que a su vez implica $|G| = k = 1$, y por lo tanto $G$ es el grupo trivial.
 \end{proof}
 
 \end{document}
