@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tocbibind}
+\usepackage[spanish]{babel}
+\usepackage{microtype}
+\usepackage{mathpazo}
+\usepackage{euler}
+\usepackage{thmtools,xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+
+\addto\captionsspanish{\renewcommand{\chaptername}{Parte}}
+\renewcommand\qedsymbol{$\paint{\blacktriangle}$}
+\definecolor{color}{RGB}{147, 8, 8}
+\declaretheoremstyle[
+  headfont=\color{color}\normalfont\bfseries,
+  notefont=\color{color}\normalfont\bfseries
+]{colored}
+\theoremstyle{colored}
+\newtheorem{definition}{Definición}
+\newtheorem{theorem}{Teorema}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corollary}{Corolario}
+\newtheorem{lemma}{Lema}
+\newtheorem{remark}{Observación}
+\newtheorem{exercise}{Ejercicio}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Ss}{\mathbb{S}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nat}[1]{[\![#1]\!]}
+\newcommand{\natzero}[1]{\nat{#1}_0}
+\newcommand{\diam}[1]{\operatorname{diam}(#1)}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\cat}[1]{\mathsf{#1}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\qi}{\stackrel{qi}{\sim}}
+\newcommand{\paint}[1]{\color{color}{#1}}
+\newcommand{\tpaint}[1]{\paint{\textbf{#1}}}
+\newcommand{\paintline}{\begin{center}
+$\paint{
+\rule{400pt}{0.5pt}
+}$
+\vspace{10pt}
+}
+
+%-----------------------
+
+\title{
+\LARGE{\paint{Topolog\'ia Algebraica}}
+\\
+\vspace{5pt}
+\small{\paint{Ejercicios para Entregar - Pr\'acticas 6 y 7}}
+\\
+\vspace{5pt}
+\large{\paint{Guido Arnone}}
+\\
+\paint{
+\rule{250pt}{0.5pt}
+}
+}
+\author{}
+\date{}
+\lhead{Guido Arnone}
+\rhead{Pr\'acticas 6 y 7}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\paint{\large{Sobre los Ejercicios}}\\
+\end{center}
+
+\begin{center}
+Elegí el ejercicio $\tpaint{(6)}$ de la práctica seis y el ejercicio $\tpaint{(6)}$ de la práctica siete.
+$\paint{
+\rule{400pt}{0.5pt}
+}$
+\vspace{35pt}
+\end{center}
+
+\setcounter{exercise}{5}
+\begin{exercise} Probar que los $\R$-espacios vectoriales con producto interno son unicamente geodésicos.
+\end{exercise}
+\begin{proof} Sea $V$ un $\R$-espacio vectorial con producto interno. Como para cada $q \in V$ la traslación $x \in V \mapsto (x - q) \in V$ es una isometría, basta ver que para todo $p \in V$ no nulo y probar existe una única geodésica que une $0$ con $p$. Fijamos entonces $0 \neq p \in V$. 
+
+Para la existencia, basta notar que la curva
+\begin{align*}
+\gamma : [0,\|&p\|] \longrightarrow V\\
+& t \longmapsto t \cdot \left(\frac{p}{\|p\|}\right)
+\end{align*}
+es una geodésica. 
+
+Tomemos ahora $\delta: [0,\|p\|] \to V$ una geodésica y veamos que $\delta \equiv \gamma$. Notemos en primer lugar que siempre es 
+\[
+\|\delta(t)\| = \|\delta(t)-0\| = \|\delta(t)-\delta(0)\| = |t-0| = |t| = t.
+\]
+
+Ahora por un cálculo directo se tiene que
+\begin{align*}
+|s-t|^2 &= \|\delta(s) - \delta(t)\|^2 = \|\delta(s)\|^2 + \|\delta(t)\|^2 + 2\langle \delta(s), \delta(t)\rangle\\
+& = s^2 + t^2 + 2\langle \delta(s), \delta(t)\rangle
+\end{align*}
+y por lo tanto debe ser $\langle \delta(s), \delta(t)\rangle = -st$. Tomando módulo vemos entonces que $|\langle \delta(s), \delta(t)\rangle| = |st| = \|\delta(s)\|\cdot\|\delta(t)\|$. Por la desigualdad de Cauchy-Schwartz, esto implica que $\delta(s)$ y $\delta(t)$ son linealmente dependientes para todo $t,s \in [0,\|p\|]$. En particular, para cada $t \in [0,\|p\|]$ existe $\lambda(t) \in \R$ tal que $\delta(t) = \lambda(t)\lambda(\|p\|) = \lambda(t)p$. Como se tiene que
+\[
+t = \|\delta(t)\| = |\lambda(t)| \|p\|,
+\]
+concluimos que $|\lambda(t)| = \|p\|^{-1}t$, y al esta ultima ser estrictamente positiva en $[0,\|p\|]$ sabemos que $\lambda$ mantiene el signo. Por último, dado que $\lambda(\|p\|) = \delta(\|p\|)\|p\|^{-1} > 0$, es $\lambda(t) = \|p\|^{-1}t$ y 
+\[
+\delta(t) = \lambda(t)p = t \cdot \left(\frac{p}{\|p\|}\right).
+\]
+\end{proof}
+
+\begin{lemma}{1} Sea $\Gamma$ un grupo finitamente generado y $X \subset \Gamma$ un conjunto infinito. Dado un conjunto de generadores $S = \{s_1, \dots, s_k\}$, existe una sucesión $\{x_n\}_{n \geq 1} \subset X$ tal que $\ell_S(x_n) \to \infty$.
+\end{lemma}
+\begin{proof} Notemos que para cada $l \in \N$, el conjunto $X_l := \{x \in X : \ell_S(x) = l\}$ es finito. En efecto, si $x \in \Gamma$ satisface $\ell_S(x) = l$, entonces existen $s_{i_1}, \dots, s_{i_l} \in S$ tal que $x = s_{i_1} \cdots s_{i_l}$, y el conjunto $\{s_{j_1} \cdots s_{j_l} : s_{j_m} \in S\} \ni x$ es finito dado que $S$ lo es. 
+
+Como $X$ es infinito y se tiene que 
+\begin{align*}
+X = \bigsqcup_{l \geq 0}X_l,
+\end{align*}
+no puede haber finitos conjuntos $X_l$ no vacíos. Por lo tanto, podemos tomar una sucesión creciente $(l_n)_{n \geq 1}$ tal que $X_{l_n}$ sea no vacío para cada $n \in \N$. Tomando $x_n \in X_{l_n}$ en cada caso, obtenemos una sucesión que satisface
+\begin{align*}
+\ell_S(x_n) = l_n \to \infty.
+\end{align*}
+\end{proof}
+
+\begin{lemma} Sean $G$ y $H \leq G$ grupos finitamente generados. Si $H$ tiene índice finito, entonces la inclusión $H \qi G$.
+\end{lemma}
+\begin{proof} Por transitividad y en vista del lema de Švarc–Milnor, basta probar que $H$ actúa geométricamente en $C_S(G)$. Consideremos, para algún conjunto finito $S$ de generadores, la acción $H \curvearrowright C_S(G)$ dada por la extensión de la translación a izquierda como acción en $G$. Concretamente, para cada $h \in H$ consideramos la biyección $\phi_h$ en $C_S(G)$ inducida por los homeomorfismos de los segmentos $[g,g'] \equiv [0,1] \equiv [hg,hg']$ para cada $g,g'$ adyacentes en $C_S(G)$. 
+
+Cada función $\phi_h$ es una isometría (co)restringiéndola a cada par de aristas $[g,g']$ y $[hg,hg']$, y a su vez es una isometría entre los vértices del grafo pues $d_S$ es invariante a izquierda. Vemos así que $\phi_h$ resulta una isometría para cada $h \in H$ y por lo tanto $H$ actúa en $C_S(G)$ por isometrías.
+
+Por otro lado, dado que $H$ tiene indice finito\footnote{Aquí uso que la cantidad de \textit{cosets} a derecha e izquierda es la misma (pues la aplicación $gH \in G/H \mapsto Hg^{-1} \in H\textbackslash G$ es biyectiva).}, existe un conjunto finito $R = \{g_1, \dots, g_n\} \subset G$ de representantes de $H \backslash G$. Esto implica que la acción es cocompacta: si $[g,gs]$ es un arista de $C_S(G)$ con $g \in G$ y $s \in S$, existe $i \in \nat{n}$ y $h \in H$ tal que $g = hg_i$ y entonces es
+\[
+[g,gs] = [hg_i,hg_is] = \phi_h([g_i,g_is]).
+\]
+Esto muestra que se tiene $C_S(G) = H \cdot K$ con $K := \bigcup_{s \in S, i\in\nat{n}}[g_i,g_is]$. Al $S$ ser finito y cada arista compacta, obtenemos que $K$ es compacto.
+
+Para terminar, veamos que la acción es propia. Fijemos $x \in C_S(G)$ y separemos en casos. Si $x$ es un vértice de $G$, entonces podemos tomar $r > 0$ de forma que
+\begin{align*}
+B_r(x) \subset \bigcup_{s \in S}[x,xs]
+\end{align*}
+y luego es
+\begin{align*}
+h \cdot B_r(x) \cap B_r(x) \subset \bigcup_{s,t \in S} [x,xs] \cap [hx,hxt].
+\end{align*}
+
+Para que la intersección sea no vacía, en particular tienen que existir $t,s \in S$ tales que $[x,xs] \cap [hx,hxt] \neq \emptyset$. Esto quiere decir que tiene que haber dos tales aristas que compartan por lo menos un extremo, lo que impone que se satisfaga
+\[
+h \in \{1,xt^{-1}x^{-1},xsx^{-1},xst^{-1}x^{-1}\}.
+\]
+Si en cambio es $x \in [g,gs] \setminus \{g,gs\}$ para cierto $g \in G$ y $s \in S$, entonces tomamos $r > 0$ tal que $x \in B_r(x) \subset [g,gs] \setminus \{g,gs\}$. Así, de forma similar vemos que $h \cdot B_r(x) \cap B_r(x) \neq \emptyset$ implica $[g,gs] = [hg,hgs]$ y entonces debe ser $h \in \{1,gsg^{-1},gs^{-1}g^{-1}\}$.
+
+Como $S$ es finito, en cualquier caso encontramos $r > 0$ tal que 
+\begin{align*}
+| \ \{h \in H : h \cdot B_r(x) \cap B_r(x) \neq \emptyset \} \ | < \infty.
+\end{align*}
+\end{proof}
+
+\setcounter{exercise}{5}
+\begin{exercise} Sea $\varphi : \Gamma_1 \to \Gamma_2$ morfismo entre grupos finitamente generados. Probar que:
+\begin{itemize}
+\item[a)] Si $\varphi$ es un embedding quasi-isométrico, entonces $\ker \varphi$ es finito.
+\item[b)] El morfismo $\varphi$ es una quasi-isometría si y sólo si $\ker \varphi$ y $\coker \varphi$ son finitos.
+\end{itemize}
+\end{exercise}
+\begin{proof} Hacemos cada inciso por separado. De todas formas, fijamos de antemano conjuntos finitos de generadores $A$ y $B$ de $\Gamma_1$ y $\Gamma_2$ respectivamente.  
+\begin{itemize}[listparindent = \parindent]
+\item[a)] Como $\varphi$ es un embedding quasi-isométrico, existen $\lambda \geq 1$ y $\varepsilon \geq 0$ tales que
+\begin{align*}
+-\varepsilon + \frac{1}{\lambda}d_A(x,y) \leq d_B(\varphi(x),\varphi(y)) \leq \lambda d_A(x,y) + \varepsilon \quad (\forall x,y \in \Gamma_1).
+\end{align*}
+Como $d_A(x,y) = \ell_A(x^{-1}y)$ y $d_B(\varphi(x),\varphi(y)) = \ell_B(\varphi(x^{-1}y))$, equivalentemente es
+\begin{align}
+-\varepsilon + \frac{1}{\lambda}\ell_A(x) \leq \ell_B(\varphi(x)) \leq \lambda \ell_A(x) + \varepsilon.
+\end{align}
+para cada $x \in \Gamma_1$.
+
+Si $\ker \varphi$ fuera infinito, entonces por el $\paint{\text{Lema $1$}}$ existiría una sucesión $\{x_n\}_{n \geq 1} \subset \ker \varphi$ tal que $\ell_A(x_n) \to \infty$. Sin embargo esto supone una contradicción, pues como $\varphi(x_n) = 1$ para todo $n \in \N$, de $\paint{(1)}$ tenemos que
+\begin{align*}
+\ell_A(x_n) \leq \lambda\varepsilon. \quad (\forall n \in \N)
+\end{align*}
+Por lo tanto, necesariamente $\ker \varphi$ debe ser finito.
+\item[b)] Veamos ambas implicaciones.
+\begin{itemize}[listparindent = \parindent]
+\item[($\Rightarrow$)] En vista del punto $\paint{(a)}$, resta probar que $\coker \varphi$ es finito. Como $\varphi$ es quasi-densa, existe $K \in \R$ tal que $d(y,\im \varphi) \leq K$ para todo $y \in \Gamma_2$. 
+
+Por lo tanto, dado $y \in \Gamma_2$ sabemos que hay cierto $x \in \Gamma_1$ tal que 
+\begin{align*}
+d_B(y, \varphi(x)) = \ell_B(y^{-1}\varphi(x)) \leq K,
+\end{align*}
+y existe entonces $s  = \in \Gamma_2$ tal que $y^{-1}s^{-1} = \varphi(x) \in \im \varphi$ y $\ell_B(s^{-1}) = \ell_B(s) \leq K$. Como esto dice que $[s^{-1}] = [y]$ en $\coker \varphi$, el argumento anterior muestra que
+\begin{align*}
+L := \{s \in \Gamma_2 : \ell(s) \leq K \}
+\end{align*}
+contiene un sistema de representantes para $\coker \varphi$. 
+
+Dado que los elementos de $L$ están acotados en longitud, por el $\paint{\text{Lema $1$}}$ éste no puede ser infinito, y por tanto $\coker \varphi$ es finito. 
+\item[($\Leftarrow$)] En vista del $\tpaint{Lema 2}$, podemos suponer que $\varphi$ es un epimorfismo (ya que $\coker \varphi$ es finito). En particular, tomamos $B = \varphi(A)$ como conjunto de generadores de $\Gamma_2$. 
+
+Sea ahora $\{y_1, \dots, y_n\}$ un sistema de representantes de $\coker \varphi$. Dado $y \in \Gamma_2$, sabemos entonces que existe $i \in \nat{k}$ tal que $yy_i^{-1} \in \im \varphi$. En consecuencia, es
+\begin{align*}
+d_B(y,\varphi(\Gamma_1)) \leq d_B(y,yy_i^{-1}) = \ell_B(y_i) \leq K
+\end{align*}
+lo que muestra que $\varphi$ es quasi-densa.
+
+Para terminar, veamos que $\varphi$ es un embedding quasi-isométrico: alcanza ver que se satisface la desigualdad $\tpaint{(1)}$. Dado $x \in \Gamma_1$ con $\ell_B(\varphi(x)) = L$, existen generadores $s_1, \dots, s_L \in B$ tales que $\varphi(x) = s_1 \cdots s_L$. Tenemos entonces elementos $a_1, \dots, a_L$ en $A$ tales que $\varphi(a_i) = s_i$ para cada $i \in \nat{L}$ y de esta forma es
+\[
+\varphi(x \cdot a_L^{-1} \cdots a_1^{-1}) = 1.
+\]
+Notando $k := x \cdot a_L^{-1} \cdots a_1^{-1} \in \ker \varphi$, se tiene que
+\begin{align*}
+\ell_A(x) &= \ell_A(k \cdot x_1 \cdots x_L) \leq \max_{k \in \ker \varphi}\ell_A(k) + L \cdot \max_{a \in A}\ell_A(a)\\ &= \max_{k \in \ker \varphi}\ell_A(k) + \ell_B(\varphi(x)) \cdot \max_{a \in A}\ell_A(a). 
+\end{align*}
+Observemos  además que tanto $\kappa := \max_{k \in \ker \varphi}\ell_A(k)$ como $\xi := \max_{a \in A}\ell_A(a)$ son finitos pues $\ker \varphi$ y $X$ lo son. 
+
+Reescribiendo, la anterior desigualdad nos dice entonces que para todo $x \in \Gamma_1$ obtenemos  
+\begin{align*}
+-\xi \cdot \kappa^{-1} + \kappa^{-1} \ell_A(x) \leq \ell_B(x),
+\end{align*}
+y (como $B = \varphi(A)$) por otro lado es
+\[
+\ell_B(\varphi(x)) \leq \ell_A(x) \leq \kappa\ell_A(x) + \xi \cdot \kappa^{-1}.
+\]
+\end{itemize}
+\end{itemize}
+\end{proof}
+
+\end{document}
