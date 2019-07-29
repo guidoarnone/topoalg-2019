@@ -53,6 +53,7 @@
 \newcommand{\cat}[1]{\mathsf{#1}}
 \newcommand{\coker}{\operatorname{coker}}
 \newcommand{\qi}{\stackrel{qi}{\sim}}
+\newcommand{\id}{\operatorname{id}}
 \newcommand{\paint}[1]{\color{color}{#1}}
 \newcommand{\tpaint}[1]{\paint{\textbf{#1}}}
 \newcommand{\paintline}{\begin{center}
@@ -101,33 +102,24 @@ $\paint{
 \setcounter{exercise}{5}
 \begin{exercise} Probar que los $\R$-espacios vectoriales con producto interno son unicamente geodésicos.
 \end{exercise}
-\begin{proof} Sea $V$ un $\R$-espacio vectorial con producto interno. Como para cada $q \in V$ la traslación $x \in V \mapsto (x - q) \in V$ es una isometría, basta ver que para todo $p \in V$ no nulo y probar existe una única geodésica que une $0$ con $p$. Fijamos entonces $0 \neq p \in V$. 
+\begin{proof} Sea $V$ un $\R$-espacio vectorial con producto interno. Como para cada $q \in V$ la traslación $x \in V \mapsto (x - q) \in V$ es una isometría, basta ver que para todo $p \in V$ no nulo existe una única geodésica que une $0$ con $p$. 
 
-Para la existencia, basta notar que la curva
-\begin{align*}
-\gamma : [0,\|&p\|] \longrightarrow V\\
-& t \longmapsto t \cdot \left(\frac{p}{\|p\|}\right)
-\end{align*}
-es una geodésica. 
+Más aún, si $\gamma$ es una tal geodésica, entonces $\tilde{\gamma} : t \in I \mapsto \|p\|^{-1} \cdot \gamma(\|p\|t) \in V$ es una geodésica que une a $0$ con $p/\|p\|$, y además la asignación $\gamma \mapsto \tilde{\gamma}$ es inyectiva. Por lo tanto, alcanza mostrar que para cada vector unitario $v \in V$ existe una única geodésica que une $0$ con $v$. 
 
-Tomemos ahora $\delta: [0,\|p\|] \to V$ una geodésica y veamos que $\delta \equiv \gamma$. Notemos en primer lugar que siempre es 
+Fijamos entonces $v \in V$ unitario. Para la existencia, basta notar que la curva $\ell : t \in I \mapsto t \cdot v \in V$ es geodésica. Sea ahora $\delta: I \to V$ una geodésica que une $0$ con $v$. Notemos en primer lugar que para todo $t \in I$ es 
 \[
 \|\delta(t)\| = \|\delta(t)-0\| = \|\delta(t)-\delta(0)\| = |t-0| = |t| = t.
 \]
-
-Ahora por un cálculo directo se tiene que
+Por un cálculo directo, se tiene que
 \begin{align*}
-|s-t|^2 &= \|\delta(s) - \delta(t)\|^2 = \|\delta(s)\|^2 + \|\delta(t)\|^2 + 2\langle \delta(s), \delta(t)\rangle\\
-& = s^2 + t^2 + 2\langle \delta(s), \delta(t)\rangle
+\langle \delta(s), \delta(t)\rangle &= -\frac{1}{2}\left(\|\delta(s)-\delta(t)\|^2-\|\delta(t)\|^2-\|\delta(s)\|^2\right)\\
+&= -\frac{1}{2}(|s-t|^2-t^2-s^2)\\
+&= st = \|\delta(s)\|\cdot\|\delta(t)\|,
 \end{align*}
-y por lo tanto debe ser $\langle \delta(s), \delta(t)\rangle = -st$. Tomando módulo vemos entonces que $|\langle \delta(s), \delta(t)\rangle| = |st| = \|\delta(s)\|\cdot\|\delta(t)\|$. Por la desigualdad de Cauchy-Schwartz, esto implica que $\delta(s)$ y $\delta(t)$ son linealmente dependientes para todo $t,s \in [0,\|p\|]$. En particular, para cada $t \in [0,\|p\|]$ existe $\lambda(t) \in \R$ tal que $\delta(t) = \lambda(t)\lambda(\|p\|) = \lambda(t)p$. Como se tiene que
-\[
-t = \|\delta(t)\| = |\lambda(t)| \|p\|,
-\]
-concluimos que $|\lambda(t)| = \|p\|^{-1}t$, y al esta ultima ser estrictamente positiva en $[0,\|p\|]$ sabemos que $\lambda$ mantiene el signo. Por último, dado que $\lambda(\|p\|) = \delta(\|p\|)\|p\|^{-1} > 0$, es $\lambda(t) = \|p\|^{-1}t$ y 
-\[
-\delta(t) = \lambda(t)p = t \cdot \left(\frac{p}{\|p\|}\right).
-\]
+y la desigualdad de Cauchy-Schwartz implica que $\delta(s)$ y $\delta(t)$ son linealmente dependientes para todo $t,s \in I$. Existe entonces $\lambda(t) \in \R$ tal que $\delta(t) = \lambda(t)\delta(1) = \lambda(t)v$, para todo $t \in I$. 
+
+Sabemos además que $\lambda$ es continua pues es \[|\lambda(s)-\lambda(t)| = \|\delta(s)-\delta(t)\| = |s-t|,\]
+y como su módulo $|\lambda| \equiv \|\delta\|$ solo se anula en cero, debe mantener su signo. Finalmente, como ya sabemos que $\lambda(1) = 1$, necesariamente es $\lambda \equiv \id$ y por tanto $\delta \equiv \ell$.
 \end{proof}
 
 \begin{lemma}{1} Sea $\Gamma$ un grupo finitamente generado y $X \subset \Gamma$ un conjunto infinito. Dado un conjunto de generadores $S = \{s_1, \dots, s_k\}$, existe una sucesión $\{x_n\}_{n \geq 1} \subset X$ tal que $\ell_S(x_n) \to \infty$.
@@ -169,12 +161,11 @@ Para que la intersección sea no vacía, en particular tienen que existir $t,s \
 \[
 h \in \{1,xt^{-1}x^{-1},xsx^{-1},xst^{-1}x^{-1}\}.
 \]
-Si en cambio es $x \in [g,gs] \setminus \{g,gs\}$ para cierto $g \in G$ y $s \in S$, entonces tomamos $r > 0$ tal que $x \in B_r(x) \subset [g,gs] \setminus \{g,gs\}$. Así, de forma similar vemos que $h \cdot B_r(x) \cap B_r(x) \neq \emptyset$ implica $[g,gs] = [hg,hgs]$ y entonces debe ser $h \in \{1,gsg^{-1},gs^{-1}g^{-1}\}$.
-
-Como $S$ es finito, en cualquier caso encontramos $r > 0$ tal que 
+Si en cambio es $x \in [g,gs] \setminus \{g,gs\}$ para cierto $g \in G$ y $s \in S$, entonces tomamos $r > 0$ tal que $x \in B_r(x) \subset [g,gs] \setminus \{g,gs\}$. De forma similar vemos que $h \cdot B_r(x) \cap B_r(x) \neq \emptyset$ implica $[g,gs] = [hg,hgs]$, por lo que debe ser $h \in \{1,gsg^{-1},gs^{-1}g^{-1}\}$. Como $S$ es finito, en cualquier caso encontramos $r > 0$ tal que 
 \begin{align*}
-| \ \{h \in H : h \cdot B_r(x) \cap B_r(x) \neq \emptyset \} \ | < \infty.
+| \ \{h \in H : h \cdot B_r(x) \cap B_r(x) \neq \emptyset \} \ | < +\infty,
 \end{align*}
+lo que termina de mostrar que la acción es propia.
 \end{proof}
 
 \setcounter{exercise}{5}
@@ -215,7 +206,7 @@ L := \{s \in \Gamma_2 : \ell(s) \leq K \}
 \end{align*}
 contiene un sistema de representantes para $\coker \varphi$. 
 
-Dado que los elementos de $L$ están acotados en longitud, por el $\paint{\text{Lema $1$}}$ éste no puede ser infinito, y por tanto $\coker \varphi$ es finito. 
+Dado que los elementos de $L$ están acotados en longitud, por el $\paint{\text{Lema $1$}}$ este no puede ser infinito, y por tanto $\coker \varphi$ es finito. 
 \item[($\Leftarrow$)] En vista del $\tpaint{Lema 2}$, podemos suponer que $\varphi$ es un epimorfismo (ya que $\coker \varphi$ es finito). En particular, tomamos $B = \varphi(A)$ como conjunto de generadores de $\Gamma_2$. 
 
 Sea ahora $\{y_1, \dots, y_n\}$ un sistema de representantes de $\coker \varphi$. Dado $y \in \Gamma_2$, sabemos entonces que existe $i \in \nat{k}$ tal que $yy_i^{-1} \in \im \varphi$. En consecuencia, es
