@@ -169,7 +169,7 @@ s_is_j = s_{j+1}s_i &\text{si $i \leq j$}\\
 \end{itemize}
 \end{definition}
 
-\begin{example}[el $n$-símplex estándar] Para cada $n \in \N_0$ tenemos un conjunto simplicial dado por el funtor $\ordcat(-,\ord{n})$. Conrectamente, para cada $j \geq 0$ definimos los conjuntos
+\begin{example}[el $n$-símplex estándar] Para cada $n \in \N_0$ tenemos un conjunto simplicial dado por el funtor $\ordcat(-,\ord{n})$. Conrectamente, para cada $m \geq 0$ definimos los conjuntos
 \[
 \ss{n}_m := \ordcat(\ord{m},\ord{n}) = \{f : \ord{m} \to \ord{n} : \text{ $f$ es morfismo de posets } \}
 \]
@@ -455,12 +455,11 @@ Como vimos en la sección anterior, la realización geométrica está directamen
   & \cat{sSet} \arrow[bend left=35]{ll}{\mathcal{S}}
 \end{tikzcd}
 \end{center}
-
 En otras palabras, se tiene una biyección
 \[
 \cat{Top}(|X|,Y) \simeq \cat{sSet}(X,\mathcal{S}(Y))
 \]
-entre las funciones continuas $|X| \to Y$ y los morfismos simpliciales $X \to \mathcal{S}$. Más aún, esta biyección es natural tanto en $X$ como en $Y$.
+entre las funciones continuas $|X| \to Y$ y los morfismos simpliciales $X \to \mathcal{S}(Y)$. Más aún, esta biyección es natural tanto en $X$ como en $Y$.
 \end{theorem}
 \begin{proof} Recordemos que hay una correspondencia biyectiva entre morfimos simpliciales $\sigma: \ss{n} \to X$ y símplices $x \in X_n$. Notamos $\sigma_x$ al morfismo simplicial asociado a un símplex $x$. Vimos también que una función continua $g : |X| \to Y$ se corresponde unívocamente con una colección de funciones continuas $g_x : \ss{n_x} \to Y$ tales que 
 \[
