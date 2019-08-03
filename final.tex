@@ -380,7 +380,7 @@ A su vez, usando la propiedad universal del coproducto y el hecho de que cada es
 \[
 \lambda_x : |\ss{n}| \to Z
 \]
-para cada $x \in X_n$ y $n \geq 0$, que satisfagan las condiciones de compatibilidad de antes: esto es, que para cada morfismo de posets\footnote{Si bien la condición original era sobre los mapas de caras y degeneración, que son imagen por $X$ de los mapas de cocaras y codegeneración en $\ordcat$. Al clausurar la relación de equivalencia se tiene una condición equivalente reemplazando éstos por cualquier función $X(\theta)$ con $\theta$ un morfismo en $\ordcat$.} $\theta : \ord{n} \to \ord{m}$ se tenga $\lambda_{X(\theta)(x)} = \lambda_x \circ |\theta| = |\theta_*|(\lambda_x)$.
+para cada $x \in X_n$ y $n \geq 0$, que satisfagan las condiciones de compatibilidad de antes: esto es, que para cada morfismo de posets\footnote{Si bien la condición original era sobre los mapas de caras y degeneración, que son imagen por $X$ de los mapas de cocaras y codegeneración en $\ordcat$. Al clausurar la relación de equivalencia se tiene una condición equivalente reemplazando éstos por cualquier función $X(\theta)$ con $\theta$ un morfismo en $\ordcat$.} $\theta : \ord{n} \to \ord{m}$ se tenga $\lambda_{X(\theta)(x)} = \lambda_x \circ |\theta| = |\theta^*|(\lambda_x)$.
 
 Recordemos ahora que, por el lema de Yoneda, tenemos que
 \[
@@ -392,9 +392,9 @@ y
 \]
 para cada $n,m \geq 0$. Por lo tanto, cada elemento $x \in X_n$ se corresponde a un único morfismo simplicial $\sigma_x : \ss{n} \to X$, y toda flecha $\ss{n} \to \ss{m}$ es la poscomposición por cierto morfismo de posets $\theta: \ord{n} \to \ord{m}$.
 
-En éstos terminos, la información anterior se puede describir como un morfismo $\lambda_\sigma : |\ss{n}| \to Z$ para cada símplex $\sigma : \ss{n} \to X$, de forma que para todo morfismo de posets $\theta : \ord{n} \to \ord{m}$ y símplices $\sigma : \ss{n} \to X, \tau : \ss{m} \to X$ tales que $\sigma = \tau \  \theta_*$ se tenga que $\lambda_\sigma = \lambda_\tau |\theta_*|$. 
+En éstos terminos, la información anterior se puede describir como un morfismo $\lambda_\sigma : |\ss{n}| \to Z$ para cada símplex $\sigma : \ss{n} \to X$, de forma que para todo morfismo de posets $\theta : \ord{n} \to \ord{m}$ y símplices $\sigma : \ss{n} \to X, \tau : \ss{m} \to X$ tales que $\sigma = \tau \  \theta_*$ se tenga que $\lambda_\sigma = \lambda_\tau |\theta|$. 
 
-Es decir, dar un morfismo $g : |X| \to Z$ es equivalente a dar un cocono sobre $Z$ para el funtor $F : \Delta \downarrow X \to \mathsf{Top}$ que envía $(\sigma : \ss{n} \to X) \xrightarrow{\theta_*} (\tau : \ss{m} \to X)$ a $|\ss{n}| \xrightarrow{|\theta_*|} |\ss{m}|$.
+Es decir, dar un morfismo $g : |X| \to Z$ es equivalente a dar un cocono sobre $Z$ para el funtor $F : \Delta \downarrow X \to \mathsf{Top}$ que envía $(\sigma : \ss{n} \to X) \xrightarrow{\theta_*} (\tau : \ss{m} \to X)$ a $|\ss{n}| \xrightarrow{|\theta|} |\ss{m}|$.
 
 Por otro lado, tenemos un cocono sobre $X$ dado por las funciones
 \[
@@ -443,9 +443,116 @@ y
 lo que nos dice que $\widetilde{f}$ manda puntos relacionados en puntos relacionados. En consecuencia, está bien definida la función continua $|f| : |X| \to |Y|$ que envía $[(x,p)]$ a $[(f_n(x),p)]$ si $x \in X_n$, y de esta caracterización se deduce la funtorialidad de $|\cdot|$.
 \end{proof}
 
+\section{La adjunción entre la realización geométrica y el funtor singular}
+
+Como vimos en la sección anterior, la realización geométrica está directamente relacionada con el conjunto singular de un espacio topológico. El teorema que sigue describe explícitamente esta relación en terminos de los functores $| \cdot |$ y $\mathcal{S}$.
+
+\begin{theorem} Existe una adjunción
+\begin{center}
+\begin{tikzcd}
+    \cat{Top} \arrow[bend left=35]{rr}{| \  \cdot \ |}
+  & \rotatebox{90}{$\vdash$}
+  & \cat{sSet} \arrow[bend left=35]{ll}{\mathcal{S}}
+\end{tikzcd}
+\end{center}
+
+En otras palabras, se tiene una biyección
+\[
+\cat{Top}(|X|,Y) \simeq \cat{sSet}(X,\mathcal{S}(Y))
+\]
+entre las funciones continuas $|X| \to Y$ y los morfismos simpliciales $X \to \mathcal{S}$. Más aún, esta biyección es natural tanto en $X$ como en $Y$.
+\end{theorem}
+\begin{proof} Recordemos que hay una correspondencia biyectiva entre morfimos simpliciales $\sigma: \ss{n} \to X$ y símplices $x \in X_n$. Notamos $\sigma_x$ al morfismo simplicial asociado a un símplex $x$. Vimos también que una función continua $g : |X| \to Y$ se corresponde unívocamente con una colección de funciones continuas $g_x : \ss{n_x} \to Y$ tales que 
+\[
+g([(x,p)]) = g_x(p)
+\]
+para todo símplex $x \in X_n$ y $p \in |\ss{n}|$. 
+
+En vista de esto, definimos la aplicación
+\begin{align*}
+e : \cat{Top}(|X|,&Y) \to \cat{sSet}(X,\mathcal{S}(Y))\\
+& g \longmapsto e(g)(x) := g_x
+\end{align*}
+Como $g$ es un morfismo cuyo dominio es $|X|$, las funciones $g_x$ deben satisfacer
+\[
+g_{X\theta(x)} = |\theta|^*(g_x)
+\]
+para todo símplice $x$ y morfismo de posets $\theta$. En particular, esto prueba que $e(g)$ es efectivamente un morfismo de complejos simpliciales, por lo que $e$ está bien definida.
+
+Por otro lado, definimos otra aplicación
+\begin{align*}
+\rho : \cat{sSet}(X,\mathcal{S}(&Y)) \to \cat{Top}(|X|,Y)\\
+& f \longmapsto \rho(f)
+\end{align*}
+del siguiente modo: dado un morfismo simplicial $f$, para cada $f_n : X_n \to \mathcal{S}(Y)_n$ definimos las funciones
+\[
+\widetilde{f_n} : (x,p) \in X_n \times |\ss{n}| \mapsto f_n(x)(p) \in Y,
+\]
+las cuales inducen a su vez una función continua
+\[
+\coprod_{n \geq 0} \widetilde{f_n} : \coprod_{n \geq 0} X_n \times |\ss{n}| \to Y.
+\]
+
+Como $f$ es un morfismo simplicial, para cada $\theta \in \ordcat(m,n)$ se tiene que
+\[
+\widetilde{f_m}(X\theta(x), p) = (f_mX\theta)(x)(p) = |\theta|^*(f_n(x))(p) = (f_n(x) |\theta|)(p) = \widetilde{f_n}(x,|\theta|(p)).
+\]
+Esto dice que la función $\coprod_{n \geq 0} \widetilde{f_n}$ pasa al cociente por las identificaciones de la realización geométrica, y por lo tanto, induce una aplicación continua $|X| \to Y$ que tomamos como imagen de $f$ por $\rho$. Concretamente, dados $x \in X_n$ y $p \in |\ss{n}|$ es
+\[
+\rho(f)([(x,p)]) = f_n(x)(p).
+\]
+
+Veamos ahoar que $e$ y $\rho$ son aplicaciones inversas. Si tomamos $f : X \to \mathcal{S}(Y)$ simplicial, es
+\[
+e\rho(f)(x)(p) = \rho(f)([(x,p)]) = f_n(x)(p)
+\]
+para todo $x \in X_n$ y $p \in |\ss{n}|$. Por lo tanto, se tiene que $e \rho(f) = f$ y, en general, $e \rho = 1$.
+
+Recíprocamente, si $g : |X| \to Y$ es una función continua, entonces para cada $(x,p) \in X_n \times |\ss{n}|$ es
+\[
+\rho e(g)([(x,p)]) = e(g)_n(x)(p) = g_x(p) = g([(x,p)]),
+\]
+lo cual prueba que $\rho e  = 1$.
+
+Para terminar, veamos que el isomorfismo es natural tanto en $X$ como $Y$. Fijemos $g : |X| \to Y$ continua y $(x,p) \in X_n \times |\ss{n}|$. Dado un morfismo simplicial $f : X' \to X$, debemos ver que el diagrama
+\begin{center}
+\begin{tikzcd}
+\cat{Top}(|X|,Y) \arrow{r}{e}\arrow{d}[left]{|f|^*} \  &\ \cat{sSet}(X,\mathcal{S}(Y))\arrow{d}{f^*}\\ 
+\cat{Top}(|X'|,Y)\arrow{r}{e} & \cat{sSet}(X',\mathcal{S}(Y)) 
+\end{tikzcd}
+\end{center}
+conmuta. Por un cálculo directo es
+\begin{align*}
+f^*(e(g))(x)(p) &= e(g)(f(x))(p) = g([(f(x),p)])\\
+& = g|f|([(x,p)]) = e(g|f|)(x)(p)\\
+& = e(|f|^*(g))(x)(p),
+\end{align*}
+y por lo tanto $f^*e = e|f|^*$. Del mismo modo, si $f : Y \to Y'$ es continua entonces
+\begin{center}
+\begin{tikzcd}
+\cat{Top}(|X|,Y) \arrow{r}{e}\arrow{d}[left]{f_*} \  &\ \cat{sSet}(X,\mathcal{S}(Y))\arrow{d}{f_*}\\ 
+\cat{Top}(|X|,Y')\arrow{r}{e} & \cat{sSet}(X,\mathcal{S}(Y')) 
+\end{tikzcd}
+\end{center}
+conmuta pues
+\begin{align*}
+f_*(e(g))(x)(p) &= f(e(g)(x)(p)) = fg([(x,p)])\\
+&= e(fg)(x)(p) = e(f_*(g))(x)(p).
+\end{align*}
+\end{proof}
+
+\begin{remark} En \cite{GJ} se encuentra una demostración «puramente categórica» del teorema anterior usando que todo prehaz es un colímite de funtores representables, y que las realizaciones geométricas son colímites de símplices (topológicos) estándar.
+
+Concretamente, usando la relacion entre funtores $\hom$ y colímites (ver \cite{context}, sección 3.4) es
+\begin{align*}
+\cat{Top}(|X|,Y) &\simeq \catcolim{\substack{\ss{n} \to X \\ \text{ en $\Delta \downarrow X$}}}{\cat{Top}(|\ss{n}|,Y)}\\ &\simeq \catcolim{\substack{\ss{n} \to X \\ \text{ en $\Delta \downarrow X$}}}{\cat{sSet}(\ss{n},\mathcal{S}(Y))}\\&\simeq  \cat{sSet}(X,\mathcal{S}(Y)).
+\end{align*}
+\end{remark}
+
 \begin{thebibliography}{}
 \bibitem{GJ} P. Goerss y J. Jardine, \textit{Simplicial Homotopy Theory}. Birkhäuser, 2010.
 \bibitem{F} G. Friedman. \textit{An elementary introduction to simplicial sets}, arXiv:0809.4221v5 [at], 2016.
+\bibitem{context} E. Riehl. \textit{Category Theory in Context}. Dover, 2016.
 \end{thebibliography}
 \end{document}
 
