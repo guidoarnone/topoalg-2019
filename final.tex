@@ -1,0 +1,452 @@
+\documentclass[11pt]{report}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+
+\usepackage{mathpazo,euler}
+\linespread{1.05}
+\usepackage{mathrsfs}
+
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{tocbibind}
+
+\usepackage{thmtools,xcolor}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[misc]{ifsym}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+
+\definecolor{color}{RGB}{0, 131, 126}
+\addto\captionsspanish{\renewcommand{\chaptername}{Parte}}
+\renewcommand\qedsymbol{$\tpaint{\small{\FilledSectioningDiamond}}$}
+\declaretheoremstyle[
+  headfont=\color{color}\normalfont\bfseries,
+  notefont=\color{color}\normalfont\bfseries
+]{colored}
+\theoremstyle{colored}
+\newtheorem{definition}{Definición}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem*{theorem*}{Teorema}
+\newtheorem{proposition}{Proposición}[section]
+\newtheorem{corollary}{Corolario}[section]
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{remark}{Observación}[section]
+\newtheorem{example}{Ejemplo}[section]
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\M}[2]{\mathsf{M}_{#1}#2}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nat}[1]{[\![#1]\!]}
+\newcommand{\ord}[1]{\nat{#1}}
+\newcommand{\natzero}[1]{\nat{#1}_0}
+\newcommand{\ol}{\overline}
+\newcommand{\cat}[1]{\mathsf{#1}}
+\renewcommand{\ss}[1]{\Delta^{#1}}
+\newcommand{\bss}[1]{\partial \ss{n}}
+\newcommand{\horn}[2]{\Lambda^{#1}_{#2}}
+\newcommand{\ordcat}{\boldsymbol{\Delta}}
+\newcommand{\catlim}[2]{\underset{#1}{\operatorname{lim}}#2}
+\newcommand{\catcolim}[2]{\underset{#1}{\operatorname{colim}}#2}
+
+\newcommand{\paint}[1]{\color{color}{#1}}
+\newcommand{\tpaint}[1]{\paint{\textbf{#1}}}
+\newcommand{\paintline}{\begin{center}
+$\paint{
+\rule{400pt}{0.5pt}
+}$
+\vspace{10pt}
+\end{center}}
+
+%-----------------------
+
+\title{
+\LARGE{Topología Algebraica}
+\\
+\vspace{3pt}
+\small{Primer Cuatrimestre -- 2019}
+\\
+\vspace{0.5pt}
+\large{Examen Final}
+\\
+\vspace{80pt}
+{\includegraphics[height=5cm]{uba2.jpg}}
+\vspace{80pt}
+}
+\author{Guido Arnone}
+\date{}
+\lhead{Guido Arnone}
+\rhead{Examen Final}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Preliminares}
+
+\section{La categoría de ordinales finitos}
+
+\begin{definition} Se define la \textbf{categoría $\ordcat$ de ordinales finitos} como la categoría que tiene por objetos a los conjuntos ordenados
+\[
+\ord{n} := \{0 < 1 < \cdots < n\}
+\]
+para cada $n \in \N_0$, y cuyas flechas son las funciones $f : \ord{n} \to \ord{m}$ que resultan morfismos de posets. Definimos además, para cada $\ord{n} \in \ordcat$ e $i \in \natzero{n}$, 
+\begin{itemize}
+\item los mapas de \textbf{cocaras},
+\begin{align*}
+d^i : \ord{n-&1} \to \ord{n}\\
+&j \mapsto \begin{cases}
+j &\text{si $j < i$}\\
+j+1 &\text{si $j \geq i$}
+\end{cases}
+\end{align*}
+y
+\item los mapas de \textbf{codegeneraciones},
+\begin{align*}
+s^i : \ord{n+&1} \to \ord{n}\\
+&j \mapsto \begin{cases}
+j &\text{si $j \leq i$}\\
+j-1 &\text{si $j > i$}
+\end{cases}
+\end{align*}
+\end{itemize} 
+\end{definition}
+
+\begin{proposition} Los mapas de cocaras y codegeneraciones satisfacen las siguientes \textit{identidades cosimpliciales},
+\[
+\begin{cases}
+d^jd^i = d^id^{j-1} &\text{si $i < j$}\\
+s^jd^i = d^is^{j-1} &\text{si $i < j$}\\
+s^jd^j = s^jd^{j+1} = 1 &\text{si $i < j$}\\
+s^jd^i = d^{i-1}s^j &\text{si $i > j+1$}\\
+s^js^i = s^is^{j+1} &\text{si $i \leq j$}\\
+\end{cases}
+\]
+\qed \\
+\end{proposition}
+
+\begin{proposition} Toda flecha $\ord{n} \xrightarrow{f} \ord{m}$ en $\ordcat$ se puede escribir como una composición de mapas de cocaras y codegeneraciones. \\ \qed
+\end{proposition}
+
+\begin{remark} En vista de las dos proposiciones anteriores,  usando los mapas de cocaras y codegeneraciones y las identidades cosimpliciales se puede dar «una presentación de $\ordcat$ en términos de generadores y relaciones». A grandes rasgos, esto nos permitirá definir los objetos relacionados a $\ordcat$ únicamente a partir de los mapas de cocaras y codegeneraciones.
+\end{remark}
+
+\section{Conjuntos Simpliciales}
+
+Ahora sí, pasamos a definir los conjuntos simpliciales:
+
+\begin{definition} Un \textbf{conjunto simplcial} es un funtor $X : \ordcat^{op} \to \cat{Set}$. Concretamente, éste consiste de 
+\begin{itemize}
+\item[(i)] una sucesión $X_0,X_1,X_2, \dots$ de conjuntos, y \item[(ii)] para cada $n \in \N_0$ e $i \in \natzero{n}$, funciones 
+$d_i : X_n \to X_{n-1}$ y $s_i : X_n \to X_{n+1}$ llamadas mapas de caras y degeneraciones respectivamente, que satisfacen las siguientes \textit{identidades simpliciales}:
+\[
+\begin{cases}
+d_id_j = d_{j-1}d_i &\text{si $i < j$}\\
+d_is_j = s_{j-1}d_i &\text{si $i < j$}\\
+d_js_j = d_{j+1}s_j = 1 &\text{si $i < j$}\\
+d_is_j = s_jd_{i-1} &\text{si $i > j+1$}\\
+s_is_j = s_{j+1}s_i &\text{si $i \leq j$}\\
+\end{cases}
+\] 
+\end{itemize}
+\end{definition}
+
+\begin{example}[el $n$-símplex estándar] Para cada $n \in \N_0$ tenemos un conjunto simplicial dado por el funtor $\ordcat(-,\ord{n})$. Conrectamente, para cada $j \geq 0$ definimos los conjuntos
+\[
+\ss{n}_m := \ordcat(\ord{m},\ord{n}) = \{f : \ord{m} \to \ord{n} : \text{ $f$ es morfismo de posets } \}
+\]
+y los mapas de caras y degeneraciones están dados por
+\[
+(d^i)^* : f \in \ordcat(\ord{m},\ord{n}) \mapsto fd^i \in \ordcat(\ord{m-1},\ord{n})
+\]
+y
+\[
+(s^i)^* : f \in \ordcat(\ord{m},\ord{n}) \mapsto fs^i \in \ordcat(\ord{m+1},\ord{n}).
+\]
+Llamamos a este conjunto simplicial el \textbf{n-símplex estándar} y lo notamos $\ss{n}$.
+\end{example}
+
+Una vez más interpretando a $\ord{n}$ como el $n$-símplex combinatorio ordenado, su conjunto simplicial asociado consiste de «todas las formas posibles de incluir o colapsar un $m$-símplex estándar en $\nat{n}$».
+
+Extendiendo esta interpretación tenemos el siguiente ejemplo,
+
+\begin{example}[complejos simpliciales ordenados] Sea $K$ un complejo simplicial equipado con una relación de orden total para sus vértices $V = \{v_i\}_{i \in I}$. Notamos a cada $n$-símplex como una $n$-upla $[v_{i_0},\dots, v_{i_n}]$ con $v_k < v_{k+1}$ para cada $k$.
+
+Asociaremos a $K$ un conjunto simplicial, agregando como en el caso de $\ss{n}$ la noción de \textit{símlpices degenerados}. Concretamente, para cada $n \in \N_0$ definimos
+\[
+K_n := \left\{[v_{i_0}, \dots, v_{i_n}] : \text{ $v_{i_k} \leq v_{i_{k+1}}$ para cada $k$, y $\{v_{i_k}\}_{k = 0}^n \in K$ }\right\}.
+\]
+
+En otras palabras, el conjunto $K_n$ consiste de $n$-uplas ordenadas de vértices que forman un símplex de $K$, pero permitiendo repetición. Definimos a su vez los mapas de caras y degeneraciones como
+\[
+d_k[v_{i_0}, \dots, v_{i_n}] := [v_{i_0},\dots,\widehat{v_{i_k}},\dots, v_{i_n}] \quad \text{y} \quad
+s_k[v_{i_0}, \dots, v_{i_n}] := [v_{i_0},\dots,v_{i_k},v_{i_k}, \dots, v_{i_n}].
+\]
+\end{example}
+
+\begin{definition} Dado un $n$-śimplex estándar (como complejo simplicial), su \textbf{borde} es el complejo $\bss{n}$ dado por la unión de sus caras maximalesy su $k$-ésimo \textbf{cuerno} es el subcomplejo $\horn{n}{k}$ de $\bss{n}$ que se obtiene quitando la $k$-ésima cara maximal de $\ss{n}$, para cierto $0 \leq k \leq n$. Decimos que $\horn{n}{k}$ es un cuerno \textit{interno} si $0 < k < n$, y \textit{externo} en caso contrario.
+\end{definition}
+
+Ahora sí, veamos un primer ejemplo topológico:
+
+\begin{example} Sea $X$ un espacio topológico. Para cada $n \in \N_0$ definimos el conjunto
+\[
+\mathcal{S}(X)_n := \cat{Top}(|\ss{n}|,X)
+\]
+de todos los $n$-simplices singulares de $X$, y las aplicaciones 
+\[
+d_i : \mathcal{S}(X)_n \to \mathcal{S}(X)_{n-1}, \quad
+s_i : \mathcal{S}(X)_n \to \mathcal{S}(X)_{n+1}
+\]
+que envían un $n$-símplex singular a la restricción $d_i\sigma$ a su $i$-ésima cara y al $(n+1)$-simplex singular $s_i\sigma$ que corresponde a colapsar $|\ss{n+1}|$ a $|\ss{n}|$ a través de $|s^i|$ y luego componer con $\sigma$.
+
+Estos conforman el conjunto simplicial $\mathcal{S}(X)$ que se conoce como el \textbf{conjunto singular} de $X$.
+\end{example}
+
+\begin{definition} Dado un conjunto simplicial $X$, definimos su \textbf{complejo de Moore} como el complejo de cadenas
+\[
+\cdots \to \Z X_2 \xrightarrow{\partial} \Z X_1 \xrightarrow{\partial} \Z X_0,
+\]
+con $\Z X_n$ el grupo abeliano libre generado por el conjunto $X_n$ y 
+\[
+\partial = \sum_{i=1}^n(-1)^i d_i
+\]
+para cada $n \geq 0$.
+\end{definition}
+
+\begin{remark} La homología singular de un espacio topológico $X$ coincide con la homología del complejo de Moore de su conjunto singular.
+\end{remark}
+
+\begin{example}[nervio de una categoría] Sea $\mathscr{C}$ una categoría localmente pequeña. Definimos el \textbf{nervio} de  $\mathscr{C}$ como el conjunto simplicial dado por los conjuntos
+\begin{align*}
+N(\mathscr{C})_n = \hom(\mathbf{n},\mathscr{C}) &= \{(f_1,\dots, f_k) : f_i \in \operatorname{mor} \mathscr{C}, \ \operatorname{cod} f_i = \operatorname{dom}f_{i+1}\}\\
+& = \{x_0 \xrightarrow{f_1} x_1 \xrightarrow{f_2} \cdots \xrightarrow{f_n} x_n\}
+\end{align*}
+de $n$-uplas de morfismos componibles junto con los mapas 
+\[
+d_i(f_1, \dots, f_n) = (f_1, \dots,f_{i-1}, \ f_i \circ f_{i+1} \ ,\dots,f_n)
+\]
+y
+\[
+s_i(f_1, \dots, f_n) = (f_1, \dots, f_i, 1, f_{i+1},\dots,f_n),
+\]
+para cada $0 \leq i \leq n$. 
+
+En particular, si $\mathscr{C} = BG$ es el grupoide asociado a un grupo $G$, entonces su nervio consiste de $n$-uplas de elementos de $G$ y los mapas de caras y degeneraciones están dados por
+\[
+d_i(g_1, \dots, g_n) = (g_1,\dots, g_{i-1},g_ig_{i+1},\dots,g_n), \quad s_i(g_1, \dots,g_n) = (g_1, \dots,g_i,1,g_{i+1},\dots,g_n).
+\]
+\end{example}
+
+\begin{definition} Dados dos complejos simpliciales $X,Y : \ordcat^{op} \to \cat{Set}$, un \textbf{morfismo de conjuntos simpliciales} de $X$ a $Y$ es una transformación natural $f : X \to Y$. Concretamente, esto consiste en dar una familia de funciones $f_n : X_n \to Y_n$ tales que, para cada $0 \leq i \leq n$, los siguientes diagramas conmutan
+\begin{center}
+\begin{tikzpicture}
+\matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em]
+  {
+     X_n & X_{n-1} & & X_n & X_{n+1}\\
+     Y_n & Y_{n-1} & & Y_n & Y_{n+1}\\};
+  \path[-stealth]
+    (m-1-1) edge node [left] {$f_n$} (m-2-1)
+    (m-1-4) edge node [left] {$f_n$} (m-2-4)
+    (m-1-2) edge node [right] {$f_{n-1}$} (m-2-2)
+    (m-1-5) edge node [right] {$f_{n+1}$} (m-2-5)
+    (m-1-1) edge node [above] {$d_i$} (m-1-2)
+    (m-2-1) edge node [below] {$d_i$} (m-2-2)
+    (m-1-4) edge node [above] {$s_i$} (m-1-5)
+    (m-2-4) edge node [below] {$s_i$} (m-2-5);
+\end{tikzpicture} 
+\end{center}
+
+Es decir, un morfismo de conjuntos simpliciales consiste de una colección de aplicaciones que sea compatible con los mapas de caras y degeneraciones.
+\end{definition}
+
+\begin{remark} Los conjuntos simpliciales junto con los morfismos antes definidos forman una categoría\footnote{Esta es precisamente la categoría de prehaces de $\ordcat^{op}$.}, que notaremos $\cat{sSet}$.
+\end{remark}
+
+\begin{remark} Un morfismo $f : K \to L$ de complejos simlpiciales ordenados induce a su vez un morfismo de conjuntos simpliciales dado por $f_n[v_{i_1}, \dots, v_{i_n}] := [f(v_{i_1}), \dots, f(v_{i_n})]$ para cada $n$-símplex $[v_{i_1}, \dots, v_{i_n}]$ (posiblemente degenerado) de $K$.
+
+De forma similar, una función continua $f : X \to Y$ induce un morfismo $f_* : \mathcal{S}(X) \to \mathcal{S}(Y)$ entre conjuntos singulares vía la postcomposición. De hecho, 
+\end{remark}
+
+\begin{definition} El \textbf{funtor singular} $\mathcal{S} : \cat{Top} \to \cat{sSet}$ asigna a cada espacio su conjunto singular, y a cada función continua $f : X \to Y$ el morfismo simplicial $f_* : \mathcal{S}(X) \to \mathcal{S}(Y)$ dado por $(f_*)_n(\sigma) =  f \circ \sigma$ para cada $\sigma: |\ss{n}| \to X$.
+\end{definition}
+
+\begin{remark} Si $X$ es un conjunto simplicial, el conjunto $X_n$ está determinado por los morfismos de conjuntos simpliciales de $\ss{n}$ a $X$. 
+
+Concretamente, por el lema de Yoneda tenemos una biyección natural
+\[
+\hom_{\cat{sSet}}(\ss{n},X) \simeq X_n
+\]
+
+que a cada elemento $x \in X_n$ le asigna un morfismo de conjuntos simpliciales $\iota_x : \ss{n} \to X$ que satisface $\iota_x(1_{\ord{n}}) = x$. 
+
+Esto se corresponde con la intuición que proveen los ejemplos anteriores, en los que los $n$-símplices de un conjunto simplicial son alguna «manifestación» de el $n$-símplex estándar: como la cara de un $m$-símplex de dimensión mayor, como un $m$-símplex de dimensión menor que represente un colapso del mismo, o como el $n$-símplex singular de un espacio topológico.\\
+\end{remark}
+
+\begin{definition} Sea $X$ un conjunto simplicial. Un $n$-simplex $x \in X_n$ se dice \textbf{degenerado} si existe $y \in X_{n-1}$ tal que $s_i(y) = x$ para algún $i \in \natzero{n}$. En caso contrario, decimos que $x$ es \textbf{no degenerado}.
+\end{definition}
+
+\section{Realización Geométrica}
+
+Durante la materia vimos como a partir de un complejo simplicial $K$ podemos construir un espacio topológico $|K|$, la realización geométrica de $K$. Siguiendo esta idea, queremos extender esta noción al contexto de los conjuntos simpliciales.
+
+\begin{definition}[realización geométrica, primera definición] Sea $X$ un conjunto simplicial. Dotando a cada conjunto $X_n$ de la topología discreta, definimos la \textbf{realización geométrica} de $X$ como el espacio
+\[
+|X| = \left(\coprod_{n \geq 0}X_n \times |\ss{n}|\right)\Big/\sim
+\]
+donde identificamos a los puntos $(x,|d^i|(p)) \sim (d_i(x),p)$ y $(x,|s^i|(p)) \sim (s_i(x),p)$.
+\end{definition}
+
+Esto formaliza la intuición anterior: para cada $x \in X_n$ construimos una copia del $n$-símplex estándar y los pegamos en función de si son caras o colapsos unos de otros.
+
+Además, como veremos en breve esta asignación es funtorial, teniéndose así un análogo a la realización geométrica para complejos simpliciales.
+
+\begin{proposition} La realización geométrica del $n$-símplex estándar $\ss{n} :\ordcat^{op} \to \cat{Set}$ es homeomorfa a la realización geométrica del $n$-símplex estándar como complejo simplicial.
+\end{proposition}
+\begin{proof} Para evitar ambiguedades, en toda la demostración notaremos $|\ss{n}|$ exclusivamente para referirnos a la realización geométrica del $n$-símplex como complejo simplicial. Por otro lado, notaremos $|\ordcat(-,n)|$.
+
+Para cada $k \in \N_0$ tenemos una aplicación
+\[
+(f,x) \in \ordcat(k,n) \times |\Delta^k| \to |f|(x) \in |\Delta^n|,
+\]
+que resulta continua pues cada espacio $\ordcat(k,n)$ es discreto.
+
+Ésta familia de funciones induce un morfismo en el coproducto que pasa al cociente por las identificaciones de la realización geométrica, pues si $g$ es un mapa de cocara o codegeneración, entonces
+\[
+r(g^*(f),x) = |fg|(x) = r(f,|g|(x)).
+\]
+Se tiene entonces una función continua $r : [(f,x)] \in |\ordcat(-,n)| \to |f|(x) \in |\Delta^n|$. 
+
+Por otro lado, podemos considerar la inclusión $i : |\ss{n}| \to |\ordcat(-,n)|$ dada por la composición
+\[
+|\ss{n}| \xrightarrow{\simeq} \{id\} \times |\ss{n}| \hookrightarrow |\ordcat(-,n)|,
+\]
+que satisface $ri = 1$ pues
+\[
+ri(x) = [(id,x)] = |id|(x) = x
+\]
+para todo $x \in |\ss{n}|$. En particular sabemos que $i$ es inyectiva. Por lo tanto, para terminar basta ver que $i$ es sobreyectiva, en cuyo caso es un homeomorfismo con inversa $f$.
+
+Equivalentemente, resta ver que todo elemento $[(f,x)]$ está relacionado con un punto de la forma $(id,y)$ para cierto $y \in |\ss{n}|$. En efecto, sea $(f,x) \in |\ordcat(-,n)|$ con $f : \ord{k} \to \ord{n}$ un morfismo de posets y $x \in |\ss{k}|$. Sabemos entonces que existen mapas de cocara o codegeneración $f_1, \dots, f_n$ tales que $f = f_1 \cdots f_n$. En consecuencia es
+\begin{align*}
+[(f,x)] &= [(f_1 \cdots f_n, x)] = [(f_n^* \circ \cdots \circ f_1^*(id), x)]\\ &= [(id,|f_1 \cdots f_n|(x))] = [(id, |f|(x))],
+\end{align*}
+lo que concluye la demostración.
+\end{proof}
+
+\begin{definition} Sea $X$ un conjunto simplicial. Su \textbf{categoría de símplices} es la categoría coma $\Delta \downarrow X$, donde $\Delta: \ordcat \to \cat{Set}^{\ordcat^{op}}$ es el embedding de Yoneda de $\ordcat$ y $X : \ordcat \to \cat{Set}^{\ordcat^{op}}$ es el funtor que vale constantemente $X$. Concretamente, los objetos de $\Delta \downarrow X$ son \textit{símplices} de $X$, entendidos como morfismos simpliciales $\ss{n} \to X$, y las flechas son morfismos $\theta : \ord{n} \to \ord{m}$ de posets tales que el diagrama
+\begin{center}
+\begin{tikzpicture}
+\matrix (m) [matrix of math nodes,row sep=3em,column sep=4em,minimum width=2em]
+  {
+     \ss{n}& &\\
+     & & X\\
+     \ss{m} & &\\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$\sigma$} (m-2-3)
+    (m-1-1) edge node [left] {$\theta_*$} (m-3-1)
+    (m-3-1) edge node [below] {$\tau$} (m-2-3);
+\end{tikzpicture} 
+\end{center}
+conmuta, donde $\theta_*$ es la postcomposición por $\theta$.
+\end{definition}
+
+\begin{theorem} Si $X$ es un conjunto simplicial, entonces
+\[
+|X| \simeq \catcolim{\substack{\ss{n} \to X \\ \text{ en $\Delta \downarrow X$}}}{|\ss{n}|}.
+\]
+\end{theorem}
+\begin{proof} Observemos que si $Z$ es un espacio topológico arbitrario, una función continua $g : |X| \to Z$ se corresponde unívocamente con una función continua $\tilde{g} : \coprod_{n \geq 0} X_n \times |\ss{n}| \to Z$ que sea compatible con la relación que identifica caras y colapsos.
+
+A su vez, usando la propiedad universal del coproducto y el hecho de que cada espacio $X_n$ tiene la topología discreta, esto equivale a dar funciones
+\[
+\lambda_x : |\ss{n}| \to Z
+\]
+para cada $x \in X_n$ y $n \geq 0$, que satisfagan las condiciones de compatibilidad de antes: esto es, que para cada morfismo de posets\footnote{Si bien la condición original era sobre los mapas de caras y degeneración, que son imagen por $X$ de los mapas de cocaras y codegeneración en $\ordcat$. Al clausurar la relación de equivalencia se tiene una condición equivalente reemplazando éstos por cualquier función $X(\theta)$ con $\theta$ un morfismo en $\ordcat$.} $\theta : \ord{n} \to \ord{m}$ se tenga $\lambda_{X(\theta)(x)} = \lambda_x \circ |\theta| = |\theta_*|(\lambda_x)$.
+
+Recordemos ahora que, por el lema de Yoneda, tenemos que
+\[
+\hom(\ss{n},\ss{m}) \simeq \ordcat(n,m) = \{\theta : \ord{n} \to \ord{m} : \text{ $\theta$ es morfismo de posets}\}
+\]
+y
+\[
+\hom(\ss{n}, X) \simeq X_n
+\]
+para cada $n,m \geq 0$. Por lo tanto, cada elemento $x \in X_n$ se corresponde a un único morfismo simplicial $\sigma_x : \ss{n} \to X$, y toda flecha $\ss{n} \to \ss{m}$ es la poscomposición por cierto morfismo de posets $\theta: \ord{n} \to \ord{m}$.
+
+En éstos terminos, la información anterior se puede describir como un morfismo $\lambda_\sigma : |\ss{n}| \to Z$ para cada símplex $\sigma : \ss{n} \to X$, de forma que para todo morfismo de posets $\theta : \ord{n} \to \ord{m}$ y símplices $\sigma : \ss{n} \to X, \tau : \ss{m} \to X$ tales que $\sigma = \tau \  \theta_*$ se tenga que $\lambda_\sigma = \lambda_\tau |\theta_*|$. 
+
+Es decir, dar un morfismo $g : |X| \to Z$ es equivalente a dar un cocono sobre $Z$ para el funtor $F : \Delta \downarrow X \to \mathsf{Top}$ que envía $(\sigma : \ss{n} \to X) \xrightarrow{\theta_*} (\tau : \ss{m} \to X)$ a $|\ss{n}| \xrightarrow{|\theta_*|} |\ss{m}|$.
+
+Por otro lado, tenemos un cocono sobre $X$ dado por las funciones
+\[
+\iota_\sigma : p \in |\ss{n}| \to [(x,p)] \in |X|,
+\]
+para cada $\sigma : \ss{n} \to X$ que está en correspondencia con $x \in X_n$. Por las observaciones anteriores, sabemos que $(\lambda_\sigma)_{\sigma \in \Delta \downarrow X}$ se factoriza por $(\iota_\sigma)_{\sigma \in \Delta \downarrow X}$ a través de $g$ ya que es
+\[
+\lambda_\sigma(p) = g([(x,p)]) = g(\iota_\sigma(x,p))
+\]
+para todo $\sigma : \ss{n} \to X$ y $p \in |\ss{n}|$. Pero como notamos anteriormente, de existir una función continua $|X| \to Z$ está determinada por lo que vale en la imagen de cada morfismo $\iota_\sigma$. 
+Hemos visto entonces que todo cono sobre $F : \Delta \downarrow X \to \mathsf{Top}$ se factoriza a través de $(\iota_\sigma)_\sigma$ de forma única, y esto es precisamente que
+\[
+|X| \simeq \catcolim{\substack{\ss{n} \to X \\ \text{ en $\Delta \downarrow X$}}}{|\ss{n}|}.
+\]
+\end{proof}
+
+\begin{proposition} Se tiene un funtor
+\[
+| \cdot | : \cat{sSet} \to \cat{Top}
+\]
+que asigna a cada conjunto simplicial $X$ su realización geométrica, y a cada morfismo simplicial $f : X \to Y$ una flecha $|f| : |X| \to |Y|$ inducida por cada función $f_n \times 1 : X_n \times |\ss{n}| \to Y_n \times |\ss{n}|$.
+\end{proposition}
+\begin{proof} En primer lugar, notemos que las aplicaciones $\{f_n \times 1\}_{n \geq 1}$ inducen una función continua
+\begin{center}
+\begin{tikzcd}
+ \coprod_{n \geq 0} X_n \times |\ss{n}| \arrow{r}{\widetilde{f}} &  \coprod_{n \geq 0} Y_n \times |\ss{n}|\\
+ X_n \times |\ss{n}| \arrow[hookrightarrow]{u} \arrow{r}{f_n \times 1} & Y_n \times |\ss{n}| \arrow[hookrightarrow]{u}
+\end{tikzcd}
+\end{center}
+
+entre los coproductos. Como $f$ es un morfismo simplicial, si $\theta : \ord{m} \to \ord{m}$ es un morfismo de posets entonces el diagrama
+\begin{center}
+\begin{tikzcd}
+ X_n \times |\ss{n}| \arrow{r}{X\theta}\arrow{d}[left]{f_n \times 1} &  X_m \times |\ss{n}| \arrow{d}{f_m \times 1}\\
+ Y_n \times |\ss{n}| \arrow{r}{Y \theta} & Y_m \times |\ss{n}| 
+\end{tikzcd}
+\end{center}
+conmuta. Por lo tanto, se tiene que
+\[
+\widetilde{f}(X\theta(x),p) = (f_mX\theta(x),p) = (Y\theta f_n(x),p)
+\]
+y
+\[
+\widetilde{f}(x,|\theta|(p)) = (f_n(x),|\theta|(p)),
+\]
+lo que nos dice que $\widetilde{f}$ manda puntos relacionados en puntos relacionados. En consecuencia, está bien definida la función continua $|f| : |X| \to |Y|$ que envía $[(x,p)]$ a $[(f_n(x),p)]$ si $x \in X_n$, y de esta caracterización se deduce la funtorialidad de $|\cdot|$.
+\end{proof}
+
+\begin{thebibliography}{}
+\bibitem{GJ} P. Goerss y J. Jardine, \textit{Simplicial Homotopy Theory}. Birkhäuser, 2010.
+\bibitem{F} G. Friedman. \textit{An elementary introduction to simplicial sets}, arXiv:0809.4221v5 [at], 2016.
+\end{thebibliography}
+\end{document}
+
+
