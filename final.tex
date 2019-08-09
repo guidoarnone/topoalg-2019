@@ -30,7 +30,7 @@
 
 \definecolor{color}{RGB}{0, 131, 126}
 \addto\captionsspanish{\renewcommand{\chaptername}{Parte}}
-\renewcommand\qedsymbol{$\tpaint{\small{\FilledSectioningDiamond}}$}
+\renewcommand\qedsymbol{$\paint{\blacklozenge}$}
 \declaretheoremstyle[
   headfont=\color{color}\normalfont\bfseries,
   notefont=\color{color}\normalfont\bfseries
@@ -45,6 +45,15 @@
 \newtheorem{remark}{Observación}[section]
 \newtheorem{example}{Ejemplo}[section]
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=color,
+    filecolor=color,
+    linkcolor=color,
+    urlcolor=color,
+}
+
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -58,7 +67,10 @@
 \newcommand{\ord}[1]{\nat{#1}}
 \newcommand{\natzero}[1]{\nat{#1}_0}
 \newcommand{\ol}{\overline}
+\newcommand{\tint}[1]{\stackrel{o}{#1}}
+\newcommand*{\dt}[1]{\accentset{\mbox{\large\bfseries .}}{#1}}
 \newcommand{\cat}[1]{\mathsf{#1}}
+\newcommand{\sk}{\mathsf{sk}}
 \renewcommand{\ss}[1]{\Delta^{#1}}
 \newcommand{\bss}[1]{\partial \ss{n}}
 \newcommand{\horn}[2]{\Lambda^{#1}_{#2}}
@@ -135,7 +147,7 @@ j-1 &\text{si $j > i$}
 \begin{cases}
 d^jd^i = d^id^{j-1} &\text{si $i < j$}\\
 s^jd^i = d^is^{j-1} &\text{si $i < j$}\\
-s^jd^j = s^jd^{j+1} = 1 &\text{si $i < j$}\\
+s^jd^j = s^jd^{j+1} = 1\\
 s^jd^i = d^{i-1}s^j &\text{si $i > j+1$}\\
 s^js^i = s^is^{j+1} &\text{si $i \leq j$}\\
 \end{cases}
@@ -161,12 +173,13 @@ $d_i : X_n \to X_{n-1}$ y $s_i : X_n \to X_{n+1}$ llamadas mapas de caras y dege
 \begin{cases}
 d_id_j = d_{j-1}d_i &\text{si $i < j$}\\
 d_is_j = s_{j-1}d_i &\text{si $i < j$}\\
-d_js_j = d_{j+1}s_j = 1 &\text{si $i < j$}\\
+d_js_j = d_{j+1}s_j = 1\\
 d_is_j = s_jd_{i-1} &\text{si $i > j+1$}\\
 s_is_j = s_{j+1}s_i &\text{si $i \leq j$}\\
 \end{cases}
 \] 
 \end{itemize}
+Notamos $x \in X$ si $x \in X_n$ para algún $n \in \N_0$, y decimos que $x$ es un \textbf{$n$-símplex generalizado}\footnote{Cuando no sea necesario aclararlo, diremos simplemente que $x$ es un símplex de $X$.} de $X$.\\
 \end{definition}
 
 \begin{example}[el $n$-símplex estándar] Para cada $n \in \N_0$ tenemos un conjunto simplicial dado por el funtor $\ordcat(-,\ord{n})$. Conrectamente, para cada $m \geq 0$ definimos los conjuntos
@@ -278,7 +291,7 @@ d_i(g_1, \dots, g_n) = (g_1,\dots, g_{i-1},g_ig_{i+1},\dots,g_n), \quad s_i(g_1,
 Es decir, un morfismo de conjuntos simpliciales consiste de una colección de aplicaciones que sea compatible con los mapas de caras y degeneraciones.
 \end{definition}
 
-\begin{remark} Los conjuntos simpliciales junto con los morfismos antes definidos forman una categoría\footnote{Esta es precisamente la categoría de prehaces de $\ordcat^{op}$.}, que notaremos $\cat{sSet}$.
+\begin{remark} Los conjuntos simpliciales junto con los morfismos antes definidos forman una categoría\footnote{Esta es precisamente la categoría de prehaces de $\ordcat$.}, que notaremos $\cat{sSet}$.
 \end{remark}
 
 \begin{remark} Un morfismo $f : K \to L$ de complejos simlpiciales ordenados induce a su vez un morfismo de conjuntos simpliciales dado por $f_n[v_{i_1}, \dots, v_{i_n}] := [f(v_{i_1}), \dots, f(v_{i_n})]$ para cada $n$-símplex $[v_{i_1}, \dots, v_{i_n}]$ (posiblemente degenerado) de $K$.
@@ -301,14 +314,68 @@ que a cada elemento $x \in X_n$ le asigna un morfismo de conjuntos simpliciales 
 Esto se corresponde con la intuición que proveen los ejemplos anteriores, en los que los $n$-símplices de un conjunto simplicial son alguna «manifestación» de el $n$-símplex estándar: como la cara de un $m$-símplex de dimensión mayor, como un $m$-símplex de dimensión menor que represente un colapso del mismo, o como el $n$-símplex singular de un espacio topológico.\\
 \end{remark}
 
-\begin{definition} Sea $X$ un conjunto simplicial. Un $n$-simplex $x \in X_n$ se dice \textbf{degenerado} si existe $y \in X_{n-1}$ tal que $s_i(y) = x$ para algún $i \in \natzero{n}$. En caso contrario, decimos que $x$ es \textbf{no degenerado}.
+\begin{definition} Sea $X$ un conjunto simplicial. Un $n$-simplex $x \in X_n$ se dice \textbf{degenerado} si existe $y \in X_{n-1}$ tal que $s_i(y) = x$ para algún $i \in \natzero{n}$. En caso contrario, decimos que $x$ es \textbf{no degenerado}. 
+
+Notamos $NX_n := \{x \in X_n : \text{ $x$ es no degenerado}\}$ y $NX_{\leq n} = \bigcup_{0 \leq k \leq n}NX_k$ para cada $n \in \N_0$. Definimos también el conjunto $NX := \bigcup_{n \in \N_0}NX_n$ de todos los símplices no degenerados.
 \end{definition}
+
+\begin{proposition} Sea $X$ un conjunto simplicial. Si $x \in X$ es un símplex degenerado, entonces existe un único símplex no degenerado $y \in X$ tal que $x = s_{i_1} \cdots s_{i_k}y$.
+\end{proposition}
+\begin{proof} Como $x$ es degenerado, sabemos que existe $x_1 \in X$ y un mapa de degeneración $s_{i_1}$ tal que $x = s_{i_1}(x_1)$. 
+
+Procediendo inductivamente\footnote{Notemos que el proceso termina pues cada símplex que tomamos tiene una dimensión menos, y un $0$-símplex nunca es degenerado.}, obtenemos una sucesión de mapas de degeneración $s_{i_1},\dots, s_{i_k}$ y un símplex no degenerado $y \in X$ tal que
+\[
+x = s_{i_1} \cdots s_{i_k}(y).
+\]
+
+Para terminar, veamos la unicidad. Supongamos que existen mapas de degeneraciones $s_{j_1}, \dots, s_{j_l}$ y un símplex $z \in X$ tales que
+\[
+s_{i_1} \cdots s_{i_k}(y) = x = s_{j_1} \cdots s_{j_l}(z).
+\]
+Componiendo a derecha por $d_{i_k} \cdots d_{i_1}$, es
+\[
+y = d_{i_k} \cdots d_{i_1}s_{j_1} \cdots s_{j_l}(z).
+\]
+
+Usando las identidades simpliciales, podemos «reordenar» los mapas de forma que existen $s$ y $d$, composiciones de mapas de caras y degeneraciones respectivamente, que satisfacen
+\[
+y = sd(z).
+\]
+Como $y$ es no degenerado, debe ser $s = 1$ y por lo tanto $y = dz$ es una cara de $z$. Por simetría, vemos también que $z$ es una cara de $y$. En particular, los símplices $z$ e $y$ deben tener la misma dimensión, por lo que debe ser $d = 1$ y $z = y$. 
+\end{proof}
+
+\begin{definition} Sea $k \in \N_0$. Un punto $p \in |\ss{k}|$ del $k$-símplex topólogico se dice \textbf{interior} si no existe un mapa de cocara $d^i : \ss{k-1} \to \ss{k}$ y $q \in |\ss{k-1}|$ tal que $|d^i|(q) = p$.
+\end{definition}
+
+\begin{proposition} Sea $k \in \N_0$ y $p \in |\ss{k}|$. Si $p$ es interior, existen únicos $l \in \N_0$, $q \in |\ss{l}|$ y $d^{i_1}, \dots, d^{i_s}$ mapas de cocara tales que $p = |d^{i_1} \cdots d^{i_s}|(q)$.
+\end{proposition}
+\begin{proof} Como $p$ es interior, existe un mapa de cocara $d^{i_1}$ y $q_1 \in |\Delta^{k-1}|$ tal que $d^{i_1}q_1 = p$. Procedemos inductivamente obtenemos la existencia. 
+
+Ahora, supongamos que $q \in |\ss{k}|,q'\in|\ss{k'}|$ son tales que existen mapas de cocara $d^{i_1}, \dots, d^{i_r},d^{j_1}, \dots, d^{j_s}$ con $|d^{i_1}, \dots, d^{i_s}|(q) = |d^{j_1}, \dots, d^{j_s}|(q')$. Usando las identidades cosimpliciales existen funciones $s, \ d$ que son composiciones de codegeneraciones y cocaras respectivamente, y satisfacen
+\[
+q = |ds|(q').
+\]
+Como $q$ es interior, debe ser $|d| = 1$ y entonces $q'$ se colapsa a $q$. Por simetría tenemos entonces que ambos puntos se colapsan el uno al otro: esto implica $s = 1$ y $q  = q'$.
+\end{proof}
+
+\begin{corollary} Si $p \in |\ss{k+1}|$ es interior, y $s^j$ es un mapa de codegeneración, entonces $s_j(p)$ es interior. 
+\end{corollary}
+\begin{proof} Notemos que para todo $\sum_{i=1}^{n-1}\alpha_ ie_i \in |\ss{n-1}|$ y mapa de cocara $d^i$, es 
+\[
+d^iz= \sum_{j=1}^{i-1}\alpha_j e_j + \sum_{j = i+1}^{n}\alpha_{j-1} e_j.
+\]
+Por lo tanto, un punto interior debe tener todas sus coordenadas no nulas. En consecuencia el punto $p = \sum_{j=1}^{k+1}\alpha_je_j \in |\ss{k+1}|$ debe tener todas sus coordenadas no nulas. Como es
+\[
+s^j(p) = \sum_{j < i}\alpha_j e_j + (\alpha_i+\alpha_{i+1})e_i + \sum_{j > i+1}^k \alpha_{j}e_{j-1}
+\]
+que una vez más tiene todas sus coordenadas no nulas, debe ser entonces un punto interior.
+\end{proof}
 
 \section{Realización Geométrica}
 
 Durante la materia vimos como a partir de un complejo simplicial $K$ podemos construir un espacio topológico $|K|$, la realización geométrica de $K$. Siguiendo esta idea, queremos extender esta noción al contexto de los conjuntos simpliciales.
 
-\begin{definition}[realización geométrica, primera definición] Sea $X$ un conjunto simplicial. Dotando a cada conjunto $X_n$ de la topología discreta, definimos la \textbf{realización geométrica} de $X$ como el espacio
+\begin{definition} Sea $X$ un conjunto simplicial. Dotando a cada conjunto $X_n$ de la topología discreta, definimos la \textbf{realización geométrica} de $X$ como el espacio
 \[
 |X| = \left(\coprod_{n \geq 0}X_n \times |\ss{n}|\right)\Big/\sim
 \]
@@ -317,7 +384,7 @@ donde identificamos a los puntos $(x,|d^i|(p)) \sim (d_i(x),p)$ y $(x,|s^i|(p)) 
 
 Esto formaliza la intuición anterior: para cada $x \in X_n$ construimos una copia del $n$-símplex estándar y los pegamos en función de si son caras o colapsos unos de otros.
 
-Además, como veremos en breve esta asignación es funtorial, teniéndose así un análogo a la realización geométrica para complejos simpliciales.
+Además, como veremos en breve esta asignación es funtorial, teniéndose así un análogo a la realización geométrica para complejos simpliciales. Más aún, estas nociones coindicen cuando $X$ es el conjunto simplicial asociado a un complejo simplicial ordenado.
 
 \begin{proposition} La realización geométrica del $n$-símplex estándar $\ss{n} :\ordcat^{op} \to \cat{Set}$ es homeomorfa a la realización geométrica del $n$-símplex estándar como complejo simplicial.
 \end{proposition}
@@ -351,6 +418,91 @@ Equivalentemente, resta ver que todo elemento $[(f,x)]$ está relacionado con un
 \end{align*}
 lo que concluye la demostración.
 \end{proof}
+
+\begin{proposition} Si $K$ es un complejo simplicial ordenado, entonces sus realizaciones geométricas como conjunto y complexo simplicial coinciden.
+\end{proposition}
+\begin{proof} Notemos $\mathfrak{K}$ a la realización geométrica de $K$ como conjunto simplicial y $|K|$ a la realización geométrica como complejo simplicial. Para cada símplex generalizado $x  = [v_{i_1}\cdots v_{i_k}]$, notamos $\Delta_x := \{v_{i_1}, \dots, v_{i_k}\}$. De la misma forma, notaremos $[\sigma]$ al símplex ordenado que se corresponde con $\sigma \in K$.
+
+Ahora, tenemos una flecha $|\ss{k}| \to |\Delta_x|$ vía el morfismo de posets que envía a cada $s \in \ord{k}$ a $v_{i_s}$, lo que induce una función continua  $f_x : \{x\} \times |\Delta^k| \to |\Delta_x|$ para cada $x\in X$. A través de la inclusión $|\Delta_x| \hookrightarrow |K|$ obtenemos finalmente funciones continuas $ \{x\} \times |\ss{k}| \to |K|$ para cada $x \in X$. Por un cálculo directo, siempre se tiene $f_{d_i(x)}(p)  = f_x(|d^i|(p))$ y $f_{s_i(x)}(p) = f_x(|s^i|(p))$, así que estas inducen una aplicación continua
+\[
+f: \mathfrak{K} \to |K|.
+\]
+
+Por otro lado, tenemos una función $g : |K| \to \mathfrak{K}$ que envía la combinación convexa (ordenada, con escalares no nulos) $\sum_{i=1}^k a_iv_{i_k}$ a la clase del elemento $([v_{i_1}, \dots, v_{i_k}] ,a_1e_1 + \dots + a_ke_k)$.
+
+La continuidad de $g$ se desprende de que el diagrama
+\begin{center}
+\begin{tikzcd}
+\text{$|K|$} \arrow{r}{g} &\mathfrak{K}\\
+\text{$|\sigma|$} \arrow[hook]{u} \arrow{r}{\equiv} & \text{$\{[\sigma]\} \times |\ss{k}|$} \arrow[hook]{u}
+\end{tikzcd}
+\end{center}
+es conmutativo para cada $k$-símplex $\sigma \in K$ y $|K|$ tiene la topología final con respecto a sus símplices. 
+
+Para terminar, veamos que $f$ y $g$ son inversas: por construcción, para cada símplex $\sigma \in K$ se tiene que $f_{[\sigma]}g|_{|\sigma|} = 1$, así que ya sabemos que $fg = 1$. Por otro lado, si $x \in X$ es no degenerado entonces es $[\Delta_x] = x$ y  $g|_{|\Delta_x|}f_x = 1$. Como todo punto de $\mathfrak{K}$ es equivalente a la clase de uno cuyo símplex generalizado es no degenerado, obtenemos finalmente que $gf = 1$.
+\end{proof}
+
+Vemos así que la construcción que dimos efectivamente generaliza a la de realización geométrica para complejos simpliciales: tiene sentido preguntarse entonces, ¿qué sucede cuando $X$ no necesariamente viene inducido por un complejo simplicial? Veremos más adelante que el espacio topológico $|X|$ siempre es un CW-complejo.
+
+\begin{definition} Sea $X$ un conjunto simplicial. Un punto $(x,p) \in \coprod_{n \geq 0} X_n \times |\ss{n}|$ se dice \textbf{no degenerado} si $p$ es interior y $x$ no degenerado.
+\end{definition}
+
+\begin{lemma}\label{uniq-pt-nodeg} Sea $X$ un conjunto simplicial. Si $(x,p) \in \coprod_{n \geq 0} X_n \times |\ss{n}|$, entonces existe un único punto no degerado $(y,q)$ relacionado con $(x,p)$.
+\end{lemma}
+\begin{proof} Para cada símplex $x \in X$, sabemos que existe un único símplex no degenerado $y \in X$ y $s = X(\sigma)$ una composición de mapas de degeneración tales que $s(y) = x$. Del mismo modo, existe un único punto $q$ de un símplex topológico y una composición de mapas de cocaras $\delta$ tales que $p = \delta(q)$. Notando $\lambda(x,p) := (y,\sigma p)$ y $\rho(x,p) := (X(\delta)(x),q)$, tenemos definidas dos aplicaciones
+\[
+\lambda, \rho : \coprod_{n \geq 0} X_n \times |\ss{n}| \to \coprod_{n \geq 0} X_n \times |\ss{n}|
+\] 
+
+Más aún, la imagen de $\lambda$ consiste de puntos cuyo símplice de $X$ es no degenerado, y por otro lado la imagen de lambda consiste de pares cuyo elemento del símplex topológico es interior. Por lo tanto, la composición
+\[
+\Phi := \lambda \circ \rho : \coprod_{n \geq 0} X_n \times |\ss{n}| \to \coprod_{n \geq 0} X_n \times |\ss{n}|
+\]
+envía cada punto a uno relacionado que es no degenerado, lo que prueba la existencia.
+
+Notemos además que $\Phi$ deja fijos a los puntos no degenerados, así que para ver la unicidad resta probar que puntos relacionados tienen la misma imagen por $\Phi$. De hecho, alcanza probar que  $\Phi(X(d)x,p) = \Phi(x,|d|p)$ y $\Phi(X(s)x,|s|p)$ para cada mapa de cocara $d$ y codegeneración $s$. 
+
+Tomemos un punto $(x,p)$ con $p = |\delta|q$ y $q$ interior. Se tiene entonces que
+\[
+\rho(X(d)x,p) = \rho(X(d),|\delta|q) = (X(\delta)X(d)x,q) = (X(d\delta)x,q) = \rho(x,|d\delta|q) = \rho(x,|d|p),
+\]
+para cada mapa $d$ de cocara. En particular debe ser $\Phi(X(d)x,p) = \Phi(x,|d|p)$. 
+
+Si ahora $s$ es un mapa de degeneración, podemos escribir $s\delta = \delta's'$ y $X(\delta')x = X(\sigma)z$ y cierta composición de mapas de cocara $\delta'$ y codegeneración $s',\sigma$, con $z$ no degenerado. Con esta notación es
+\[
+X(\delta)X(s)x = X(s\delta)x = X(\delta's')x = X(s')X(\delta')x = X(s')X(\sigma)z = X(\sigma s')z.
+\]
+lo que finalmente dice que
+\begin{align*}
+\Phi(X(s)x,p) &= \lambda(X(\delta)X(s)x,q) = \lambda(X(\sigma s')z,q) = (z,|\sigma s'|q)\\
+&= \lambda(X(\sigma)z,|s'|q) = \lambda(X(\delta')x,|s'|q) = \lambda\rho(x,|\delta's'|q)\\
+&= \Phi(x,|s\delta|q) = \Phi(x,|s|p).
+\end{align*}
+\end{proof}
+
+\begin{theorem} La realización geométrica de un conjunto símplicial $X$ es un CW-complejo, con una celda por cada símplice $x \in X$ no degenerado.
+\end{theorem}
+
+\begin{proof} Notemos $q : \coprod_{n \geq 0} X_n \times |\ss{n}| \to |X|$ a la proyección al y $\Delta_x := q(\{x\} \times |\ss{n}|)$ para cada $x \in NX$. Tenemos luego funciones continuas
+\[
+f_x : p \in |\ss{n}| \mapsto q(x,p) \in \Delta_x \subset |X|
+\]
+para cada $x \in X$. 
+
+Afirmamos que esto le dá una estructura celular a la realización geométrica, cuyas $n$-celdas son los conjuntos $\Delta_x$ para cada $x \in NX_n$. Así, los $n$-esqueletos resultan
+\[
+\sk_n |X| := \bigcup_{x \in NX_{\leq n}}\Delta_x
+\]
+para cada $n \in \N_0$. Por el Lema \ref{uniq-pt-nodeg}, sabemos que $\bigcup_n \sk_n|X| = |X|$, y que dado $(x,p) \sim (y,q)$ con $x \in X_n, y \in X_m$ e $(y,q)$ no degenerado implica $n \geq m$. De esto ultimo vemos que si $x \in NX_n$, entonces
+\[
+\Delta_x \cap \sk_{n-1}|X| = \{[(x,p)] : p \in \partial|\ss{n}|\}.
+\]
+
+En efecto, si $p \in \partial|\ss{n}|$ debe ser $p = |d^i|(q)$, y por lo tanto $(x,p) \sim (d_i(x),q)$ es equivalente a algún punto no degenerado cuya primera coordenada debe pertenecer a $NX_{\leq n-1}$. Reciprocamente, si $p \not \in \partial|\ss{n}|$ entonces $(x,p)$ es no degenerado, y en consecuencia no está relacionado con ningún elemento del $(n-1)$-esqueleto.
+
+De la caracterización de $\dot{\Delta_x}$ se sigue que $\tint{\Delta_x} = \{ [(x,p)] : p \in \tint{|\ss{n}|}\}$ y por lo tanto cada función $f_x$ es biyectiva, continua, y la restricción $f_x : \partial|\ss{n}| \to \dot{\Delta_x}$ es sobreyectiva. Para concluir que se tiene una estructura celular en $|X|$ debemos ver entonces que $f_x$ es abierta al restringirla al interior de $\Delta_x$.  $\tpaint{[FALTA TERMINAR (Y REVISAR)]}$
+\end{proof}
+
 
 \begin{definition} Sea $X$ un conjunto simplicial. Su \textbf{categoría de símplices} es la categoría coma $\Delta \downarrow X$, donde $\Delta: \ordcat \to \cat{Set}^{\ordcat^{op}}$ es el embedding de Yoneda de $\ordcat$ y $X : \ordcat \to \cat{Set}^{\ordcat^{op}}$ es el funtor que vale constantemente $X$. Concretamente, los objetos de $\Delta \downarrow X$ son \textit{símplices} de $X$, entendidos como morfismos simpliciales $\ss{n} \to X$, y las flechas son morfismos $\theta : \ord{n} \to \ord{m}$ de posets tales que el diagrama
 \begin{center}
@@ -467,7 +619,7 @@ g([(x,p)]) = g_x(p)
 \]
 para todo símplex $x \in X_n$ y $p \in |\ss{n}|$. 
 
-En vista de esto, definimos la aplicación
+En vista de esto, definimos
 \begin{align*}
 e : \cat{Top}(|X|,&Y) \to \cat{sSet}(X,\mathcal{S}(Y))\\
 & g \longmapsto e(g)(x) := g_x
@@ -480,8 +632,8 @@ para todo símplice $x$ y morfismo de posets $\theta$. En particular, esto prueb
 
 Por otro lado, definimos otra aplicación
 \begin{align*}
-\rho : \cat{sSet}(X,\mathcal{S}(&Y)) \to \cat{Top}(|X|,Y)\\
-& f \longmapsto \rho(f)
+r : \cat{sSet}(X,\mathcal{S}(&Y)) \to \cat{Top}(|X|,Y)\\
+& f \longmapsto r(f)
 \end{align*}
 del siguiente modo: dado un morfismo simplicial $f$, para cada $f_n : X_n \to \mathcal{S}(Y)_n$ definimos las funciones
 \[
@@ -496,22 +648,22 @@ Como $f$ es un morfismo simplicial, para cada $\theta \in \ordcat(m,n)$ se tiene
 \[
 \widetilde{f_m}(X\theta(x), p) = (f_mX\theta)(x)(p) = |\theta|^*(f_n(x))(p) = (f_n(x) |\theta|)(p) = \widetilde{f_n}(x,|\theta|(p)).
 \]
-Esto dice que la función $\coprod_{n \geq 0} \widetilde{f_n}$ pasa al cociente por las identificaciones de la realización geométrica, y por lo tanto, induce una aplicación continua $|X| \to Y$ que tomamos como imagen de $f$ por $\rho$. Concretamente, dados $x \in X_n$ y $p \in |\ss{n}|$ es
+Esto dice que la función $\coprod_{n \geq 0} \widetilde{f_n}$ pasa al cociente por las identificaciones de la realización geométrica, y por lo tanto, induce una aplicación continua $|X| \to Y$ que tomamos como imagen de $f$ por $r$. Concretamente, dados $x \in X_n$ y $p \in |\ss{n}|$ es
 \[
-\rho(f)([(x,p)]) = f_n(x)(p).
+r(f)([(x,p)]) = f_n(x)(p).
 \]
 
-Veamos ahoar que $e$ y $\rho$ son aplicaciones inversas. Si tomamos $f : X \to \mathcal{S}(Y)$ simplicial, es
+Veamos ahoar que $e$ y $r$ son aplicaciones inversas. Si tomamos $f : X \to \mathcal{S}(Y)$ simplicial, es
 \[
-e\rho(f)(x)(p) = \rho(f)([(x,p)]) = f_n(x)(p)
+er(f)(x)(p) = r(f)([(x,p)]) = f_n(x)(p)
 \]
-para todo $x \in X_n$ y $p \in |\ss{n}|$. Por lo tanto, se tiene que $e \rho(f) = f$ y, en general, $e \rho = 1$.
+para todo $x \in X_n$ y $p \in |\ss{n}|$. Por lo tanto, se tiene que $e r(f) = f$ y, en general, $e r = 1$.
 
 Recíprocamente, si $g : |X| \to Y$ es una función continua, entonces para cada $(x,p) \in X_n \times |\ss{n}|$ es
 \[
-\rho e(g)([(x,p)]) = e(g)_n(x)(p) = g_x(p) = g([(x,p)]),
+r e(g)([(x,p)]) = e(g)_n(x)(p) = g_x(p) = g([(x,p)]),
 \]
-lo cual prueba que $\rho e  = 1$.
+lo cual prueba que $r e  = 1$.
 
 Para terminar, veamos que el isomorfismo es natural tanto en $X$ como $Y$. Fijemos $g : |X| \to Y$ continua y $(x,p) \in X_n \times |\ss{n}|$. Dado un morfismo simplicial $f : X' \to X$, debemos ver que el diagrama
 \begin{center}
@@ -540,18 +692,20 @@ f_*(e(g))(x)(p) &= f(e(g)(x)(p)) = fg([(x,p)])\\
 \end{align*}
 \end{proof}
 
-\begin{remark} En \cite{GJ} se encuentra una demostración «puramente categórica» del teorema anterior usando que todo prehaz es un colímite de funtores representables, y que las realizaciones geométricas son colímites de símplices (topológicos) estándar.
+Recuerdo ahora el siguiente resultado general sobre funtores adjuntos:
 
-Concretamente, usando la relacion entre funtores $\hom$ y colímites (ver \cite{context}, sección 3.4) es
-\begin{align*}
-\cat{Top}(|X|,Y) &\simeq \catcolim{\substack{\ss{n} \to X \\ \text{ en $\Delta \downarrow X$}}}{\cat{Top}(|\ss{n}|,Y)}\\ &\simeq \catcolim{\substack{\ss{n} \to X \\ \text{ en $\Delta \downarrow X$}}}{\cat{sSet}(\ss{n},\mathcal{S}(Y))}\\&\simeq  \cat{sSet}(X,\mathcal{S}(Y)).
-\end{align*}
-\end{remark}
+\begin{theorem} Sean $F : \mathscr{C} \to \mathscr{D}$ y $G : \mathscr{D} \to \mathscr{C}$ dos funtores. Si $F \dashv G$, entonces $G$ preserva límites y $F$ preserva colíimtes. 
+\end{theorem}
+\begin{proof} Ver \cite{ct-context}, teoremas 4.5.2 y 4.5.3.
+\end{proof}
+
+\begin{corollary} La realización geométrica $| \cdot | : \cat{sSet} \to \cat{Top}$ preserva colímites. En particular, preserva coproductos y pushouts. \qed
+\end{corollary}
 
 \begin{thebibliography}{}
 \bibitem{GJ} P. Goerss y J. Jardine, \textit{Simplicial Homotopy Theory}. Birkhäuser, 2010.
 \bibitem{F} G. Friedman. \textit{An elementary introduction to simplicial sets}, arXiv:0809.4221v5 [at], 2016.
-\bibitem{context} E. Riehl. \textit{Category Theory in Context}. Dover, 2016.
+\bibitem{ct-context} E. Riehl. \textit{Category Theory in Context}. Dover, 2016.
 \end{thebibliography}
 \end{document}
 
