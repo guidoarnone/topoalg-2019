@@ -127,17 +127,11 @@ $\paint{
 
 \section{Preliminares}
 
-\todo{Motivar la necesidad de estas definiciones.}
+Comenzamos definiendo la categoría de ordinales finitos, que será la base de todas las definiciones posteriores. Incluimos también algunos resultados categóricos que utilizaremos más adelante.
 
 \subsection{La categoría de ordinales finitos}
 
-\begin{definition} Se define la \textbf{categoría $\ordcat$ de ordinales finitos} como la categoría que tiene por objetos a los conjuntos ordenados
-\[
-\ord{n} := \{0 < 1 < \cdots < n\}
-\]
-para cada $n \in \N_0$, y cuyas flechas son las funciones $f : \ord{n} \to \ord{m}$ que resultan morfismos de posets. Definimos además, para cada $\ord{n} \in \ordcat$ e $i \in \natzero{n}$, 
-\begin{itemize}
-\item los mapas de \textbf{cocaras},
+\begin{definition} Se define la \textbf{categoría $\ordcat$ de ordinales finitos} como la categoría que tiene por objetos a los conjuntos ordenados $\ord{n} := \{0 < 1 < \cdots < n\}$ para cada $n \in \N_0$, y cuyas flechas son las funciones $f : \ord{n} \to \ord{m}$ que resultan morfismos de posets. Definimos además, para cada $\ord{n} \in \ordcat$ e $i \in \natzero{n}$, los mapas de \textbf{cocaras} 
 \begin{align*}
 d^i : \ord{n-&1} \to \ord{n}\\
 &j \mapsto \begin{cases}
@@ -145,8 +139,7 @@ j &\text{si $j < i$}\\
 j+1 &\text{si $j \geq i$}
 \end{cases}
 \end{align*}
-y
-\item los mapas de \textbf{codegeneraciones},
+y los mapas de \textbf{codegeneraciones}
 \begin{align*}
 s^i : \ord{n+&1} \to \ord{n}\\
 &j \mapsto \begin{cases}
@@ -154,7 +147,6 @@ j &\text{si $j \leq i$}\\
 j-1 &\text{si $j > i$}
 \end{cases}
 \end{align*}
-\end{itemize} 
 \end{definition}
 
 \begin{proposition} Los mapas de cocaras y codegeneraciones satisfacen las siguientes \textit{identidades cosimpliciales},
@@ -176,13 +168,52 @@ s^js^i = s^is^{j+1} &\text{si $i \leq j$}\\
 \begin{remark} En vista de las dos proposiciones anteriores,  usando los mapas de cocaras y codegeneraciones y las identidades cosimpliciales se puede dar «una presentación de $\ordcat$ en términos de generadores y relaciones». A grandes rasgos, esto nos permitirá definir los objetos relacionados a $\ordcat$ únicamente a partir de los mapas de cocaras y codegeneraciones.
 \end{remark}
 
-\subsection{Adjunciones y (co)unidades}
+\begin{remark} Podemos también pensar a $\ordcat$ como la subcategoría plena de los conjuntos simpliciales ordenados dada por $n$-símplices estándar. Como todo morfismo $\ss{k} \to \ss{l}$ es simplicial, esto equivale a dar funciones $\{0,\dots,k\} \to \{0,\dots,l\}$ que preservan el orden.
+\end{remark}
 
-\todo{pasar todo el \textit{abstract nonesense} posible a esta sección}
+\subsection{Límites, Colímites, Adjunciones y (co)unidades}
 
-\begin{proposition}
-\label{lema-adj-cuadrados}\todo{Escribir este lema, es el Lemma 4.1.3 en el libro Riehl}
+\begin{proposition}\label{(co)limites-lugar-a-lugar} Si $\cat{A}$ es una categoría pequeña, el funtor olvido $\cat{C}^\cat{A} \to \cat{C}^\cat{ob A}$ crea estrictamente todos los (co)límites que existen en $\cat{C}$ y estos se definen objeto por objeto, es decir, para cada $c \in \cat{C}$ la evaluación $ev_c : \cat{C}^\cat{A} \to \cat{C}$ preserva todos los (co)límites que existen en $\cat{C}$.
 \end{proposition}
+\begin{proof} Ver \cite{ct-context}, Proposition 3.3.9.
+\end{proof}
+
+\begin{proposition} \label{lema-adj-cuadrados} Sean $F : \mathscr{C}  \rightleftarrows \mathscr{D} : G$ dos funtores equipados con una familia de isomorfismos $\mathscr{D}(Fc,d) \simeq C(c,Gd)$ para cada $c \in \mathscr{C}$ y $d \in \mathscr{D}$. La naturadlidad de esta colección es equivalente a que para todo morfismo con dominio y codominio como se muestra a continuación
+\begin{center}
+\begin{tikzcd}
+Fc \arrow{r}{f^\sharp}\arrow{d}[left]{Fh} &d\arrow{d}{k} \\
+Fc' \arrow{r}[below]{g^\sharp} &d'
+\end{tikzcd}
+\quad$\leftrightsquigarrow$\quad
+\begin{tikzcd}
+c \arrow{r}{f^\flat}\arrow{d}[left]{h} &Gd\arrow{d}{Gk} \\
+c' \arrow{r}[below]{g^\flat} &Gd'
+\end{tikzcd}
+\end{center}
+se tenga que el cuadrado de la izquierda conmuta si y sólo si lo hace el de la derecha.
+\end{proposition}
+\begin{proof} Ver \cite{ct-context}, Lemma 4.1.3.
+\end{proof}
+
+\begin{proposition} Dada una adjunción $F \vdash G$, se tienen dos transformaciones naturales $\eps: GF \Rightarrow 1_{\mathscr{C}}$ y $\eta : FG \Rightarrow 1_{\mathscr{D}}$ llamadas counidad y unidad de la adjunción. Si $c \in \mathscr{C}$, la componente $\eta_c : c \to GFc$ está dada por la transposición de la flecha $1_{Fc} : Fc \to Fc$. Del mismo modo, dado $d \in \mathscr{D}$ se define la componente $\eps_d : FGd \to d$ como la transposición de $1_{Gd} : Gd \to Gd$.
+\end{proposition}
+\begin{proof} Ver \cite{ct-context}, Lemma 4.2.3.
+\end{proof}
+
+\begin{theorem} \label{rapl-lapc} Si se tiene una adjunción de la forma
+\begin{center}
+\begin{tikzcd}
+    \cat{\mathscr{C}} \arrow[bend left=35]{rr}{F}
+  & \rotatebox{90}{$\vdash$}
+  & \cat{\mathscr{D}} \arrow[bend left=35]{ll}{G}
+\end{tikzcd}
+\end{center}
+entonces $G$ preserva límites y $F$ preserva colímites.
+\end{theorem}
+\begin{proof} Ver \cite{ct-context}, Theorem 4.5.2 y Theorem 4.5.3.
+\end{proof}
+
+
 \section{Conjuntos Simpliciales}
 
 Ahora sí, pasamos a definir los conjuntos simpliciales:
@@ -201,7 +232,7 @@ s_is_j = s_{j+1}s_i &\text{si $i \leq j$}\\
 \end{cases}
 \] 
 \end{itemize}
-Notamos $x \in X$ si $x \in X_n$ para algún $n \in \N_0$, y decimos que $x$ es un \textbf{$n$-símplex generalizado}\footnote{Cuando no sea necesario aclararlo, diremos simplemente que $x$ es un símplex de $X$.} de $X$.\\
+En ocasiones utilizaremos la palabra \guill{complejo} para referirnos a un conjunto simplicial, cuando no haya ambiguedad. Notamos $x \in X$ si $x \in X_n$ para algún $n \in \N_0$, y decimos que $x$ es un \textbf{$n$-símplex generalizado}\footnote{Cuando no sea necesario aclararlo, diremos simplemente que $x$ es un símplex de $X$.} de $X$.\\
 \end{definition}
 
 \begin{definition} Dados dos complejos simpliciales $X,Y : \ordcat^{op} \to \cat{Set}$, un \textbf{morfismo de conjuntos simpliciales} de $X$ a $Y$ es una transformación natural $f : X \to Y$. Concretamente, esto consiste en dar una familia de funciones $f_n : X_n \to Y_n$ tales que, para cada $0 \leq i \leq n$, los siguientes diagramas conmutan
@@ -341,9 +372,7 @@ que a cada elemento $x \in X_n$ le asigna un morfismo de conjuntos simpliciales 
 Esto se corresponde con la intuición que proveen los ejemplos anteriores, en los que los $n$-símplices de un conjunto simplicial son alguna «manifestación» de el $n$-símplex estándar: como la cara de un $m$-símplex de dimensión mayor, como un $m$-símplex de dimensión menor que represente un colapso del mismo, o como el $n$-símplex singular de un espacio topológico.\\
 \end{remark}
 
-\todo{Agregar un ejemplo más de conjunto simplicial que no sea un complejo simplicial y represente algo geométrico, mirar algo de $\Delta$-sets en \cite{F}}
-
-\subsection{Símplices degenerados, puntos interiores y esqueletos}
+\subsection{Símplices Degenerados, Puntos Interiores y Esqueletos}
 
 \begin{definition} Sea $X$ un conjunto simplicial. Un $n$-simplex $x \in X_n$ se dice \textbf{degenerado} si existe $y \in X_{n-1}$ tal que $s_i(y) = x$ para algún $i \in \natzero{n}$. En caso contrario, decimos que $x$ es \textbf{no degenerado}. 
 
@@ -402,14 +431,35 @@ s^j(p) = \sum_{j < i}\alpha_j e_j + (\alpha_i+\alpha_{i+1})e_i + \sum_{j > i+1}^
 que una vez más tiene todas sus coordenadas no nulas, debe ser entonces un punto interior.
 \end{proof}
 
-\begin{definition} \todo{definir esqueleto}
+\begin{definition} Sea $X$ un conjunto simplicial. Un \textbf{subconjunto simplicial} o subcomplejo de $X$ es un conjunto simplicial $K$ junto con un morfismo simplicial $K \hookrightarrow X$ que en cada nivel es una inclusión de conjuntos $K_n \hookrightarrow X_n$.
+\end{definition}
+
+\begin{definition} Sea $X$ un conjunto simplicial y $n \in \N_0$. Definimos el $n$-esqueleto $\sk_n X$ de $X$ como el menor subcomplejo de $X$ que tiene a los $j$-símplices de $X$ para cada $j \in \natzero{n}$. Es decir, es el complejo
+\[
+(\sk_nX)_j = \begin{cases}
+X_j &\text{si $j \leq n$}\\
+\{x \in X_j : x = s_{i_1} \cdots s_{i_{j-n}}y \text{ con } y \in X_n\} &\text{si $j > n$}
+\end{cases}
+\]
+junto con las restricciones de los mapas de caras y degeneraciones de $X$. Notemos que si $k < l$ por construcción es $(\sk_k X)_j \subset (\sk_l X)_j$ para todo $j \geq 0$, por lo que tenemos las siguientes \guill{inclusiones} de subcomplejos,
+\[
+\sk_0X \subset \sk_1X \subset \sk_2X \subset \cdots \subset \sk_nX \subset \cdots
+\]
+\todo{Probar que $X \simeq \operatorname{colim} \sk_nX$}
 \end{definition}
 
 \subsection{Productos, Coproductos, Pushouts}
 
-\todo{definir y caracterizar los (co)productos y pushouts en $\cat{sSet}$, los uso después}
+\begin{definition} Sean $X$ e $Y$ dos conjuntos simpliciales. Se define su \textbf{producto} como el conjunto simplicial dado por los conjutos $X_n \times Y_n$ y cuyos mapas de caras y degeneraciones son las funciones producto $d_i = d_i^X \times d_i^Y, s_i = s_i^X \times s_i^Y$ de los mapas de caras y degeneraciones de cada conjunto simplicial. Lo notamos $X \times Y$, pues es el objeto producto en $\cat{sSet}$.
+\end{definition}
 
-\begin{proposition}\label{sk-pushout} Si $X$ es un conjunto simplicial y $n \in \N$, entonces el diagrama
+\begin{definition} Sean $X$ e $Y$ dos conjuntos simpliciales. Se define su \textbf{coproducto} como el conjunto simplicial dado por los conjuntos $X_n \sqcup Y_n$ y mapas de caras y degeneraciones dados por la unión disjunta $d_i = d_i^X \sqcup d_i^Y, s_i = s_i^X \sqcup s_i^Y$ de los mapas de cada espacio. Lo notamos $X \sqcup Y$ ya que es el objeto coproducto en $\cat{sSet}$.
+\end{definition}
+
+\begin{remark} Por la Proposición \ref{(co)limites-lugar-a-lugar} y usando que $\cat{Set}$ es cocompleta\footnote{Una categoría $\cat{C}$ es (co)completa si existe el (co)límite de todo diagrama $\cat{J} \to \cat{C}$.}, los pushouts en $\cat{sSet}$ se pueden construir \guill{nivel a nivel}, es decir, a partir del pushout de los conjuntos en el lugar $n$ de cada complejo.
+\end{remark}
+
+\begin{proposition}\label{sk-pushout} Si $X$ es un conjunto simplicial y $n \in \N$, entonces el siguiente diagrama es un pushout
 \begin{center}
 \begin{tikzcd}
 \coprod_{n \in NX_n} \partial \ss{n} \arrow{d}\arrow{r}& \sk_{n-1}X\arrow{d}\\
@@ -418,10 +468,42 @@ que una vez más tiene todas sus coordenadas no nulas, debe ser entonces un punt
 \end{center}
 es un puhsout.
 \end{proposition}
-\begin{proof}[caption]
-content...
+\begin{proof}asd
+\todo{¡HACER!}
 \end{proof}
 
+\subsection{Complejos de Funciones y Ley Exponencial}
+
+Para definir las nociones siguientes, necesitamos primero definir complejos de funciones y probar una versión simplicial de la ley exponencial.
+
+\begin{definition} Sean $X$ e $Y$ conjuntos simpliciales. Definimos el \textbf{complejo de funciones} $\homcomplex(X,Y)$ dado por
+\[
+\homcomplex(X,Y)_n := \hom_{\cat{sSet}}(X \times \ss{n},Y)
+\]
+para cada $n \in \N_0$ y 
+\begin{align*}
+\theta^* : \homcomplex(X,&Y)_m \to \homcomplex(X,Y)_n \\
+&f \longmapsto f \circ (1_X \times \theta)
+\end{align*}
+para cada $\ord{n} \xrightarrow{\theta} \ord{m}$.
+\end{definition}
+
+\begin{definition} Dados $X$ e $Y$ conjuntos simpliciales, se define la \textbf{función evaluación}
+\[
+ev : X \times \homcomplex(X,Y) \to Y.
+\]
+dada por $ev_n(x,f) = f(x,1_n)$. Esta resulta un morfismo simplicial que natural en ambas variables.
+\end{definition}
+
+\begin{theorem}[Ley Exponencial] Si $K,X$ e $Y$ son conjuntos simpliciales, la aplicación
+\begin{align*}
+ev_* : \hom_{\cat{sSet}}(K,\homcomplex(X,Y&)) \to \hom_{\cat{sSet}}(X \times K,Y)\\
+&g \longmapsto ev \circ (1_X \times g)
+\end{align*}
+está bien definida y es biyectiva. Más aún, esta resulta natural en las tres variables.
+\end{theorem}
+\begin{proof} Damos solo la aplicación inversa, los demás detalles se pueden ver en \cite{GJ}, Chapter 1, Section 5 y en \cite{M}, Chapter 1, \S 6. Recordemos que un elemento $x \in X_n$ se corresponde con una flecha $\iota_x : \ss{n} \to X$. La inversa de $ev_*$ envía entonces $f : X \times K \to Y$ a $x \mapsto f \circ (1_X \times \iota_x)$.
+\end{proof}
 
 \section{Realización Geométrica}
 
@@ -533,31 +615,6 @@ lo que finalmente dice que
 &= \Phi(x,|s\delta|q) = \Phi(x,|s|p).
 \end{align*}
 \end{proof}
-
-\begin{tcolorbox}[colupper=black,colback=red!20,colframe=white]
-\todo[inline]{Decidir si esta demo se queda}
-\begin{theorem} La realización geométrica de un conjunto símplicial $X$ es un CW-complejo, con una celda por cada símplice $x \in X$ no degenerado.
-\end{theorem}
-\begin{proof} Notemos $q : \coprod_{n \geq 0} X_n \times |\ss{n}| \to |X|$ a la proyección al y $\Delta_x := q(\{x\} \times |\ss{n}|)$ para cada $x \in NX$. Tenemos luego funciones continuas
-\[
-f_x : p \in |\ss{n}| \mapsto q(x,p) \in \Delta_x \subset |X|
-\]
-para cada $x \in X$. 
-
-Afirmamos que esto le dá una estructura celular a la realización geométrica, cuyas $n$-celdas son los conjuntos $\Delta_x$ para cada $x \in NX_n$. Así, los $n$-esqueletos resultan
-\[
-\sk_n |X| := \bigcup_{x \in NX_{\leq n}}\Delta_x
-\]
-para cada $n \in \N_0$. Por el Lema \ref{uniq-pt-nodeg}, sabemos que $\bigcup_n \sk_n|X| = |X|$, y que dado $(x,p) \sim (y,q)$ con $x \in X_n, y \in X_m$ e $(y,q)$ no degenerado implica $n \geq m$. De esto ultimo vemos que si $x \in NX_n$, entonces
-\[
-\Delta_x \cap \sk_{n-1}|X| = \{[(x,p)] : p \in \partial|\ss{n}|\}.
-\]
-
-En efecto, si $p \in \partial|\ss{n}|$ debe ser $p = |d^i|(q)$, y por lo tanto $(x,p) \sim (d_i(x),q)$ es equivalente a algún punto no degenerado cuya primera coordenada debe pertenecer a $NX_{\leq n-1}$. Reciprocamente, si $p \not \in \partial|\ss{n}|$ entonces $(x,p)$ es no degenerado, y en consecuencia no está relacionado con ningún elemento del $(n-1)$-esqueleto.
-
-De la caracterización de $\dot{\Delta_x}$ se sigue que $\tint{\Delta_x} = \{ [(x,p)] : p \in \tint{|\ss{n}|}\}$ y por lo tanto cada función $f_x$ es biyectiva, continua, y la restricción $f_x : \partial|\ss{n}| \to \dot{\Delta_x}$ es sobreyectiva. Para concluir que se tiene una estructura celular en $|X|$ debemos ver entonces que $f_x$ es abierta al restringirla al interior de $\Delta_x$.  \todo[inline]{FALTA TERMINAR (Y REVISAR)}
-\end{proof}
-\end{tcolorbox}
 
 \subsection{Funtorialidad y adjunción entre la realización geométrica y el funtor singular}
 
@@ -747,17 +804,12 @@ f_*(e(g))(x)(p) &= f(e(g)(x)(p)) = fg([(x,p)])\\
 \end{align*}
 \end{proof}
 
-\subsection{Estructura de CW-complejo y CW aproximación}
+\subsection{La estructura de CW-complejo y CW aproximación}
 
-Recuerdo ahora el siguiente resultado general sobre funtores adjuntos:
-
-\begin{theorem} \label{rapl-lapc}Sean $F : \mathscr{C} \to \mathscr{D}$ y $G : \mathscr{D} \to \mathscr{C}$ dos funtores. Si $F \dashv G$, entonces $G$ preserva límites y $F$ preserva colíimtes. 
-\end{theorem}
-\begin{proof} Ver \cite{ct-context}, teoremas 4.5.2 y 4.5.3.
-\end{proof}
-
-\begin{corollary} La realización geométrica $| \cdot | : \cat{sSet} \to \cat{Top}$ preserva colímites. En particular, preserva coproductos y pushouts. \qed
+\begin{corollary} La realización geométrica $| \cdot | : \cat{sSet} \to \cat{Top}$ preserva colímites. En particular, preserva coproductos y pushouts.
 \end{corollary}
+\begin{proof} Ver el Teorema \ref{rapl-lapc}.
+\end{proof}
 
 \begin{theorem} La realización geométrica de un conjunto símplicial $X$ es un CW-complejo, con una celda por cada símplice $x \in X$ no degenerado.
 \end{theorem}
@@ -779,9 +831,8 @@ es un pushout para cada $n \in \N$. Como cada inclusión $\partial \ss{n} \hookr
 \[
 |X| = \bigcup_{n \geq 0} |\sk_n| \quad \text{con } \quad |\sk_0 X| \subset |\sk_1 X| \subset  \cdots
 \] 
-por lo que efectivamente $|X|$ resulta un CW-complejo.
+y como $X \simeq \operatorname{colim} \sk_nX$, la realización geométrica $|X|\equiv \operatorname{colim} |sk_n X|$ tiene la topología final con respecto a las realizaciones de los $n$-esqueletos. Esto termina de probar que $|X|$ efectivamente resulta un CW-complejo.
 \end{proof}
-
 
 \begin{remark} Dado un espacio topológico $X$ podemos considerar entonces la counidad de la adjunción, 
 \[
@@ -799,7 +850,7 @@ X \arrow{r}{f} & Y
 \end{center}
 conmuta, y tanto $\eta_X$ como $\eta_Y$ son equivalencias débiles.
 \end{theorem}
-\begin{proof} La conmutatividad del diagrama se deduce de que la counidad de una adjunción es siempre una transformación natural. Omitimos la demostración de que las componentes de $\eta$ son equivalencias débiles. En \cite{M} se encuentra una demostración que usa la teoría de complejos de Kan, complejos minimales y sucesiones espectrales. En \cite{GJ} se tiene otra demostración a través de la teoría de extensiones anodinas. 
+\begin{proof} La conmutatividad del diagrama se deduce de que la counidad de una adjunción es siempre una transformación natural. Omitimos la demostración de que las componentes de $\eta$ son equivalencias débiles. En \cite{M} se encuentra una demostración que usa sucesiones espectrales. En \cite{GJ} se tiene otra demostración a través de la teoría de extensiones anodinas. 
 \end{proof}
 
 \begin{remark} La categoría de conjuntos simpliciales es una \textbf{categoría de modelos}. Informalmente, tenemos ciertas flechas distinguidas llamadas \guill{fibraciones}, \guill{cofibraciones} y \guill{equivalencias débiles}, que satisfacen ciertos de compatibilidad semejantes a los que satisfacen (ciertas subfamilias de) las fibraciones, cofibraciones y equivalencias débiles entre espacios topológicos. Esto pretende capturar las nociones esenciales para tener una versión de la teoría de homotopía de espacios en el contexto de la categoría $\cat{C}$. Como es de esperar, también se tiene que $\cat{Top}$ es una categoría de modelos.
@@ -816,9 +867,9 @@ entre las categorías de homotopía, que más aún induce una equivalencia de ca
 
 \end{remark}
 
-\chapter{Nociones básicas de Teoría de Homotopía Simplicial}
+\chapter{Nociones básicas de teoría de Homotopía Simplicial}
 
-Presentamos en esta sección algunas nociones básicas de la teoría de homotopía de conjuntos simpliciales. En $\cat{sSet}$, las cofibraciones son los monomorfismos y las equivalencias débiles son los morfismos que inducen una equivalencia débil\footnote{Por el teorema de Whitehead, esto es equivalente a decir una equivalencia débil es la que induce una equivalencia homotópica entre realizaciones geométricas.} de sus realizaciones geométricas. Como punto de partida, comenzamos con la definición de fibración para conjuntos simpliciales.
+Presentamos en esta sección algunas nociones básicas de la teoría de homotopía de conjuntos simpliciales. En $\cat{sSet}$, las cofibraciones son los monomorfismos y las equivalencias débiles son los morfismos que inducen una equivalencia débil\footnote{Por el teorema de Whitehead, esto es equivalente a decir que una equivalencia débil es la que induce una equivalencia homotópica entre realizaciones geométricas.} de sus realizaciones geométricas. Como punto de partida, comenzamos con la definición de fibración para conjuntos simpliciales.
 
 \section{Fibraciones y Complejos de Kan}
 
@@ -837,14 +888,14 @@ existe una flecha $|\ss{n}| \to X$ que hace conmutar el diagrama. Se puede ver q
 
 En analogía con lo anterior, se define la noción de \guill{fibración} en el contexto de la teoría de homotopía simplicial,
 
-\begin{definition} Un morfismo simplicial $f : X \to Y$ se dice una \textbf{fibración de Kan} si para cada diagrama conmutativo de la forma
+\begin{definition} Un morfismo simplicial $f : X \to Y$ se dice una \textbf{fibración de Kan} (o simplemente una fibración) si para cada diagrama conmutativo de la forma
 \begin{center}
 \begin{tikzcd}
 \horn{n}{k} \arrow{r}\arrow[hook]{d} &X\arrow{d}{f} \\
 \ss{n} \arrow{r}\arrow[dashed]{ru}{\exists} &Y
 \end{tikzcd}
 \end{center}
-existe una flecha $\ss{n} \to X$ que hace conmutar el diagrama. En ocasiones diremos que $f$ es una fibración para referirnos a que es una fibración de Kan\todo{escribir esto mejor}.
+existe una flecha $\ss{n} \to X$ que hace conmutar el diagrama.
 \end{definition}
 
 \begin{proposition}\label{equiv-fib-kan} Sea $f : X \to Y$ un morfismo simplicial. Son equivalentes:
@@ -853,11 +904,10 @@ existe una flecha $\ss{n} \to X$ que hace conmutar el diagrama. En ocasiones dir
 \item[(ii)] Si tenemos una $n$-upla de $(n-1)$-símplices $(x_0,\dots,\widehat{x}_k,\dots, x_n)$ de $X$ tal que $d_ix_j = d_{j-1}x_i$ si $i < j, \ i,j \neq k$, y existe $y \in Y$ tal que $d_iy = f(x_i)$, entonces existe $x \in X$ tal que $d_ix = x_i$, $i \neq k$, y $f(x) = y$.
 \end{itemize}
 \end{proposition}
-\begin{proof}
-\todo{Probar!}
+\begin{proof} Un morfismo $\horn{n}{k} \hookrightarrow X$ equivale a tener una tupla de símplices que satisfacen la primera condición de $\tpaint{(ii)}$. Que exista $y \in Y$ tal que $d_iy = f(x_i)$ equivale precisamente a que conmute el cuadrado exterior del diagrama que define a la noción de fibración de Kan. Por último, notar que la existencia de una flecha diagonal que haga conmutar el diagrama es justamente que el $n$-simplex $y \in Y$ en realidad sea imagen de un $n$-símplex $x \in X$ que \guill{complete} el cuerno dado por los símplices $\{x_1, \dots, \widehat{x}_k,\dots, x_n\}$.
 \end{proof}
 
-\begin{definition} Un conjunto simplicial $X$ se dice un \textbf{complejo de Kan} si el morfismo simplicial $X \xrightarrow{!\exists} \ast$ es una fibración de Kan, donde notamos $\ast = \ss{0}$ al $0$-símplex estándar. Equivalentemente, el conjunto simlpicial $X$ es un complejo de Kan sí y sólo si para cada morfismo simplicial $\alpha : \horn{n}{k} \to X$ tenemos una extensión $\overline{\alpha} : \ss{n} \to X$ al $n$-símplex,
+\begin{definition} Un conjunto simplicial $X$ se dice un \textbf{complejo de Kan} (o fibrante) si el morfismo simplicial $X \xrightarrow{!\exists} \ast$ es una fibración de Kan, donde notamos $\ast = \ss{0}$ al $0$-símplex estándar. Equivalentemente, el conjunto simlpicial $X$ es un complejo de Kan sí y sólo si para cada morfismo simplicial $\alpha : \horn{n}{k} \to X$ tenemos una extensión $\overline{\alpha} : \ss{n} \to X$ al $n$-símplex,
 \begin{center}
 \begin{tikzcd}
 \horn{n}{k} \arrow{r}{\alpha}\arrow[hook]{d} &X \\
@@ -892,14 +942,29 @@ existe una flecha $\ss{n} \to X$ que hace conmutar el diagrama. En ocasiones dir
 
 De tener una flecha $\ss{n} \to \mathcal{S}(X)$ que hace conmutar el diagrama de la derecha, la flecha $|\ss{n}| \to X$ que corresponde a esta hace conmutar el diagrama de la izquierda. Lo mismo sucede en la otra dirección.
 \end{proof}
-\todo{Una obs sobre la "necesidad" de trabajar con complejos de Kan}
+
+\begin{proposition} \label{homcomplex-kan} Sean $X$ e $Y$ dos conjuntos simpliciales. Si $Y$ es un complejo de Kan, entonces $\homcomplex(X,Y)$ es un complejo de Kan. Más aún, si $K$ es un subcomplejo de $X$, la restricción $\homcomplex(X,Y) \to \homcomplex(K,Y)$ es una fibración de Kan.
+\end{proposition}
+\begin{proof} Ver \cite{GJ}, Chapter 1, Corollary 5.3 y Corollary 6.2.
+\end{proof}
+
 \subsection{Ejemplos}
 
-Entendiendo a los símplices singulares como una \guill{buena aproximación} de los espacios topológicos, un complejo de Kan vendría a generalizar la idea de \guill{modelo combinatorio} de un espacio.
+Entendiendo a los símplices singulares como una \guill{buena aproximación} de los espacios topológicos, un complejo de Kan vendría a generalizar la idea de \guill{modelo combinatorio} de un espacio. 
+
+Desde otro punto de vista, uno de los axiomas de una categoría de modelos pide en particular que toda flecha $f : c \to d$ se factorice como
+\[
+c \xrightarrow{i} x \xrightarrow{j} d
+\]
+con $c \xrightarrow{i} x$ una equivalencia débil y $x \xrightarrow{j} d$ una fibración. Dado $c$ un objeto cualesquiera, sabemos que debe existir una flecha $c \to 1$, obteniéndose para este caso una factorización de la forma
+\[
+c \xrightarrow{i} x \xrightarrow{\exists!} 1
+\]
+con $c \xrightarrow{i} x$ una equivalencia débil. Al pasar a la categoría de homotopía, esto nos dice que \guill{podemos concentrarnos en los objetos que satisfacen que $x \to 1$ es una fibración}. Tales objetos se dicen fibrantes, y en $\cat{sSet}$ estos son precisamente los complejos de Kan.
 
 \begin{proposition} Si $X$ es un espacio topológico, entonces $\mathcal{S}(X)$ es un complejo de Kan. 
 \end{proposition}
-\begin{proof} Para ver que $\mathcal{S}(X) \to \ast$ es una fibración de Kan basta ver que $X \to \ast$ es una fibración de Serre. A su vez, esto equivale a mostrar que toda función continua $|\horn{n}{k}| \to X$ se extiende a una función $|\ss{n}| \to X$ del $n$-símplex, y esto se sigue de que $|\horn{n}{k}|$ es un retracto de $|\ss{n}|$.
+\begin{proof} Para ver que $\mathcal{S}(X) \to \ast$ es una fibración de Kan basta ver que $X \to \ast$ es una fibración de Serre. A su vez, esto equivale a mostrar que toda función continua $|\horn{n}{k}| \to X$ se extiende a una función $|\ss{n}| \to X$ del $n$-símplex, lo que sucede pues $|\horn{n}{k}|$ es un retracto de $|\ss{n}|$.
 \end{proof}
 
 \begin{proposition}[Moore] Sea $Y$ un grupo simplicial, es decir, un funtor $X : \ordcat^{op} \to \cat{Grp}$. Si consideramos a $Y$ visto como conjunto simplicial (es decir, tomamos $UY$ con $U : \cat{Grp} \to \cat{Set}$ el funtor olvido), entonces este es un complejo de Kan.
@@ -909,53 +974,14 @@ Entendiendo a los símplices singulares como una \guill{buena aproximación} de 
 
 \begin{proposition} Si $G$ es un grupoide, su espacio clasificante $BG$ es un complejo de Kan.
 \end{proposition}
-\begin{proof} Ver \cite{GJ}, Lemma 3.5. \todo{Revisar si esto se puede contar.}
-\end{proof}
-
-\begin{remark} Un \textbf{no}-ejemplo de complejo de Kan corresponde a los símplices estándar vistos como conjuntos simpliciales. \todo{desarrollar}
-\end{remark}
-
-\section{Complejos de Funciones y Ley Exponencial}
-
-Para definir las nociones siguientes, necesitamos primero definir complejos de funciones y probar una versión simplicial de la ley exponencial.
-
-\begin{definition} Sean $X$ e $Y$ conjuntos simpliciales. Definimos el \textbf{complejo de funciones} $\homcomplex(X,Y)$ dado por
-\[
-\homcomplex(X,Y)_n := \hom_{\cat{sSet}}(X \times \ss{n},Y)
-\]
-para cada $n \in \N_0$ y 
-\begin{align*}
-\theta^* : \homcomplex(X,&Y)_m \to \homcomplex(X,Y)_n \\
-&f \longmapsto f \circ (1_X \times \theta)
-\end{align*}
-para cada $\ord{n} \xrightarrow{\theta} \ord{m}$.
-\end{definition}
-
-\begin{definition} Dados $X$ e $Y$ conjuntos simpliciales, se define la \textbf{función evaluación}
-\[
-ev : X \times \homcomplex(X,Y) \to Y.
-\]
-dada por $ev_n(x,f) = f(x,1_n)$. Esta resulta un morfismo simplicial que natural en ambas variables.
-\end{definition}
-
-\begin{theorem}[Ley Exponencial] Si $K,X$ e $Y$ son conjuntos simpliciales, la aplicación
-\begin{align*}
-ev_* : \hom_{\cat{sSet}}(K,\homcomplex(X,Y&)) \to \hom_{\cat{sSet}}(X \times K,Y)\\
-&g \longmapsto ev \circ (1_X \times g)
-\end{align*}
-está bien definida y es biyectiva. Más aún, esta resulta natural en las tres variables.
-\end{theorem}
-\begin{proof} Damos solo la aplicación inversa, los demás detalles se pueden ver en \cite{GJ}, Chapter 1, Section 5 y en \cite{M}, Chapter 1, \S 6. Recordemos que un elemento $x \in X_n$ se corresponde con una flecha $\iota_x : \ss{n} \to X$. La inversa de $ev_*$ envía entonces $f : X \times K \to Y$ a $x \mapsto f \circ (1_X \times \iota_x)$.
-\end{proof}
-
-\begin{proposition} \label{homcomplex-kan} Sean $X$ e $Y$ dos conjuntos simpliciales. Si $Y$ es un complejo de Kan, entonces $\homcomplex(X,Y)$ es un complejo de Kan.
-\end{proposition}
-\begin{proof}\todo{chequear si esto es cierto y probarlo}
+\begin{proof} Ver \cite{GJ}, Lemma 3.5.
 \end{proof}
 
 \section{Homotopías y Grupos de Homotopía Simpliciales}
 
 Pasamos ahora a definir la noción de homotopías y grupos de homotopía para complejos simpliciales,
+
+\subsection{Homotopías y Componentes Conexas}
 
 \begin{definition} Una \textbf{homotopía} entre dos morfismos simpliciales $f,g : X \to Y$ es un morfismo simplicial $H : X \times \ss{1} \to Y$ tal que el siguiente diagrama conmuta,
 \begin{center}
@@ -965,11 +991,18 @@ X \times \ss{1} \arrow{r}{H}&Y\\
 X \times \ss{0} \arrow{u}{1 \times d_0}\arrow{r}{\simeq}&X \arrow{u}[right]{g}
 \end{tikzcd}
 \end{center}
-En tal caso, escribiremos $H : f \simeq g$. Notar que esta definición se corresponde (al menos intuitivamente) con su contraparte topológica: el $1$-símplex estándar viene a representar el intervalo, y las \guill{inclusiones} de cada cara muestran que 
+En tal caso, escribiremos $H : f \simeq g$. Diremos que $f$ y $g$ son homotópicas y notaremos $f \simeq g$ si existe una homotopía $H: f \simeq g$. Una homotopía $H : f \simeq g$ entre dos funciones $f,g : X \to Y$ se dice \textbf{relativa} a un subcomplejo $K$ de $X$ si es \guill{constante en $K$}, esto es, si conmuta el siguiente diagrama
+\begin{center}
+\begin{tikzcd}
+X \times \ss{1} \arrow{r}{H}&X\\
+K \times \ss{1} \arrow[hook]{u}{i \times 1}\arrow{r}{\pi_1}&K \arrow{u}[right]{\alpha}
+\end{tikzcd}
+\end{center}
+En este caso, escribimos $H : f \simeq g (\text{rel $K$})$. Notar que estas definiciones se corresponden (al menos intuitivamente) con su contraparte topológica: el $1$-símplex estándar viene a representar el intervalo, y las \guill{inclusiones} de cada cara muestran que 
 \[
 H(x,0) = f(x) \text{\quad y \quad} H(x,1) = g(x)
 \]
-para cada símplex $x \in X$. 
+para cada símplex $x \in X$. Del mismo modo, el segundo diagrama nos dice que $H(x,i) = \alpha(x)$ si $x \in K$ e $i \in \{0,1\}$. 
 \end{definition}
 
 \begin{remark} Si $f : X \to Y$ es un morfismo simplicial, notaremos $\widetilde{f}$ a la composición $X \times \ss{0} \xrightarrow{\simeq} X \xrightarrow{f} Y$
@@ -983,23 +1016,23 @@ X \times \ss{0} \xrightarrow{1 \times d_i} X \times \ss{1} \xrightarrow{H} Y.
 \] 
 \end{proof}
 
-\begin{proposition} Si $X$ es un complejo de Kan, entonces las homotopías simpliciales de vértices $x : \ss{0} \to X$ definen una relación de equivalencia en $X_0$.
+\begin{proposition} Si $X$ es un complejo de Kan, entonces las homotopías simpliciales de vértices definen una relación de equivalencia en $X_0$.
 \end{proposition}
 \begin{proof} Dado un $n$-símplex $x \in X_n$, escribiremos la \guill{frontera} de $x$ como $\partial x = (d_0x,\dots,d_nx)$. Notemos que dados dos vértices $x,y : \ss{0} \to  X$, una homotopía $H : x \simeq y$ se corresponde con un $1$-símplex $z \in X_1$ tal que $\partial z = (y,x)$. Ahora sí, 
 \begin{itemize}
 \item \textbf{Reflexividad:} dado $x \in X_0$, basta considerar el $1$-símplex $s_0x$ pues $\partial s_0x = (x,x)$.
-\item \textbf{Simetría:} sean $x,y \in X_0$ tales que existe $z \in X_1$ con $\partial z = (y,x)$ y sea $w = s_0x$. Como $\partial w = (x,x)$, es $d_1z = d_2w$ por lo que estos inducen un morfismo simplicial $\horn{2}{0} \to X$. 
+\item \textbf{Simetría:} sean $x,y \in X_0$ tales que existe $\sigma_1 \in X_1$ con $\partial \sigma_1 = (y,x)$ y sea $\sigma_2 = s_0x$. Como $\partial \sigma_2 = (x,x)$, es $d_1\sigma_1 = d_2\sigma_2$ por lo que estos inducen un morfismo simplicial $\horn{2}{0} \to X$. 
 
 Como $X$ es un complejo de Kan, esta flecha se extiende al $2$-símplex estándar 
 \begin{center}
 \begin{tikzcd}
-\horn{2}{0} \arrow{r}{(-,w,z)}\arrow[hook]{d} &X \\
+\horn{2}{0} \arrow{r}{(-,\sigma_2,\sigma_1)}\arrow[hook]{d} &X \\
 \ss{2} \arrow[dashed]{ru}[below]{\quad \exists \theta}
 \end{tikzcd}
 \end{center}
-que se corresponde a cierto símplex $\sigma \in X_2$ con $d_1\sigma = w$ y $d_2\sigma = z$. Por lo tanto, es
+que se corresponde a cierto símplex $\sigma \in X_2$ con $d_1\sigma = \sigma_2$ y $d_2\sigma = \sigma_1$. Por lo tanto, es
 \[
-\partial d_0\sigma = (d_0d_0\sigma,d_0d_1\sigma) = (d_0d_1\sigma,d_0d_2\sigma) = (d_0w,d_0z) = (x,y).
+\partial d_0\sigma = (d_0d_0\sigma,d_0d_1\sigma) = (d_0d_1\sigma,d_0d_2\sigma) = (d_0\sigma_2,d_0\sigma_1) = (x,y).
 \]
 \item \textbf{Transitividad:} sean $x,y,z \in X_0$ y $\sigma_1,\sigma_2 \in X_1$ tales que $\partial \sigma_1 = (y,x)$ y $\partial \sigma_2 = (z,y)$. Como $d_0\sigma_1 = d_1\sigma_2$, se tiene un morfismo simplicial inducido $\horn{2}{1} \to X$. Como antes, este se extiende al $2$-símplex pues $X$ es un complejo de Kan
 \begin{center}
@@ -1015,10 +1048,84 @@ y la extensión se corresponde con $\sigma \in X_2$ tal que $d_0\sigma = \sigma_
 \end{itemize}
 \end{proof}
 
+\begin{remark} Esto muestra que $\ss{1}$ \textbf{no} es un complejo de Kan. En efecto, notemos que hay un único $1$-símplex, la identidad $id$ de $\nat{1}$ cuya frontera es $\partial id = (i_0,i_1)$ las inclusiones de $\ss{0}$ en $\ss{1}$. Si $\ss{1}$ fuera un complejo de Kan, por simetría debiera existir un $1$-símplex con frontera $(i_1,i_0)$, lo que no sucede.
+\end{remark}
+
 \begin{proposition} Si $X$ es un conjunto simplicial e $Y$ un complejo de Kan, las homotopías simpliciales definen una relación de equivalencia en $\hom_{\cat{sSet}}(X,Y)$.
 \end{proposition}
-\begin{proof} Por la Proposición \ref{homcomplex-kan}, sabemos que $\homcomplex(X,Y)$ es un complejo de Kan, y por otro lado las homotopías simpliciales se corresponden a los $1$-símplices en $\homcomplex(X,Y)$. Así mismo, esto último se corresponde con las homotopías de vértices de $\homcomplex(X,Y)$, que definen una relación de equivalencia en $\homcomplex(X,Y)_0 = \hom_{\cat{sSet}}(X \times \ss{0},Y)$. Resta identificar este último con $\hom_{\cat{sSet}}(X,Y)$. \todo{escribir mejor}
+\begin{proof} Por la Proposición \ref{homcomplex-kan}, sabemos que $\homcomplex(X,Y)$ es un complejo de Kan, y por otro lado las homotopías simpliciales están en biyección con los $1$-símplices en $\homcomplex(X,Y)$. Así mismo, esto último se corresponde con las homotopías de vértices de $\homcomplex(X,Y)$, que definen una relación de equivalencia en $\homcomplex(X,Y)_0 = \hom_{\cat{sSet}}(X \times \ss{0},Y)$. Resta identificar este último con $\hom_{\cat{sSet}}(X,Y)$.
 \end{proof}
+
+\begin{proposition} Sea $X$ un conjunto simplicial e $Y$ un complejo de Kan. Si $K$ es un subcomplejo de $Y$, las homotopías simpliciales relativas a $K$ definen una relación de equivalencia en $\hom_{\cat{sSet}}(X,Y)$.
+\end{proposition}
+\begin{proof} Una demostración de este hecho se encuentra en \cite{GJ}, Chapter 1, Corollary 6.2. Como antes, apelamos a la Proposición \ref{homcomplex-kan}, ahora usando que restringir es una fibración de Kan. Esto nos dice que en cada fibra se tiene un complejo de Kan, por lo que allí podemos usar el mismo argumento que para homotopías \guill{a secas}.
+\end{proof}
+
+\begin{definition} Definimos las \textbf{componentes conexas} de un complejo de Kan $X$ como las clases de homotopía de los vértices de $X$, que notamos $\pi_0(X)$. Escribimos $[v]$ para referirnos a la clase de equivalencia de un vértice $v \in X_0$, y se dice que $X$ es \textbf{conexo} si $\pi_0(X) = \ast$.
+\end{definition}
+
+\subsection{Grupos de Homotopía}
+
+\begin{definition} Sea $X$ un complejo de Kan y $n \in \N$. Se define el $n$-ésimo grupo de homotopía con punto base $v \in X_0$ como el conjunto $\pi_n(X,v)$ de clases de homotopía relativas a $\partial \ss{n}$ de morfismos simpliciales $\alpha : \ss{n} \to X$ que valen constantemente $v$ en el borde del símplex,
+\begin{center}
+\begin{tikzcd}
+\ss{n} \arrow{r}{\alpha}&X\\
+\partial \ss{n} \arrow[hook]{u} \arrow{r}{\exists!} &\ss{0}\arrow{u}{v}
+\end{tikzcd}
+\end{center}
+Veremos a continuación que este este conjunto tiene efectivamente una estructura de grupo. Notamos $[\alpha]$ a la clase de homotopía de $\alpha : \ss{n} \to X$, y $v : \ss{n} \to X$ a la flecha dada por la composición \[\ss{n} \xrightarrow{\exists!} \ss{0} \xrightarrow{\iota_v} X.\]
+\end{definition}
+
+\begin{remark} Sean $X$ un complejo de Kan y $\alpha,\beta : \ss{n} \to X$ dos morfismos simpliciales que valen constantemente $v \in X_0$ en el borde. Como la $(n+1)$-upla de símplices dada por
+\[
+v_i = \begin{cases}
+v & \text{si $0 \leq i \leq n-2$}\\
+\alpha & \text{si $i = n-1$}\\
+\beta & \text{si $i = n+1$}
+\end{cases}
+\]
+satisface que $d_iv_j = d_{j-1}v_i$ si $i<j$ y $i,j \neq n$, estos definen un morfismo
+\[
+(v_0,\dots,v_{n-1},-,v_{n+1}) : \horn{n+1}{n} \to X
+\]
+que, como $X$ es un complejo de Kan, se extiende a cierto morfismo $\sigma : \ss{n} \to X$ que representa a un $n$-símplex $\sigma \in X_n$ que notamos con el mismo nombre. Observemos que que el borde de $d_n\sigma$ es
+\[
+\partial d_n\sigma = (d_0d_n\sigma,\dots,d_{n+1}d_n\sigma) = (d_{n-1}d_0\sigma,\dots,d_{n-1}d_{n-1}\sigma,d_nd_{n+1}\sigma) = (v,\dots,v),
+\]
+así que tiene sentido considerar su clase de homotopía en $\pi_n(X,v)$. Definimos así
+\[
+[\alpha] \ast [\beta] := [d_n\sigma].
+\]
+El siguiente resultado prueba la buena definición, esto es, que la clase de homotopía de $d_n\sigma$ sólo depende de las clases de homotopía de $\alpha$ y $\beta$.
+\end{remark}
+
+\begin{lemma} Sea $X$ un complejo de Kan, $v$ un vértice de $X$, y sean $\alpha,\alpha',\beta,\beta : \ss{n} \to X$ morfismos simplciales que valen constantemente $v$ en $\partial \ss{n}$ y cumplen $\alpha \simeq \alpha' (\text{rel $\partial \ss{n}$}), \beta \simeq \beta' (\text{rel $\partial \ss{n}$})$. 
+
+Si $\sigma, \sigma' : \ss{n+1} \to X$ son extensiones de los morfismos definidos por las $(n+1)$-uplas $(v,\dots,v,\alpha,\beta)$ y $(v,\dots,\alpha',\beta')$ respectivamente, se tiene que
+\[
+d_n\sigma \simeq d_n\sigma' \ (\text{rel $\partial \ss{n}$}).
+\] 
+\end{lemma}
+\begin{proof} Sean $H_{n-1} : \alpha \simeq \alpha'$ y $H_{n+1} : \beta \simeq \beta'$ dos homotopías relativas a $\partial \ss{n}$. Como se tiene que
+\[
+\partial \sigma = (v,\dots,v,\alpha,d_n\sigma,\beta)
+\]
+y
+\[
+\partial \sigma' = (v,\dots,v,\alpha',d_n\sigma',\beta'),
+\]
+\todo{Terminar}
+\end{proof}
+
+\begin{theorem} Sea $X$ un complejo de Kan y $v \in X_0$ un vértice. Si $n \in \N$, entonces $(\pi_n(X,v),\ast)$ es un grupo
+\end{theorem}
+\begin{proof}
+\todo{hacer}
+\end{proof}
+
+\todo{ver que mas contar de $\pi_n(X,v)$.}
+
+\section{Modelos Minimales}
 
 \begin{thebibliography}{}
 \bibitem{F} G. Friedman. \textit{An elementary introduction to simplicial sets}, 2016, \href{https://arxiv.org/abs/0809.4221}{arXiv:0809.4221v5 [at]}.
