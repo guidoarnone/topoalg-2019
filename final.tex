@@ -68,6 +68,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\M}[2]{\mathsf{M}_{#1}#2}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Ss}{\mathbb{S}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\eps}{\varepsilon}
@@ -360,6 +362,8 @@ d_i(g_1, \dots, g_n) = (g_1,\dots, g_{i-1},g_ig_{i+1},\dots,g_n), \quad s_i(g_1,
 \begin{definition} El \textbf{funtor singular} $\mathcal{S} : \cat{Top} \to \cat{sSet}$ asigna a cada espacio su conjunto singular, y a cada función continua $f : X \to Y$ el morfismo simplicial $f_* : \mathcal{S}(X) \to \mathcal{S}(Y)$ dado por $(f_*)_n(\sigma) =  f \circ \sigma$ para cada $\sigma: |\ss{n}| \to X$.
 \end{definition}
 
+\subsection{Morfismos determinados por símplices, fronteras y cuernos}
+
 \begin{remark} Si $X$ es un conjunto simplicial, el conjunto $X_n$ está determinado por los morfismos de conjuntos simpliciales de $\ss{n}$ a $X$. 
 
 Concretamente, por el lema de Yoneda tenemos una biyección natural
@@ -371,6 +375,16 @@ que a cada elemento $x \in X_n$ le asigna un morfismo de conjuntos simpliciales 
 
 Esto se corresponde con la intuición que proveen los ejemplos anteriores, en los que los $n$-símplices de un conjunto simplicial son alguna «manifestación» de el $n$-símplex estándar: como la cara de un $m$-símplex de dimensión mayor, como un $m$-símplex de dimensión menor que represente un colapso del mismo, o como el $n$-símplex singular de un espacio topológico.\\
 \end{remark}
+
+\begin{proposition} Si $X$ es un conjunto simplicial y $k \leq n \in \N$, los morifsmos simpliciales $\hom_{\cat{sSet}}(\horn{n}{k}, X)$ están en correspondencia biyectiva con las $n$-uplas de $(n-1)$-símplices $(x_0,\dots,\widehat{x}_k,\dots, x_n)$ de $X$ tales que $d_ix_j = d_{j-1}x_i$ si $i < j, \ i,j \neq k$. 
+\end{proposition}
+\begin{proof} \todo{Esto probablemente habría que probarlo}
+\end{proof}
+
+\begin{proposition} Si $X$ es un conjunto simplicial y $k \leq n \in \N$, los morifsmos simpliciales $\hom_{\cat{sSet}}(\partial\ss{n}, X)$ están en correspondencia biyectiva con las $(n+1)$-uplas de $(n-1)$-símplices $(x_0,\dots,x_k,\dots, x_n)$ de $X$ tales que $d_ix_j = d_{j-1}x_i$ si $i < j$.
+\end{proposition}
+\begin{proof} \todo{Esto probablemente habría que probarlo}
+\end{proof}
 
 \subsection{Símplices Degenerados, Puntos Interiores y Esqueletos}
 
@@ -441,11 +455,51 @@ X_j &\text{si $j \leq n$}\\
 \{x \in X_j : x = s_{i_1} \cdots s_{i_{j-n}}y \text{ con } y \in X_n\} &\text{si $j > n$}
 \end{cases}
 \]
-junto con las restricciones de los mapas de caras y degeneraciones de $X$. Notemos que si $k < l$ por construcción es $(\sk_k X)_j \subset (\sk_l X)_j$ para todo $j \geq 0$, por lo que tenemos las siguientes \guill{inclusiones} de subcomplejos,
+junto con las restricciones de los mapas de caras y degeneraciones de $X$. 
+
+\begin{remark}Notemos que por construcción es $(\sk_n X)_j \subset (\sk_{n+1} X)_j$ para todo $j \geq 0$, por lo que tenemos las siguientes \guill{inclusiones} de subcomplejos
 \[
 \sk_0X \subset \sk_1X \subset \sk_2X \subset \cdots \subset \sk_nX \subset \cdots
 \]
-\todo{Probar que $X \simeq \operatorname{colim} \sk_nX$}
+y de hecho
+\end{remark}
+
+\begin{proposition} Si $X$ es un conjunto simplicial, entonces $X \simeq \operatorname{colim_{n \geq 0}} \sk_nX$ donde el colimite se toma sobre el diagrama inducido por las inclusiones entre los $n$-esqueletos.
+\end{proposition}
+\begin{proof} Debemos ver que si $\{f^n : \sk_nX \to Y\}_{n\geq 0}$ es una familia de morfismos simpliciales tales que $f^m|_{\sk_nX} = f^n$ para cada $n \leq m$, entonces existe un único morfismo simplicial $F : X \to Y$ tal que $F|_{\sk_nX} = f^n$ para cada $n \geq 0$. De existir, un tal morfismo debe satisfacer
+\[
+F_n = (F|_{\sk_nX})_n = f^n_n, 
+\]
+por lo que alcanza ver que esta definición es simplicial y satisface lo pedido. 
+
+En primer lugar, veamos que para cada $0\leq i,j \leq n $ conmuta el siguiente diagrama
+\begin{center}
+\begin{tikzcd}
+X_{n-1} \arrow{d}[left]{f_{n-1}^{n-1}}& X_n\arrow{l}[above]{d_i}\arrow{r}{s_j}\arrow{d}{f_n^n} & X_{n+1}\arrow{d}{f_{n+1}^{n+1}}\\
+Y_{n-1} & Y_n\arrow{l}{d_i}\arrow{r}[below]{s_j} & Y_{n+1}
+\end{tikzcd}
+\end{center}
+Fijemos $x \in X_n$. Como $s_jx \in (\sk_nX)_{n+1}$, se tiene que
+\[
+f^{n+1}_{n+1}(s_jx) = (f^{n+1}|_{\sk_nX})_{n+1}(s_jx) = f^n_{n+1}(s_jx) = s_jf^n_n(x).
+\]
+Por otro lado, dado que $d_ix \in X_{n-1} = (\sk_{n-1}X)_{n-1}$ es
+\[
+d_if^n_n(x) = f^n_{n-1}(d_ix) = (f^n|_{\sk_{n-1}X})_{n-1}(d_ix) = f^{n-1}_{n-1}(d_ix),
+\]
+así que $F$ resulta simplicial.
+
+Para terminar, probaremos que $F|_{\sk_nX} = f^n$ para cada $n \geq 0$. Sean $n,j \in \N_0$ y $x \in (\sk_nX)_j$. Si se tiene que $j \leq n$, entonces es $x \in (\sk_jX)_j$ y
+\[
+f^n_j(x) = (f^n|_{\sk_jX})_j(x) = f^j_j(x) = F_j(x).
+\]
+Si en cambio es $j = n + k$ con $k \in \N$, existen mapas de degeneracion $s_{i_1},\dots,s_{i_{k}}$ e $y \in X_n$ tales que $x = s_{i_1}\cdots s_{i_{k}}y$, y como $F$ es simplicial obtenemos que
+\[
+F_j(x) = F_j(s_{i_1}\cdots s_{i_{k}}y) = s_{i_1}\cdots s_{i_{k}}F_n(y) = s_{i_1}\cdots s_{i_{k}}f^n_n(y) = f^n_j(s_{i_1}\cdots s_{i_{k}}y) = f^n_j(x)
+\]
+a partir del caso anterior, lo que concluye la demostración.
+\end{proof}
+
 \end{definition}
 
 \subsection{Productos, Coproductos, Pushouts}
@@ -459,17 +513,67 @@ junto con las restricciones de los mapas de caras y degeneraciones de $X$. Notem
 \begin{remark} Por la Proposición \ref{(co)limites-lugar-a-lugar} y usando que $\cat{Set}$ es cocompleta\footnote{Una categoría $\cat{C}$ es (co)completa si existe el (co)límite de todo diagrama $\cat{J} \to \cat{C}$.}, los pushouts en $\cat{sSet}$ se pueden construir \guill{nivel a nivel}, es decir, a partir del pushout de los conjuntos en el lugar $n$ de cada complejo.
 \end{remark}
 
-\begin{proposition}\label{sk-pushout} Si $X$ es un conjunto simplicial y $n \in \N$, entonces el siguiente diagrama es un pushout
+\begin{proposition}\label{sk-pushout} Si $X$ es un conjunto simplicial y $n \in \N$, entonces el siguiente diagrama
 \begin{center}
 \begin{tikzcd}
-\coprod_{n \in NX_n} \partial \ss{n} \arrow{d}\arrow{r}& \sk_{n-1}X\arrow{d}\\
+\coprod_{n \in NX_n} \partial \ss{n} \arrow[hook]{d}{j}\arrow{r}& \sk_{n-1}X\arrow[hook]{d}{i}\\
 \coprod_{n \in NX_n} \ss{n} \arrow{r}& \sk_nX\\
 \end{tikzcd}
 \end{center}
 es un puhsout.
 \end{proposition}
-\begin{proof}asd
-\todo{¡HACER!}
+\begin{proof} Fijemos $n \in \N$. Los morfismos involucrados son las inclusiones $\partial \ss{n} \subset \ss{n}, \sk_{n-1}X \subset \sk_nX$ y para cada símplex no degenerado $x \in NX_n \subset X_n = (\sk_nX)_n$ los morfismos simpliciales inducidos por este,
+\begin{align*}
+x \colon &\ss{n} \to \sk_n X &\partial& x \colon \partial \ss{n} \longrightarrow \sk_n X\\
+&1_{\nat{n}} \mapsto x & &[0,\dots,\widehat{i},\dots,n] \mapsto d_ix
+\end{align*}
+Notar que $\partial x$ está bien definido pues $d_ix \in X_{n-1} = (\sk_{n-1}X)_{n-1}$ para cada $i \in \nat{n}_0$ y de las identidades simpliciales se tiene que $d_id_jx = d_{j-1}d_ix$ si $i < j$.
+
+En primer lugar, debemos ver que el diagrama de la proposición es conmutativo. Como un morfismo $\partial \ss{n}$ queda determinado por las imágenes de los $(n-1)$-símplices $[0,\dots,\widehat{i},\dots,n]$ para cada $i \in \nat{n}_0$, basta ver que estos tienen la misma imagen por ambas composiciones para cada $x \in NX_n$. Efectivamente, se tiene que
+\[
+(i\partial x)_{n-1}([0,\dots,\widehat{i},\dots,n]) = i_{n-1}(d_ix) = d_ix
+\]
+y
+\[
+(xj)_{n-1}([0,\dots,\widehat{i},\dots,n]) = x_{n-1}(d_i1_{\nat{n}}) = d_ix_n(1_{\nat{n}}) = d_ix.
+\]
+
+Ahora veamos que si se tienen morfismos simpliciales $g : \sk_{n-1} X \to Y$ y $h : \coprod_{n \in NX_n} \ss{n} \to Y$ tales que el siguiente diagrama conmuta
+\begin{center}
+\begin{tikzcd}
+\coprod_{n \in NX_n} \partial \ss{n} \arrow[hook]{d}{j}\arrow{r}& \sk_{n-1}X\arrow[hook]{d}{i}\arrow[bend left]{3-3}{g}\\
+\coprod_{n \in NX_n} \ss{n} \arrow{r} \arrow[bend right]{3-3}[below]{h}& \sk_nX \arrow[dashed]{3-3}{\exists ! f}\\
+& & Y
+\end{tikzcd}
+\end{center}
+entonces existe un único morfismo $f : \sk_n X \to Y$ que sigue haciendo conmutar el diagrama. Antes que nada, notemos que $h$ está determinado por morfismos $h_x : \ss{n} \to Y$ para cada $x \in NX_n$ que se corresponden con una elección de un $n$-símplex $y_x := h_x(1_{\nat{n}})$. De existir un tal morfismo $f$, debería cumplir entonces que
+\begin{itemize}
+\item $f|_{\sk_{n-1}X} = g$,
+\item $f_n(x) = y_x$ y, por simplicidad,
+\item $f(s_{i_1} \cdots s_{i_k} x) = s_{i_1}\cdots s_{i_k}f(x) = s_{i_1}\cdots s_{i_k}f(x)$ si $x \in X_n$.
+\end{itemize}
+
+Esto determinaría completamente a una tal flecha, pues debería estar definida por 
+\[
+f_j(x) = \begin{cases}
+g_j(x) &\text{si $x \in (\sk_{n-1}X)_j$}\\
+s_{i_1} \cdots s_{i_{j-n}}y_{x'} &\text{si $x =s_{i_1} \cdots s_{i_{j-n}}x'$ con $x' \in NX_n$}
+\end{cases}
+\]
+para cada $j \geq 0$. Para concluir la demostración debemos probar que $f$ es simplicial. Si $x \in (\sk_{n-1}X)_j$ y $\rho : \nat{i} \to \nat{j}$ es una flecha, entonces notando $\theta = X \rho$ es
+\[
+f_j(\theta x) = g_j(\theta x) = \theta g_i(x) = \theta f_i(x)
+\]
+pues $g$ es simplicial y $\theta x \in (\sk_{n-1}X)_i$. Sea ahora $x = s_{i_1} \cdots s_{i_{j-n}}x'$ con $x' \in X_n$ no degenerado. Dado $s_k : X_j \to X_{j+1}$ mapa de degeneración es
+\[
+f_j(s_kx) = s_ks_{i_1} \cdots s_{i_{j-n}}y_{x'} = s_kf_j(x).
+\]
+Por otro lado, si $d_k : X_j \to X_{j-1}$ es un mapa de cara podemos escribir $d_ks_{i_1} \cdots s_{i_{j-n}} = \widetilde{s}_{i_1} \cdots \widetilde{s}_{i_{j-n}}\widetilde{d_k}$ para ciertos otros mapas de caras y degeneración. De esta forma, es $d_kx = \widetilde{s}_{i_1} \cdots \widetilde{s}_{i_{j-n}}\widetilde{d_k}x' \in (\sk_{n-1}X)_{j-1}$ y por la conmutatividad del diagrama se obtiene
+\begin{align*}
+f_{j-1}(d_kx) &= g_{j-1}(d_kx) = g_{j-1}(\widetilde{s}_{i_1} \cdots \widetilde{s}_{i_{j-n}}\widetilde{d_k}x') = \widetilde{s}_{i_1} \cdots \widetilde{s}_{i_{j-n}}g_{n-1}(\widetilde{d_k}x')\\
+&= \widetilde{s}_{i_1} \cdots \widetilde{s}_{i_{j-n}}\widetilde{d_k}y_{x'} = d_ks_{i_1} \cdots s_{i_{j-n}}y_{x'} = d_kf_j(x).
+\end{align*}
+
 \end{proof}
 
 \subsection{Complejos de Funciones y Ley Exponencial}
@@ -827,7 +931,7 @@ es un pushout, y como $| \cdot | : \cat{sSet} \to \cat{Top}$ es adjunto a izquie
 \coprod_{n \in NX_n} \text{$|\ss{n}|$} \arrow{r}& \text{$|\sk_nX|$}\\
 \end{tikzcd}
 \end{center}
-es un pushout para cada $n \in \N$. Como cada inclusión $\partial \ss{n} \hookrightarrow \ss{n}$ viene inducida por la inclusión a un nivel de complejos simpliciales, vía las identificaciones $\ss{n} \equiv D^n$ y $\partial \ss{n} \equiv S^n$ la función entre las realizaciones es la que incluye la esfera como borde del disco. Vemos así que cada $n$-esqueleto de $X$ se construye adjuntando $n$-celdas al esqueleto anterior. Para terminar, resta notar que por definición de los $n$-esqueletos es
+es un pushout para cada $n \in \N$. Como cada inclusión $\partial \ss{n} \hookrightarrow \ss{n}$ viene inducida por la inclusión a un nivel de complejos simpliciales, vía las identificaciones $\ss{n} \equiv \D^n$ y $\partial \ss{n} \equiv \Ss^n$ la función entre las realizaciones es la que incluye la esfera como borde del disco. Vemos así que cada $n$-esqueleto de $X$ se construye adjuntando $n$-celdas al esqueleto anterior. Para terminar, resta notar que por definición de los $n$-esqueletos es
 \[
 |X| = \bigcup_{n \geq 0} |\sk_n| \quad \text{con } \quad |\sk_0 X| \subset |\sk_1 X| \subset  \cdots
 \] 
@@ -882,9 +986,6 @@ para cada diagrama conmutativo de la forma
 \end{tikzcd}
 \end{center}
 existe una flecha $|\ss{n}| \to X$ que hace conmutar el diagrama. Se puede ver que esta noción es equivalente a la propiedad de levantado de homotopías para CW-complejos, y es estrictamente más débil que la noción de fibración (en el sentido de Hurewicz, es decir, de la propiedad de levantado de homotopías para cualquier espacio). 
-
-\begin{remark} Si $X$ es un conjunto simplicial y $k \leq n \in \N$, los morifsmos simpliciales $\hom_{\cat{sSet}}(\horn{n}{k}, X)$ están en correspondencia biyectiva con las $n$-uplas de $(n-1)$-símplices $(x_0,\dots,\widehat{x}_k,\dots, x_n)$ de $X$ tales que $d_ix_j = d_{j-1}x_i$ si $i < j, \ i,j \neq k$. \todo{Esto probablemente habría que probarlo (y moverlo)}
-\end{remark}
 
 En analogía con lo anterior, se define la noción de \guill{fibración} en el contexto de la teoría de homotopía simplicial,
 
