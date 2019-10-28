@@ -8,6 +8,7 @@
 \usepackage[spanish]{babel}
 
 \usepackage{mathpazo,euler}
+
 \usepackage{mathrsfs}
 \usepackage{enumitem}
 \usepackage{microtype}
@@ -220,7 +221,7 @@ entonces $G$ preserva límites y $F$ preserva colímites.
 
 Ahora sí, pasamos a definir los conjuntos simpliciales:
 
-\begin{definition} Un \textbf{conjunto simplcial} es un funtor $X : \ordcat^{op} \to \cat{Set}$. Concretamente, éste consiste de 
+\begin{definition} Un \textbf{conjunto simplicial} es un funtor $X : \ordcat^{op} \to \cat{Set}$. Concretamente, éste consiste de 
 \begin{itemize}
 \item[(i)] una sucesión $X_0,X_1,X_2, \dots$ de conjuntos, y \item[(ii)] para cada $n \in \N_0$ e $i \in \natzero{n}$, funciones 
 $d_i : X_n \to X_{n-1}$ y $s_i : X_n \to X_{n+1}$ llamadas mapas de caras y degeneraciones respectivamente, que satisfacen las siguientes \textit{identidades simpliciales}:
@@ -376,15 +377,11 @@ que a cada elemento $x \in X_n$ le asigna un morfismo de conjuntos simpliciales 
 Esto se corresponde con la intuición que proveen los ejemplos anteriores, en los que los $n$-símplices de un conjunto simplicial son alguna «manifestación» de el $n$-símplex estándar: como la cara de un $m$-símplex de dimensión mayor, como un $m$-símplex de dimensión menor que represente un colapso del mismo, o como el $n$-símplex singular de un espacio topológico.\\
 \end{remark}
 
-\begin{proposition} Si $X$ es un conjunto simplicial y $k \leq n \in \N$, los morifsmos simpliciales $\hom_{\cat{sSet}}(\horn{n}{k}, X)$ están en correspondencia biyectiva con las $n$-uplas de $(n-1)$-símplices $(x_0,\dots,\widehat{x}_k,\dots, x_n)$ de $X$ tales que $d_ix_j = d_{j-1}x_i$ si $i < j, \ i,j \neq k$. 
+\begin{proposition} Si $X$ es un conjunto simplicial y $k \leq n \in \N$, los morifsmos simpliciales $\hom_{\cat{sSet}}(\horn{n}{k}, X)$ están en biyección con las $n$-uplas de $(n-1)$-símplices $(x_0,\dots,\widehat{x}_k,\dots, x_n)$ de $X$ tales que $d_ix_j = d_{j-1}x_i$ si $i < j, \ i,j \neq k$. \qed
 \end{proposition}
-\begin{proof} \todo{Esto probablemente habría que probarlo}
-\end{proof}
 
-\begin{proposition} Si $X$ es un conjunto simplicial y $k \leq n \in \N$, los morifsmos simpliciales $\hom_{\cat{sSet}}(\partial\ss{n}, X)$ están en correspondencia biyectiva con las $(n+1)$-uplas de $(n-1)$-símplices $(x_0,\dots,x_k,\dots, x_n)$ de $X$ tales que $d_ix_j = d_{j-1}x_i$ si $i < j$.
+\begin{proposition} Si $X$ es un conjunto simplicial y $k \leq n \in \N$, los morifsmos simpliciales $\hom_{\cat{sSet}}(\partial\ss{n}, X)$ están en biyección con las $(n+1)$-uplas de $(n-1)$-símplices $(x_0,\dots,x_k,\dots, x_n)$ de $X$ tales que $d_ix_j = d_{j-1}x_i$ si $i < j$. \qed
 \end{proposition}
-\begin{proof} \todo{Esto probablemente habría que probarlo}
-\end{proof}
 
 \subsection{Símplices Degenerados, Puntos Interiores y Esqueletos}
 
@@ -456,7 +453,7 @@ X_j &\text{si $j \leq n$}\\
 \end{cases}
 \]
 junto con las restricciones de los mapas de caras y degeneraciones de $X$. 
-
+\end{definition}
 \begin{remark}Notemos que por construcción es $(\sk_n X)_j \subset (\sk_{n+1} X)_j$ para todo $j \geq 0$, por lo que tenemos las siguientes \guill{inclusiones} de subcomplejos
 \[
 \sk_0X \subset \sk_1X \subset \sk_2X \subset \cdots \subset \sk_nX \subset \cdots
@@ -499,8 +496,6 @@ F_j(x) = F_j(s_{i_1}\cdots s_{i_{k}}y) = s_{i_1}\cdots s_{i_{k}}F_n(y) = s_{i_1}
 \]
 a partir del caso anterior, lo que concluye la demostración.
 \end{proof}
-
-\end{definition}
 
 \subsection{Productos, Coproductos, Pushouts}
 
@@ -683,6 +678,22 @@ Para terminar, veamos que $f$ y $g$ son inversas: por construcción, para cada s
 \end{proof}
 
 Vemos así que la construcción que dimos efectivamente generaliza a la de realización geométrica para complejos simpliciales: tiene sentido preguntarse entonces, ¿qué sucede cuando $X$ no necesariamente viene inducido por un complejo simplicial? Veremos más adelante que el espacio topológico $|X|$ siempre es un CW-complejo.
+
+\begin{example}[La $n$-esfera] Notemos también que por lo visto anteriormente, la realización geométrica de $\partial \ss{n}$ es homeomorfa a $\Ss^n$, pero sin embargo esta construcción involucra una cantidad de símplices mucho mayor a la cantidad de celdas de la construcción usual de la esfera como CW-complejo, donde adjuntamos una $n$-celda $e_n$ pegando su borde en una única $0$-celda $e_0$. 
+
+Veamos que podemos construir un conjunto simplicial $X$ (que no proviene de un complejo simplicial) cuya realización geométrica es $\Ss^n$ cuando $n \geq 2$. Análogamente a la construcción de la esfera adjuntando celdas, definimos $X$ de forma que tengan sólo dos símplices no degenerados, en lugares $0$ y $n-1$ respectivamente. Es decir, definimos $X_0,\cdots X_{n-2}$ como conjuntos de un punto que notamos 
+\[X_0 = \{p\} \text{ y } X_j = \{\overbrace{[p,\cdots,p]}^j\}\]
+para cada $j \leq n-2$. 
+
+A continuación el conjunto $X_{n-1} = \{\sigma, [p,\cdots,p]\}$ tiene un símplex no degenerado $\sigma$, cuyas caras todas necesariamente deben ser $\{[p,\cdots,p]\} \in X_{n-2}$, y de ahí en adelante ponemos 
+\[X_j = \{\overbrace{[p,\cdots,p]}^j, \overbrace{[\sigma,\cdots,\sigma]}^{j-n+2}\}\]
+para cada $j \geq n$.
+
+Al pasar a la realización geométrica, todo símplice degenerado es equivalence a $\sigma$ o $p$, y como las caras de $\sigma$ son colapsos de $p$, en definitiva el espacio resultante es
+\[
+|X| \equiv |\ss{n}|/|\partial \ss{n}| \equiv \Ss^n.
+\]
+\end{example}
 
 \begin{definition} Sea $X$ un conjunto simplicial. Un punto $(x,p) \in \coprod_{n \geq 0} X_n \times |\ss{n}|$ se dice \textbf{no degenerado} si $p$ es interior y $x$ no degenerado.
 \end{definition}
@@ -952,7 +963,7 @@ que por lo visto, siempre tiene como dominio a un CW complejo. Más aún,
 X \arrow{r}{f} & Y
 \end{tikzcd}
 \end{center}
-conmuta, y tanto $\eta_X$ como $\eta_Y$ son equivalencias débiles.
+conmuta, y tanto $\eta_X$ como $\eta_Y$ son equivalencias débiles. \todo{Decir algo sobre el iso en homología}
 \end{theorem}
 \begin{proof} La conmutatividad del diagrama se deduce de que la counidad de una adjunción es siempre una transformación natural. Omitimos la demostración de que las componentes de $\eta$ son equivalencias débiles. En \cite{M} se encuentra una demostración que usa sucesiones espectrales. En \cite{GJ} se tiene otra demostración a través de la teoría de extensiones anodinas. 
 \end{proof}
@@ -1095,7 +1106,7 @@ X \times \ss{0} \arrow{u}{1 \times d_0}\arrow{r}{\simeq}&X \arrow{u}[right]{g}
 En tal caso, escribiremos $H : f \simeq g$. Diremos que $f$ y $g$ son homotópicas y notaremos $f \simeq g$ si existe una homotopía $H: f \simeq g$. Una homotopía $H : f \simeq g$ entre dos funciones $f,g : X \to Y$ se dice \textbf{relativa} a un subcomplejo $K$ de $X$ si es \guill{constante en $K$}, esto es, si conmuta el siguiente diagrama
 \begin{center}
 \begin{tikzcd}
-X \times \ss{1} \arrow{r}{H}&X\\
+X \times \ss{1} \arrow{r}{H}&Y\\
 K \times \ss{1} \arrow[hook]{u}{i \times 1}\arrow{r}{\pi_1}&K \arrow{u}[right]{\alpha}
 \end{tikzcd}
 \end{center}
@@ -1104,6 +1115,9 @@ En este caso, escribimos $H : f \simeq g (\text{rel $K$})$. Notar que estas defi
 H(x,0) = f(x) \text{\quad y \quad} H(x,1) = g(x)
 \]
 para cada símplex $x \in X$. Del mismo modo, el segundo diagrama nos dice que $H(x,i) = \alpha(x)$ si $x \in K$ e $i \in \{0,1\}$. 
+\end{definition}
+
+\begin{definition} Un morfismo simplicial $f : X \to Y$ se dice una \textbf{equivalencia homotópica} si existe $g : Y \to X$ tal que $fg \simeq 1_Y$ y $gf \simeq 1_X$. En tal caso, decimos que $X$ e $Y$ son \textbf{homotópicamente equivalentes} (o que tienen el mismo tipo homotópico).
 \end{definition}
 
 \begin{remark} Si $f : X \to Y$ es un morfismo simplicial, notaremos $\widetilde{f}$ a la composición $X \times \ss{0} \xrightarrow{\simeq} X \xrightarrow{f} Y$
@@ -1221,16 +1235,83 @@ y
 \begin{theorem} Sea $X$ un complejo de Kan y $v \in X_0$ un vértice. Si $n \in \N$, entonces $(\pi_n(X,v),\ast)$ es un grupo
 \end{theorem}
 \begin{proof}
-\todo{hacer}
+\todo{hacer, capaz al menos para pi1}
 \end{proof}
 
-\todo{ver que mas contar de $\pi_n(X,v)$.}
-
 \section{Modelos Minimales}
+
+Para terminar, daremos a continuación la definición de complejo minimal y algunas de sus propiedades básicas. Esto nos permitirá caracterizar a una cierta subfamilia de conjuntos simpliciales de los cuales podemos \guill{extraer un sistema de representantes de clases de homotopía}, y dos de éstos resultan isomorfos de tener el mismo tipo homotópico.
+
+\begin{definition} Decimos que un complejo de Kan $M$ es un \textbf{complejo minimal} si para cada $x,y \in M_n$ tales que $d_ix = d_jy$ para todo $j \in \nat{n}_0 \setminus \{k\}$ se tiene que $d_kx = d_ky$. Equivalentemente $M$ es minimal si cada vez que dos $n$-símplices de $M$ son homotópicos relativos al borde, 
+\end{definition}
+
+\begin{proposition} Sea $K$ un complejo de Kan. Son equivalentes:
+\begin{itemize}
+\item[(i)] El complejo $K$ es minimal.
+\item[(ii)] Si $x,y : \ss{n} \to K$ son homotópicos, entonces $x = y$.
+\end{itemize}
+\end{proposition}
+\begin{proof}
+content...
+\end{proof}
+
+\begin{lemma} Sea $X$ un conjunto simplicial. Si $x,y \in X_n$ son dos símplices degenerados tales que $\partial x = \partial y$, entonces $x = y$.
+\end{lemma}
+\begin{proof} Sean $n,m \in \nat{n-1}$ y $z,w \in X_{n-1}$ tales que $x = s_mz$ e $y = s_nw$. Si $n = m$, entonces es $w = d_ms_mw= d_my= d_mx = z$ y por lo tanto $x = y$. 
+
+Supongamos ahora sin pérdida de generalidad que $m < n$. Esto implica que
+\[
+z = d_mx = s_{n-1}d_mw
+\]
+y
+\[
+x = s_ms_{n-1}d_mw = s_ns_md_mw,
+\]
+de forma que $w = d_ny = d_nx = s_md_mw$ y finalmente $x = s_nw = y$.
+\end{proof}
+
+\begin{corollary} Sean $x,y \in X_n$ dos $n$-símplices degenerados de un conjunto simplicial $X$. Si $x \simeq y \quad (rel \partial \ss{n})$, entonces $x = y$.
+\end{corollary}
+\begin{proof} Basta aplicar el lema anterior, ya que al ser símplices homotópicos $x$ e $y$ satisfacen $d_ix = d_iy$ para cada $i \in \natzero{n}$.
+\end{proof}
+
+\begin{proposition} Si $X$ un complejo de Kan, entonces existe un subcomplejo minimal $i : M \hookrightarrow X$ y una retracción $r : X \to M$ tal que $ir \simeq 1_X$. 
+\end{proposition}
+\begin{proof}[Idea de la demostración] Comencemos definiendo el subcomplejo $M$. En primer lugar, elegimos $M_0$ como representantes de las clases de homotopía de vértices. Ahora inductivamente definimos $M_{n+1}$ de la siguiente forma: de los símplices de $X_{n+1}$ cuyas caras yazcan en $M_n$, seleccionamos un representante de las clases de homotopía relativas a $\partial\ss{n+1}$, eligiendo un representante degenerado siempre que sea posible.
+
+Como por construcción pedimos que $d_i(M_n) \subset M_{n-1}$ para cada $n \geq 1$ e $i \in \natzero{n}$, para ver que $M$ es un subcomplejo de $X$ resta probar que $s_i(M_n) \subset M_{n+1}$ para cada $n \geq 1$ e $i \in \natzero{n}$, y procederemos por inducción en $n$. Si $x \in M_n$, entonces $s_ix$ tiene todas sus caras en $M_n$ ya que
+\[
+d_js_ix = s_kd_lx
+\]
+para ciertos $k,l \in \natzero{n}$ y por hipótesis sabemos que $d_l x \in M_{n-1}$ por lo que $s_kd_l x \in M_n$. Esto nos dice que existe un representante $y \in M_{n+1}$ de la clase de homotopía (relativa al borde) de $s_ix$ y más aún $y$ debe ser degenerado pues $s_ix$ lo es, por lo que $s_ix = y \in M_{n+1}$.  
+
+Como un retracto de un complejo de Kan es un complejo de Kan, y $M$ no tiene símplices homotópicos, al probar que $M$ es un retracto por deformación fuerte de $X$ veremos también que $M$ es minimal, completando así la demostración. 
+
+Para definir la retracción $r : X \to M$ y una homotopía $H : ri \simeq 1$ prodcedemos una vez más inductivamente en los esqueletos de $X$, si $n = 0$ entonces la función $r_0 : X_0 \to M_0$ es una retracción de la inclusión $i_0 : M_0 \to X_0$ y tenemos homotopías $h_x : i_0r_0(x) \simeq x$ para cada $x$ que definen una homotopía $H_0 : \sk_0 X \times \ss{1} \to M$. 
+\end{proof}
+
+\begin{remark} Este resultado nos dice que todo complejo de Kan se retrae por deformación a un complejo minimal, y en particular ambos deben ser homotópicos. Como anticipábamos, esto nos permite concluir que todo conjunto simplicial es homotópicamente equivalente a un complejo minimal.
+\end{remark}
+
+\begin{theorem} \label{hom-iso-min} Sea $M$ un complejo minimal y $f : M \to M$ un morfismo simplicial. Si $f \simeq 1$, entonces $f$ es un isomorfismo.
+\end{theorem}
+\begin{proof} Ver \cite{JT}, Lemma 3.3.2 o \cite{GJ},  Chapter 1, Sublemmma 10.5.
+\end{proof}
+
+\begin{corollary} Dos complejos minimales homotópicamente equivalentes son isomorfos.
+\end{corollary}
+\begin{proof} Sean $M$ y $M'$ dos complejos minimales y $f : M \to M', g: M' \to M$ morfismos simpliciales tales que $fg \simeq 1_{M'}$ y $gf \simeq 1_{M}$. Por el Teorema \ref{hom-iso-min}, se tiene que tanto $fg$ como $gf$ son isomorfismos, y entonces tanto $f$ como $g$ lo son\footnote{Notar que no necesariamente $f$ y $g$ son inversas: se tienen $a$ y $b$ inversas de $fg$ y $gf$ respectivamente, por lo que $fb = afgfb = af$ y entonces $fbg = 1$, es decir, es $g = (fb)^{-1}$. Del mismo modo se obtiene una inversa para $f$.}.
+\end{proof}
+
+\begin{corollary} Sea $X$ un conjunto simplicial y sean $M$ y $M'$ dos retractos por deformación de $X$. Si tanto $M$ como $M'$ son minimales, entonces $M$ y $M'$ son isomorfos.
+\end{corollary}
+\begin{proof} Consideremos retracciones $r : X \to M, r' : X \to M'$ a las inclusiones $i : M \hookrightarrow X$ e $i' : M' \hookrightarrow M$. 
+\end{proof}
 
 \begin{thebibliography}{}
 \bibitem{F} G. Friedman. \textit{An elementary introduction to simplicial sets}, 2016, \href{https://arxiv.org/abs/0809.4221}{arXiv:0809.4221v5 [at]}.
 \bibitem{GJ} P. Goerss y J. Jardine, \textit{Simplicial Homotopy Theory}. Birkhäuser, 2010.
+\bibitem{JT} A. Joyal y M. Tierney, \href{http://www.mat.uab.cat/~kock/crm/hocat/advanced-course/Quadern47.pdf}{\textit{Notes on Simplicial Homotopy Theory}}.
 \bibitem{M} P. May, \textit{Simplicial Objects in Algebraic Topology}. University of Chicago, 1982. 
 \bibitem{ct-context} E. Riehl. \textit{Category Theory in Context}. Dover, 2016.
 \end{thebibliography}
