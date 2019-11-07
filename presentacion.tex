@@ -70,7 +70,7 @@ $\paint{
 
 \author{Guido Arnone}
 \title{\scshape Topología Algebraica: examen final}
-\subtitle{Una introducción a los Conjuntos Simplciales\\
+\subtitle{Una introducción a los Conjuntos Simpliciales\\
 \vspace{20pt}
 \includegraphics[width=0.75\textheight]{portada.jpg}}
 \date{8 de noviembre de 2019}
@@ -86,7 +86,7 @@ $\paint{
 \end{frame}
 
 \begin{frame}{La categoría $\ordcat$ de ordinales finitos}
-\begin{defs} La categoría $\ordcat$ de ordinales finitos \texttt{}tiene por objetos a los conjuntos $\nat{n} := \{0 < 1 < \dots < n\}$ y por flechas a los morfismos de posets $f : \nat{n} \to \nat{m}$.
+\begin{defs} La categoría $\ordcat$ de ordinales finitos \texttt{}tiene por objetos a los conjuntos finitos totalmente ordenados $\nat{n} := \{0 < 1 < \dots < n\}$ y por flechas a los morfismos de orden $f : \nat{n} \to \nat{m}$.
 \end{defs}
 
 \begin{defs} Definimos para cada $n \in \N_0$ e $i \in \ord{n}$ los mapas de \textbf{cocaras} 
@@ -283,7 +283,7 @@ NX_n := \{x \in X_n : \text{ $x$ es no degenerado}\}.
 \[
 |X| := \left(\coprod_{n \geq 0}X_n \times |\ss{n}|\right)\Big/\sim
 \]
-donde identificamos a los puntos \[(x,|d^i|(p)) \sim (d_i(x),p)\] y \[(x,|s^i|(p)) \sim (s_i(x),p)\] para cada mapa de cocara y codegeneración.
+donde identificamos a los puntos \[(x,|d^i|(p)) \sim (d_i(x),p)\] y \[(x,|s^i|(p)) \sim (s_i(x),p)\] para cada mapa de cara y degeneración.
 \end{defs}
 \end{frame}
 
@@ -470,7 +470,7 @@ Equivalentemente,
 Una \textbf{homotopía} entre dos morfismos simpliciales $f,g : X \to Y$ es un morfismo simplicial $H : X \times \ss{1} \to Y$ que vale $f$ al restringir el $1$-símplex en una cara y $g$ al restringir a la otra.
 \vspace{30pt}
 
-Ésta se dice \textbf{relativa} a un subcomplejo $K$ de $X$ si además es \guill{constante en $K$}.
+Esta se dice \textbf{relativa} a un subcomplejo $K$ de $X$ si además es \guill{constante en $K$}.
 \end{column} 
 \begin{column}{0.5\textwidth}  \begin{center}
 \begin{tikzcd}[ampersand replacement=\&, column sep=small]
