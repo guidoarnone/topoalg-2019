@@ -149,10 +149,10 @@ s_is_j = s_{j+1}s_i &\text{si $i \leq j$}\\
 \includegraphics[width=0.75\textwidth]{SimplicialSetsIdea.jpg}
 \end{center}
 \begin{itemize}
-\item <2-> Los complejos simpliciales ordenados
-\item <3-> El espacio clasificante $BG$ de un grupo $G$
-\item <4-> El nervio $N\mathscr{C}$ de una categoría $\mathscr{C}$
-\item <5-> Los símplices singulares $\mathscr{S}(X)$ de un espacio topológico $X$
+\item Los complejos simpliciales ordenados
+\item El espacio clasificante $BG$ de un grupo $G$
+\item El nervio $N\mathscr{C}$ de una categoría $\mathscr{C}$
+\item Los símplices singulares $\mathscr{S}(X)$ de un espacio topológico $X$
 \end{itemize}
 \end{frame}
 
@@ -168,9 +168,9 @@ con $\Z X_n$ el grupo abeliano libre generado por el conjunto $X_n$ y el borde
 para cada $n \geq 0$. La \textbf{homología} $H_\bullet(X)$ de $X$ es la homología de este complejo de cadenas.
 \end{defs}
 \begin{itemize}
-\item <2-> $K \rightsquigarrow H_\bullet(K)$
-\item <3-> $BG \rightsquigarrow H_\bullet(G)$
-\item <4-> $\mathscr{S}(X) \rightsquigarrow H_\bullet(X)$
+\item $K \rightsquigarrow H_\bullet(K)$
+\item $BG \rightsquigarrow H_\bullet(G)$
+\item $\mathscr{S}(X) \rightsquigarrow H_\bullet(X)$
 \end{itemize}
 \end{frame}
 
@@ -181,7 +181,7 @@ NX_n := \{x \in X_n : \text{ $x$ es no degenerado}\}.
 \]
 \end{defs}
 
-\begin{prop}<2->  Sea $X$ un conjunto simplicial. Si $x \in X$ es un símplex degenerado, entonces existe un único símplex no degenerado $y \in X$ y mapas de degeneración $s_{i_1},\dots, s_{i_k}$ tales que $x = s_{i_1} \cdots s_{i_k}y$.
+\begin{prop}  Sea $X$ un conjunto simplicial. Si $x \in X$ es un símplex degenerado, entonces existe un único símplex no degenerado $y \in X$ y mapas de degeneración $s_{i_1},\dots, s_{i_k}$ tales que $x = s_{i_1} \cdots s_{i_k}y$.
 \end{prop}
 \end{frame}
 
@@ -220,10 +220,10 @@ NX_n := \{x \in X_n : \text{ $x$ es no degenerado}\}.
 %\[
 %\varphi_n(g_0, \dots,g_n) = (\varphi(g_0),\dots,\varphi(g_n)).
 %\]
-\item <3-> Un funtor $F : \mathscr{C} \to \mathscr{D}$ induce un morfismo simplicial $NF : N\mathscr{C} \to N\mathscr{D}$ entre los nervios
-\item <4-> Una función continua $f : X \to Y$ entre dos espacios induce un morfismo simplicial $f_* : \mathscr{S}(X) \to \mathscr{S}(Y)$ entre sus complejos singulares
+\item <2-> Un funtor $F : \mathscr{C} \to \mathscr{D}$ induce un morfismo simplicial $NF : N\mathscr{C} \to N\mathscr{D}$ entre los nervios
+\item <3-> Una función continua $f : X \to Y$ entre dos espacios induce un morfismo simplicial $f_* : \mathscr{S}(X) \to \mathscr{S}(Y)$ entre sus complejos singulares
 \end{itemize}
-\begin{obs} <5-> Todas estas asignaciones son funtoriales. En particular, se tiene el \textbf{funtor singular} $\mathscr{S} : \cat{sSet} \to \cat{Top}$.
+\begin{obs}<3-> Todas estas asignaciones son funtoriales. En particular, se tiene el \textbf{funtor singular} $\mathscr{S} : \cat{sSet} \to \cat{Top}$.
 \end{obs}
 \end{frame}
 
@@ -289,14 +289,12 @@ donde identificamos a los puntos \[(x,|d^i|(p)) \sim (d_i(x),p)\] y \[(x,|s^i|(p
 
 \begin{frame}{Realización Geométrica - Ejemplos}
 \begin{itemize}
-\item <1-> La realización geométrica de $\ss{n}$ es homeomorfa al $n$-símplex topológico estándar.
-\item <2-> En general, si $K$ es un complejo simplicial ordenado, la realización geométrica de su conjunto simplicial asociado es homeomorfa a la realización geométrica como complejo simplicial.
-\item <3-> Una posible realización de la $n$-esfera: podemos dar un conjunto simplicial con sólo dos símplices no degenerados cuya realización geométrica sea homeomorfa a la esfera \guill{pegando los bordes de un $(n-1)$-símplex en un punto}.
+\item <1-> Si $K$ es un complejo simplicial ordenado, la realización geométrica de su conjunto simplicial asociado es homeomorfa a la realización geométrica como complejo simplicial.
+\item <2-> Una posible realización de la $n$-esfera: podemos dar un conjunto simplicial con sólo dos símplices no degenerados cuya realización geométrica sea homeomorfa a la esfera \guill{pegando los bordes de un $(n-1)$-símplex en un punto}.
 \begin{center}
 \begin{overprint}
 \onslide <1>
 \onslide <2>
-\onslide <3>
 \begin{center}
 \includegraphics[width=0.75\textwidth]{modelo-simpl-nesfera.png}
 \end{center}
